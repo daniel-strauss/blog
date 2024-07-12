@@ -1,0 +1,4 @@
+baseURL: "https://strammermax27.github.io/"
+languageCode: "en-us"
+title: "Daniels Blog"
+theme: [PaperMod]
