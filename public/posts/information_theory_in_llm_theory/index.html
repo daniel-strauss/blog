@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
-<title>Daniels Blog</title>
+<meta name="robots" content="index, follow">
+<title>Information Theory in LLM Theory | Daniels Blog</title>
 <meta name="keywords" content="">
-<meta name="description" content="Information Theory in LLM Theory Introduction Background A Brief Introduction on Information Theory In this section we want to provide a brief overview on Information Theory.
-Philosofical Interlude: Does Information Exist? The Link of Information Theory and LLMs Analyzing Neural Network Architectures In this chapter
-An Information Theoretic Perspective on In-Context Learning References ">
+<meta name="description" content="Introduction Background A Brief Introduction on Information Theory In this section we want to provide a brief overview on Information Theory.
+Draft:
+start with everyday life example, that will make reader think of how one could formalize amount of information
+explain shannons information theory
+name entropy definition extract definition of information define mutual information, briefly mention why it is usefull briefly name an example applications from coding theory
+briefly name an example of neurology where neurons may maximize their entropy">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/information_theory_in_llm_theory/">
+<link rel="canonical" href="https://strammermax27.github.io/posts/information_theory_in_llm_theory/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
+
+<link rel="icon" href="https://strammermax27.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://strammermax27.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://strammermax27.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://strammermax27.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://strammermax27.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/information_theory_in_llm_theory/">
+<link rel="alternate" hreflang="en" href="https://strammermax27.github.io/posts/information_theory_in_llm_theory/">
 <noscript>
     <style>
         #theme-toggle,
@@ -58,6 +63,79 @@ An Information Theoretic Perspective on In-Context Learning References ">
 
     </style>
 </noscript>
+  
+
+<meta property="og:title" content="Information Theory in LLM Theory" />
+<meta property="og:description" content="Introduction Background A Brief Introduction on Information Theory In this section we want to provide a brief overview on Information Theory.
+Draft:
+start with everyday life example, that will make reader think of how one could formalize amount of information
+explain shannons information theory
+name entropy definition extract definition of information define mutual information, briefly mention why it is usefull briefly name an example applications from coding theory
+briefly name an example of neurology where neurons may maximize their entropy" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://strammermax27.github.io/posts/information_theory_in_llm_theory/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Information Theory in LLM Theory"/>
+<meta name="twitter:description" content="Introduction Background A Brief Introduction on Information Theory In this section we want to provide a brief overview on Information Theory.
+Draft:
+start with everyday life example, that will make reader think of how one could formalize amount of information
+explain shannons information theory
+name entropy definition extract definition of information define mutual information, briefly mention why it is usefull briefly name an example applications from coding theory
+briefly name an example of neurology where neurons may maximize their entropy"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://strammermax27.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Information Theory in LLM Theory",
+      "item": "https://strammermax27.github.io/posts/information_theory_in_llm_theory/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Information Theory in LLM Theory",
+  "name": "Information Theory in LLM Theory",
+  "description": "Introduction Background A Brief Introduction on Information Theory In this section we want to provide a brief overview on Information Theory.\nDraft:\nstart with everyday life example, that will make reader think of how one could formalize amount of information\nexplain shannons information theory\nname entropy definition extract definition of information define mutual information, briefly mention why it is usefull briefly name an example applications from coding theory\nbriefly name an example of neurology where neurons may maximize their entropy",
+  "keywords": [
+    
+  ],
+  "articleBody": "Introduction Background A Brief Introduction on Information Theory In this section we want to provide a brief overview on Information Theory.\nDraft:\nstart with everyday life example, that will make reader think of how one could formalize amount of information\nexplain shannons information theory\nname entropy definition extract definition of information define mutual information, briefly mention why it is usefull briefly name an example applications from coding theory\nbriefly name an example of neurology where neurons may maximize their entropy\nPhilosofical Interlude: Does Information Exist? Chapter Draft (everything in this draft is very vague, dont read)\nmake reader know that you are critic of your own ideas Previous Section information relied on an assumed probability space what is probability? It is a way to formally express of what can be known and what can not be known? (\u003c- express waeknasses of that thought and derive it and be more precise and present alternatives of expressong of what can be known and what not) Problems of probability: How well can be known what can not be know? Well enough to express probabilitys?\nmaybe also everything can be known and everything happens with probability one (\u003c- drop argument, why one can not be sure that universe is not deterministic universe, by using argument based on an explanation why even anything exists)\nexplain that under that circumstances only physically isolated can be known, using similar “proof” as holding theorems proof include limitations of calculation power into probability? use previous arguments to express where probabilistic assumptions might be off and name examples on how it could affect us practically conclude if we are carefull enough with probabilistic assumptions under scenario a everything has information 0, under scenario b everything has information $\\infty$ and under scenario a using limitation of physical possible calculation power information content is impossibly hard to compute mention that information theory has been usefull anyway The Link of Information Theory and LLMs Analyzing Neural Network Architectures In this chapter results from ( Citation: Jeon, Zhu \u0026 al., 2022 Jeon, H., Zhu, Y. \u0026 Van Roy, B. (2022). An information-theoretic framework for supervised learning. arXiv preprint arXiv:2203.00246. ) and ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) will be discussed. For several generative models models upper bounds have been established of how much information they can generate. These results can be used make statements about the expressiveness of different neuronal architecture. (\u003c- be more precise about expressivemness)\nAn Information Theoretic Perspective Analysis on In-Context Learning In ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) assumptions about the origin of the trianing data of LLMs have been made from which an explanation of in context learning was stated.\nWhat is In-Context Learning Analysis of ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) Discusion of Their Assumptions Conclusion In this blog post several applications of Information Theory in Deep Learning and LLMs where presented.\nReferences Jeon, Lee, Lei \u0026 Van Roy (2024) Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. Jeon, Zhu \u0026 Van Roy (2022) Jeon, H., Zhu, Y. \u0026 Van Roy, B. (2022). An information-theoretic framework for supervised learning. arXiv preprint arXiv:2203.00246. Deletang, Ruoss, Duquenne, Catt, Genewein, Mattern, Grau-Moya, Wenliang, Aitchison, Orseau, Hutter \u0026 Veness (2024) Deletang, G., Ruoss, A., Duquenne, P., Catt, E., Genewein, T., Mattern, C., Grau-Moya, J., Wenliang, L., Aitchison, M., Orseau, L., Hutter, M. \u0026 Veness, J. (2024). Language modeling is compression. Retrieved from https://openreview.net/forum?id=jznbgiynus ",
+  "wordCount" : "619",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://strammermax27.github.io/posts/information_theory_in_llm_theory/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Daniels Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://strammermax27.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -75,7 +153,7 @@ An Information Theoretic Perspective on In-Context Learning References ">
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Daniels Blog (Alt + H)">Daniels Blog</a>
+            <a href="https://strammermax27.github.io/" accesskey="h" title="Daniels Blog (Alt + H)">Daniels Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -109,23 +187,424 @@ An Information Theoretic Perspective on In-Context Learning References ">
   <header class="post-header">
     
     <h1 class="post-title entry-hint-parent">
-      
+      Information Theory in LLM Theory
     </h1>
     <div class="post-meta">
 
 </div>
   </header> 
-  <div class="post-content"><h1 id="information-theory-in-llm-theory">Information Theory in LLM Theory<a hidden class="anchor" aria-hidden="true" href="#information-theory-in-llm-theory">#</a></h1>
-<h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
+  <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
 <h2 id="background">Background<a hidden class="anchor" aria-hidden="true" href="#background">#</a></h2>
 <h3 id="a-brief-introduction-on-information-theory">A Brief Introduction on Information Theory<a hidden class="anchor" aria-hidden="true" href="#a-brief-introduction-on-information-theory">#</a></h3>
 <p>In this section we want to provide a brief overview on Information Theory.</p>
+<p>Draft:</p>
+<ul>
+<li>
+<p>start with everyday life example, that will make reader think of how one could formalize amount of information</p>
+</li>
+<li>
+<p>explain shannons information theory</p>
+<ul>
+<li>name entropy definition</li>
+<li>extract definition of information</li>
+<li>define mutual information, briefly mention why it is usefull</li>
+</ul>
+</li>
+<li>
+<p>briefly name an example applications from coding theory</p>
+</li>
+<li>
+<p>briefly name an example of neurology where neurons may maximize their entropy</p>
+</li>
+</ul>
 <h3 id="philosofical-interlude-does-information-exist">Philosofical Interlude: Does Information Exist?<a hidden class="anchor" aria-hidden="true" href="#philosofical-interlude-does-information-exist">#</a></h3>
+<p>Chapter Draft (everything in this draft is very vague, dont read)</p>
+<ul>
+<li>make reader know that you are critic of your own ideas</li>
+<li>Previous Section information relied on an assumed probability space</li>
+<li>what is probability? It is a way to formally express of what can be known and what can not be known? (&lt;- express waeknasses of that thought and derive it and be more precise and present alternatives of expressong of what can be known and what not)</li>
+<li>Problems of probability:
+<ul>
+<li>
+<p>How well can be known what can not be know? Well enough to express probabilitys?</p>
+</li>
+<li>
+<p>maybe also everything can be known and everything happens with probability one (&lt;- drop argument, why one can not be sure that universe is not deterministic universe, by using argument based on an explanation why even anything exists)</p>
+<ul>
+<li>explain that under that circumstances only physically isolated can be known, using similar &ldquo;proof&rdquo; as holding theorems proof</li>
+<li>include limitations of calculation power into probability?</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>use previous arguments to express where probabilistic assumptions might  be off and name examples on how it could affect us practically</li>
+<li>conclude if we are carefull enough with probabilistic assumptions under scenario a everything has information 0, under scenario b everything has information $\infty$ and under scenario a using limitation of physical possible calculation power information content is impossibly hard to compute</li>
+<li>mention that information theory has been usefull anyway</li>
+</ul>
 <h2 id="the-link-of-information-theory-and-llms">The Link of Information Theory and LLMs<a hidden class="anchor" aria-hidden="true" href="#the-link-of-information-theory-and-llms">#</a></h2>
 <h2 id="analyzing-neural-network-architectures">Analyzing Neural Network Architectures<a hidden class="anchor" aria-hidden="true" href="#analyzing-neural-network-architectures">#</a></h2>
-<p>In this chapter</p>
-<h2 id="an-information-theoretic-perspective-on-in-context-learning">An Information Theoretic Perspective on In-Context Learning<a hidden class="anchor" aria-hidden="true" href="#an-information-theoretic-perspective-on-in-context-learning">#</a></h2>
+<p>In this chapter results from 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#jeon2022information"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Hong Jun"><span itemprop="familyName">Jeon</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Yifan"><span itemprop="familyName">Zhu</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2022</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Jeon</span>,&#32;
+    <meta itemprop="givenName" content="Hong Jun" />
+    H.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Zhu</span>,&#32;
+    <meta itemprop="givenName" content="Yifan" />
+    Y.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Van Roy</span>,&#32;
+    <meta itemprop="givenName" content="Benjamin" />
+    B.</span>
+  &#32;
+    (<span itemprop="datePublished">2022</span>).
+  &#32;<span itemprop="name">An information-theoretic framework for supervised learning</span>.<i>
+    <span itemprop="about">arXiv preprint arXiv:2203.00246</span></i>.</span>
+
+
+
+
+</span></span>)</span>
+ and 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#jeon2024information"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Hong Jun"><span itemprop="familyName">Jeon</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Jason D"><span itemprop="familyName">Lee</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2024</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Jeon</span>,&#32;
+    <meta itemprop="givenName" content="Hong Jun" />
+    H.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lee</span>,&#32;
+    <meta itemprop="givenName" content="Jason D" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lei</span>,&#32;
+    <meta itemprop="givenName" content="Qi" />
+    Q.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Van Roy</span>,&#32;
+    <meta itemprop="givenName" content="Benjamin" />
+    B.</span>
+  &#32;
+    (<span itemprop="datePublished">2024</span>).
+  &#32;<span itemprop="name">An information-theoretic analysis of in-context learning</span>.<i>
+    <span itemprop="about">arXiv preprint arXiv:2401.15530</span></i>.</span>
+
+
+
+
+</span></span>)</span>
+ will be discussed. For several generative models models upper bounds have been established of how much information they can generate. These results can be used make statements about the expressiveness of different neuronal architecture. (&lt;- be more precise about expressivemness)</p>
+<h2 id="an-information-theoretic-perspective-analysis-on-in-context-learning">An Information Theoretic Perspective Analysis on In-Context Learning<a hidden class="anchor" aria-hidden="true" href="#an-information-theoretic-perspective-analysis-on-in-context-learning">#</a></h2>
+<p>In 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#jeon2024information"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Hong Jun"><span itemprop="familyName">Jeon</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Jason D"><span itemprop="familyName">Lee</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2024</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Jeon</span>,&#32;
+    <meta itemprop="givenName" content="Hong Jun" />
+    H.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lee</span>,&#32;
+    <meta itemprop="givenName" content="Jason D" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lei</span>,&#32;
+    <meta itemprop="givenName" content="Qi" />
+    Q.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Van Roy</span>,&#32;
+    <meta itemprop="givenName" content="Benjamin" />
+    B.</span>
+  &#32;
+    (<span itemprop="datePublished">2024</span>).
+  &#32;<span itemprop="name">An information-theoretic analysis of in-context learning</span>.<i>
+    <span itemprop="about">arXiv preprint arXiv:2401.15530</span></i>.</span>
+
+
+
+
+</span></span>)</span>
+ assumptions about the origin of the trianing data of LLMs have been made from which an explanation of in context learning was stated.</p>
+<h3 id="what-is-in-context-learning">What is In-Context Learning<a hidden class="anchor" aria-hidden="true" href="#what-is-in-context-learning">#</a></h3>
+<h3 id="analysis-of-hahahugoshortcode2s3hbhb">Analysis of 
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#jeon2024information"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Hong Jun"><span itemprop="familyName">Jeon</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Jason D"><span itemprop="familyName">Lee</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2024</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Jeon</span>,&#32;
+    <meta itemprop="givenName" content="Hong Jun" />
+    H.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lee</span>,&#32;
+    <meta itemprop="givenName" content="Jason D" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lei</span>,&#32;
+    <meta itemprop="givenName" content="Qi" />
+    Q.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Van Roy</span>,&#32;
+    <meta itemprop="givenName" content="Benjamin" />
+    B.</span>
+  &#32;
+    (<span itemprop="datePublished">2024</span>).
+  &#32;<span itemprop="name">An information-theoretic analysis of in-context learning</span>.<i>
+    <span itemprop="about">arXiv preprint arXiv:2401.15530</span></i>.</span>
+
+
+
+
+</span></span>)</span>
+</h3>
+<h3 id="discusion-of-their-assumptions">Discusion of Their Assumptions<a hidden class="anchor" aria-hidden="true" href="#discusion-of-their-assumptions">#</a></h3>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>In this blog post several applications of Information Theory in Deep Learning and LLMs where presented.</p>
 <h1 id="references">References<a hidden class="anchor" aria-hidden="true" href="#references">#</a></h1>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+<section class="hugo-cite-bibliography">
+  <dl>
+    
+
+      <div id="jeon2024information">
+        <dt>
+          Jeon,&#32;
+          Lee,&#32;
+          Lei&#32;&amp;&#32;Van Roy
+
+          
+          (2024)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Jeon</span>,&#32;
+    <meta itemprop="givenName" content="Hong Jun" />
+    H.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lee</span>,&#32;
+    <meta itemprop="givenName" content="Jason D" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lei</span>,&#32;
+    <meta itemprop="givenName" content="Qi" />
+    Q.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Van Roy</span>,&#32;
+    <meta itemprop="givenName" content="Benjamin" />
+    B.</span>
+  &#32;
+    (<span itemprop="datePublished">2024</span>).
+  &#32;<span itemprop="name">An information-theoretic analysis of in-context learning</span>.<i>
+    <span itemprop="about">arXiv preprint arXiv:2401.15530</span></i>.</span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="jeon2022information">
+        <dt>
+          Jeon,&#32;
+          Zhu&#32;&amp;&#32;Van Roy
+
+          
+          (2022)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Jeon</span>,&#32;
+    <meta itemprop="givenName" content="Hong Jun" />
+    H.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Zhu</span>,&#32;
+    <meta itemprop="givenName" content="Yifan" />
+    Y.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Van Roy</span>,&#32;
+    <meta itemprop="givenName" content="Benjamin" />
+    B.</span>
+  &#32;
+    (<span itemprop="datePublished">2022</span>).
+  &#32;<span itemprop="name">An information-theoretic framework for supervised learning</span>.<i>
+    <span itemprop="about">arXiv preprint arXiv:2203.00246</span></i>.</span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="deletang2024language">
+        <dt>
+          Deletang,&#32;
+          Ruoss,&#32;
+          Duquenne,&#32;
+          Catt,&#32;
+          Genewein,&#32;
+          Mattern,&#32;
+          Grau-Moya,&#32;
+          Wenliang,&#32;
+          Aitchison,&#32;
+          Orseau,&#32;
+          Hutter&#32;&amp;&#32;Veness
+
+          
+          (2024)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/CreativeWork"
+      data-type="paper-conference"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Deletang</span>,&#32;
+    <meta itemprop="givenName" content="Gregoire" />
+    G.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Ruoss</span>,&#32;
+    <meta itemprop="givenName" content="Anian" />
+    A.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Duquenne</span>,&#32;
+    <meta itemprop="givenName" content="Paul-Ambroise" />
+    P.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Catt</span>,&#32;
+    <meta itemprop="givenName" content="Elliot" />
+    E.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Genewein</span>,&#32;
+    <meta itemprop="givenName" content="Tim" />
+    T.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Mattern</span>,&#32;
+    <meta itemprop="givenName" content="Christopher" />
+    C.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Grau-Moya</span>,&#32;
+    <meta itemprop="givenName" content="Jordi" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Wenliang</span>,&#32;
+    <meta itemprop="givenName" content="Li Kevin" />
+    L.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Aitchison</span>,&#32;
+    <meta itemprop="givenName" content="Matthew" />
+    M.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Orseau</span>,&#32;
+    <meta itemprop="givenName" content="Laurent" />
+    L.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Hutter</span>,&#32;
+    <meta itemprop="givenName" content="Marcus" />
+    M.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Veness</span>,&#32;
+    <meta itemprop="givenName" content="Joel" />
+    J.</span>
+  &#32;
+    (<span itemprop="datePublished">2024</span>).
+  &#32;<span itemprop="name">
+    <i>Language modeling is compression</i></span>.
+  &#32;Retrieved from&#32;
+  <a href="https://openreview.net/forum?id=jznbgiynus"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://openreview.net/forum?id=jznbgiynus</a></span>
+
+</dd>
+
+      </div>
+  </dl>
+</section>
+
+
+
 
 
   </div>
@@ -138,7 +617,7 @@ An Information Theoretic Perspective on In-Context Learning References ">
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://localhost:1313/">Daniels Blog</a></span> · 
+        <span>&copy; 2024 <a href="https://strammermax27.github.io/">Daniels Blog</a></span> · 
 
     <span>
         Powered by

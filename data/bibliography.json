@@ -1,0 +1,124 @@
+[
+  {
+    "author": [
+      {
+        "family": "Jeon",
+        "given": "Hong Jun"
+      },
+      {
+        "family": "Lee",
+        "given": "Jason D"
+      },
+      {
+        "family": "Lei",
+        "given": "Qi"
+      },
+      {
+        "family": "Van Roy",
+        "given": "Benjamin"
+      }
+    ],
+    "container-title": "arXiv preprint arXiv:2401.15530",
+    "id": "jeon2024information",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "title": "An information-theoretic analysis of in-context learning",
+    "type": "article-journal"
+  },
+  {
+    "author": [
+      {
+        "family": "Jeon",
+        "given": "Hong Jun"
+      },
+      {
+        "family": "Zhu",
+        "given": "Yifan"
+      },
+      {
+        "family": "Van Roy",
+        "given": "Benjamin"
+      }
+    ],
+    "container-title": "arXiv preprint arXiv:2203.00246",
+    "id": "jeon2022information",
+    "issued": {
+      "date-parts": [
+        [
+          2022
+        ]
+      ]
+    },
+    "title": "An information-theoretic framework for supervised learning",
+    "type": "article-journal"
+  },
+  {
+    "URL": "https://openreview.net/forum?id=jznbgiynus",
+    "author": [
+      {
+        "family": "Deletang",
+        "given": "Gregoire"
+      },
+      {
+        "family": "Ruoss",
+        "given": "Anian"
+      },
+      {
+        "family": "Duquenne",
+        "given": "Paul-Ambroise"
+      },
+      {
+        "family": "Catt",
+        "given": "Elliot"
+      },
+      {
+        "family": "Genewein",
+        "given": "Tim"
+      },
+      {
+        "family": "Mattern",
+        "given": "Christopher"
+      },
+      {
+        "family": "Grau-Moya",
+        "given": "Jordi"
+      },
+      {
+        "family": "Wenliang",
+        "given": "Li Kevin"
+      },
+      {
+        "family": "Aitchison",
+        "given": "Matthew"
+      },
+      {
+        "family": "Orseau",
+        "given": "Laurent"
+      },
+      {
+        "family": "Hutter",
+        "given": "Marcus"
+      },
+      {
+        "family": "Veness",
+        "given": "Joel"
+      }
+    ],
+    "container-title": "The twelfth international conference on learning representations",
+    "id": "deletang2024language",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "title": "Language modeling is compression",
+    "type": "paper-conference"
+  }
+]
