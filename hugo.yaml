@@ -8,6 +8,9 @@ params:
     Title: Hi there wave
     Content: Can be Info, links, about...
 
+
+  math: true
+
   socialIcons: # optional
     - name: "<platform>"
       url: "<link>"
