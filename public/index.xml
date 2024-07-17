@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Daniels Blog</title>
-    <link>http://localhost:1313/</link>
+    <link>https://strammermax27.github.io/</link>
     <description>Recent content on Daniels Blog</description>
     <generator>Hugo -- 0.127.0</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://strammermax27.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Information Theory in LLM Theory</title>
-      <link>http://localhost:1313/posts/information_theory_in_llm_theory/</link>
+      <link>https://strammermax27.github.io/posts/information_theory_in_llm_theory/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/information_theory_in_llm_theory/</guid>
-      <description>Introduction Background A Brief Introduction on Information Theory In this section we want to provide a brief overview on Information Theory.
+      <guid>https://strammermax27.github.io/posts/information_theory_in_llm_theory/</guid>
+      <description>By reading this blogpost, you will find out, why this emoji squence is here: ⚠️ 📥 😚 🛡 🚦 👹 🌿.
+Introduction Background A Brief Introduction on Information Theory In this section we want to provide a brief overview on Information Theory.
 Draft:
 start with everyday life example, that will make reader think of how one could formalize amount of information
 explain shannons information theory
-name entropy definition extract definition of information define mutual information, briefly mention why it is usefull briefly name an example applications from coding theory
-briefly name an example of neurology where neurons may maximize their entropy</description>
+name entropy definition extract definition of information define mutual information, briefly mention why it is usefull briefly name an example applications from coding theory</description>
     </item>
   </channel>
 </rss>

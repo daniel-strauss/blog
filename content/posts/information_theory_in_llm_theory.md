@@ -3,6 +3,8 @@ title: Information Theory in LLM Theory
 bibFile: data/bibliography.json # path relative to project root
 ---
 
+*By reading this blogpost, you will find out, why this emoji squence is here:* ⚠️ 📥 😚 🛡 🚦 👹 🌿.
+
 
 ## Introduction
 
@@ -69,7 +71,7 @@ In {{< cite "jeon2024information" >}} assumptions about the origin of the triani
 
 
 ### Results and Methodology {{< cite "jeon2024information" >}}
-sfg
+TODO: add theorem numerations of original paper.
 #### Quick Overview
 
 
@@ -96,7 +98,12 @@ We denote the $M$ as the number of training documents and the training documents
 
 We say the distributions of $\{D_1,...D_{M+1}\}$ can described by autoregressive models (as are transformers) that are parametrized by the random vectors $\{\theta_1,...,\theta_m \}$. We pack for practicality all parameter vectors into one $\theta := \{\theta_1,...,\theta_m \}$
 
-The authors wanted to model $\theta_1,...,\theta_m $ such that they have some universal common information, which can be stored in a random variable $\psi$. This means that the sequence $\theta_1,...,\theta_m | \psi$ shall be iid. Additionally $\psi$ shall not contain information that could not be deducted from enough samples of $\theta_i$, e.g. $\lim_{n\to \infty} \mathbb H(\theta_{n+1} | \theta_1, ..., \theta_n) = \mathbb H(\theta_{n+1} | \psi)$(<- Check if this is correct) How can the random sequence $\theta_1,...,\theta_m$ be modeled to satisfy that constraint in such a way, that the distributions of $\theta_1,...,\theta_m$ and $\psi$ are well enough defined. In {{< cite "jeon2024information" >}} the authors came up with the clever solution for satisfying these constraints. They defined a random set of $N$ randomly initialized autoregressive models $T = \{\theta^{(1)},..., \theta^{(N)} \}$, where $N$ is an unknown number. Then they defined a random assignment of Documents and autoregresive models in T parametrized by random random distribution $\alpha \sim \text{Dirichlet}(N, (R/N, ..., R/N))$, with $R<<N$. $\alpha$ defines for a random autoregressive model $\theta^{(n)}$ its probability to be assigned for Documents. The smaller the values in the parameter-tuple $(R/N,...,R/N)$ of the Dirichlet distribution, the more sparse the distribution. Lets suppose for example if you have a factory that produces factories, which in return produce each $k$ dices and you want the dieces to be fair (each side appears with same probability). Then the dirichlet distribution, parametrized by $k, (a,...,a)$, which describes the distribution of the probability distribution dices created by a given dice factory should have a high value of $a$ in its paramatrization. <!--example is unintuitive + maybe be a bit more formal what alpha does--> 
+The authors wanted to model $\theta_1,...,\theta_m $ such that they have some universal common information, which can be stored in a random variable $\psi$. This means that the sequence $\theta_1,...,\theta_m | \psi$ shall be iid. 
+
+Additionally $\psi$ shall not contain information about any $\theta_m$ that could not be deducted from enough samples of $\theta_i$,   $D_m \bot \psi | \theta$. Since we sayd $\theta_1,...,\theta_m | \psi$ shall be iid, it holds  $D_m \bot \psi | \theta \iff D_m \bot \psi | \theta_m$. (<- not peer reviewed)
+
+(<- Check if this is correct) 
+How can the random sequence $\theta_1,...,\theta_m$ be modeled to satisfy that constraint in such a way, that the distributions of $\theta_1,...,\theta_m$ and $\psi$ are well enough defined. In {{< cite "jeon2024information" >}} the authors came up with the clever solution for satisfying these constraints. They defined a random set of $N$ randomly initialized autoregressive models $T = \{\theta^{(1)},..., \theta^{(N)} \}$, where $N$ is an unknown number. Then they defined a random assignment of Documents and autoregresive models in T parametrized by random random distribution $\alpha \sim \text{Dirichlet}(N, (R/N, ..., R/N))$, with $R<<N$. $\alpha$ defines for a random autoregressive model $\theta^{(n)}$ its probability to be assigned for Documents. The smaller the values in the parameter-tuple $(R/N,...,R/N)$ of the Dirichlet distribution, the more sparse the distribution. Lets suppose for example if you have a factory that produces factories, which in return produce each $k$ dices and you want the dieces to be fair (each side appears with same probability). Then the dirichlet distribution, parametrized by $k, (a,...,a)$, which describes the distribution of the probability distribution dices created by a given dice factory should have a high value of $a$ in its paramatrization. <!--example is unintuitive + maybe be a bit more formal what alpha does--> 
 So now we can finally define $\psi := (\alpha, \theta^{(1)}, ..., \theta^{(n)} )$. Note that $\theta_m | \psi$ is a discrete random variable with at most $N$ outcomes, therefore its entropy has an upper bound of $\log N$.
 Therefore if $M$ grows to infinity maybe the OBE will learn $\psi$ from $H_M^T$, e.g. $\log N \geq \mathbb H(\theta_{M+1} | \psi) \approx \mathbb H(\theta_{M+1}|H_M^T)$ and this may result in a logaritmic upper bound for the estimation error of $\theta_{M+1}|H_M^T$. You wonder what the estimation error is? This will be formaly definded in the next Paragraph. On top of that the previous claim will be formally evaluated in the next paragraph.
 
@@ -107,18 +114,80 @@ You might remember that earlier in this chapter I said that the authors assumed,
 
 #### Results for in-context learning
 
+##### Results without making assumptions about the bayesian prior 
+
 In this paragraph we outline the results {{< cite "jeon2024information" >}} drew from this models of data generation, by analyzing the optimal bayesian estimator $\hat P$ for the probability distribution of $X^{(m)}_{t+1}$ given $H_t^{(m)}$.  
 
-The optimal bayesian estimator is the estimator for the probability that minimizes this loss function:
+The optimal bayesian estimator is  defined to be  the estimator for the probability $P$ that minimizes this loss function:
 
-$\mathbb L(P) = \frac{1}{TM} \sum_{m=1}^{M} \sum_{t=0}^{T-1} \mathbb E[ - \ln P(H_t^{(m)})(X_{t+1}^{(m)})]$
+$\mathbb L_{M,T}(P) = \frac{1}{TM} \sum_{m=1}^{M} \sum_{t=0}^{T-1} \mathbb E[ - \ln P(H_t^{(m)})(X_{t+1}^{(m)})]$
 
 A little remark on the expression $P(H_t^{(m)})(X_{t+1}^{(m)})$: $P$ is a function that takes in an event like $H_t^{(m)}$, and returns a function, namely an estmated distribution for $X_{t+1}^{(m)}$. Therefore there are two braket pairs after $P$ in the above equation. 
 
-In {{< cite "jeon2024information" >}} it was shown, that $\hat P(H_t^{(m)}) = (x \to \mathbb P[X_{t+1}^{(m)} = x|H_t^{(m)}])$ (If $X$ is not discrete the left equation has to be expressed slightly differently). Let's denote $\mathbb L := \mathbb L(\hat P)$.
+In {{< cite "jeon2024information" >}} it was shown, that $\hat P(H_t^{(m)}) = (x \to \mathbb P[X_{t+1}^{(m)} = x|H_t^{(m)}])$ (If $X$ is not discrete the left equation has to be expressed slightly differently). 
 
-As autoregressive models such as transformers define a probability distribution one can not predict a sequence of tokens they generate with probability 1, even if one knows all of their parameters $\theta$ (Expect of course if they are deterministic autoregressive models).  This means that $\mathbb H(H_T^{(M)}|\theta)$, the hardness of predicting the sequence even if the autoregressive model is known, has a value above 0 and probably grows to infinity with T or M. 
+Let's denote the loss of the minimal bayesian optimizer with $\mathbb L_{M,T} := \mathbb L_{M,T}(\hat P) = \frac{1}{TM} \sum_{m=1}^{M} \sum_{t=0}^{T-1} \mathbb E[ - \ln \mathbb P[X_{t+1}^{(m)}|H_t^{(m)}]]$.
 
+As autoregressive models such as transformers define a probability distribution one can not predict a sequence of tokens they generate with probability 1, even if one knows all of their parameters $\theta$ (Expect of course if they are deterministic autoregressive models).  This means that $\mathbb H(H_T^{(M)}|\theta)$, e.g. the hardness of predicting the sequence even if the autoregressive model is known, has a value above 0 and might grow to infinity with T or M. The Authors named this error "the irreducible error". As we are interessted in how hard it is to estimate not the series of tokens itself, but their distribution, the error $\mathcal L_{M,T} = \mathbb L_{M,T} - \dfrac{\mathbb H(H_T^{(M)}|\theta)}{MT}$ will be more insightfull in our exploration.
+They call this error "estimation error".
+
+
+In the rest of this section we will present derived expressions for $\mathcal L_{M,T}$, that provide insights in how easy or hard it is to estimate model parameters, if the data was generated as discussed. Then we derive from this result an expression of the in-context error $\mathbb L_\tau := \frac{1}{\tau} \sum_{t=0}^{\tau-1} \mathbb E \ln \mathbb P(X_{t+1}^{(M+1)}| H_t^{(M+1)})$, where $\tau$ is the length of the in-context document.
+
+Firstly we discuss two information theoretic results of $\mathcal L_{M,T}$. 
+
+$\mathcal L_{M,T} = \dfrac{\mathbb I(H_T^{(M)};\theta)}{MT}$
+
+
+Proof:
+
+We know $\mathbb H(X) = \mathbb H(X|Y) + \mathbb I(X;Y)$, therfore it suffices to show that $\mathbb L_{M,T} \cdot MT = \mathbb H(H_T^{(M)})$. This is true since:
+
+$\sum_{m=1}^{M} \sum_{t=0}^{T-1} \mathbb E[ - \ln \mathbb P[X_{t+1}^{(m)}|H_t^{(m)}]] = \mathbb E[-\ln \prod_{m=1}^{M} \prod_{t=0}^{T-1} \mathbb P[X_{t+1}^{(m)}|H_t^{(m)}]] \overset{a)}{=} \mathbb E[-\ln  \mathbb P[H_T^{(M)}]]= \mathbb H(H_T^{(M)})$
+
+
+a) follows from the chain rule of probability.
+
+QED
+
+Be  aware I often do mistakes, when proofing something.
+I presented my own version of the proof of this equation as it contains the intermediate result $\mathbb L_{M,T}  = \dfrac{\mathbb H(H_T^{(M)})}{MT}$. Thus we can see $\mathbb L_{M,T}$ as the average entropy per token.
+
+
+This equation means roughly speaking, that the estimation error consits of these parts in $\theta$, that are conveyed to $H_T^{(M)}$. For example as we often model $\theta$ as a continous random variable and $H_T^{(M)}$ as a discrete random variable, $H_T^{(M)}$ can not contain all information in $\theta$. (<- be more clear)
+
+As in previous section, we have worked out a way to separate $\theta = \theta_1, ...\theta_m$ into two independent random variables, namely $\theta|\psi$ and $\psi$, we continue by expressing $\mathcal L_{M,T}$ with these two random variables. 
+
+
+$\mathcal L_{M,T} = 
+\underbrace{\dfrac{\mathbb I(H_T^{(M)};\psi)}{MT}}_\text{meta
+estimation error} + 
+\underbrace{\dfrac{\mathbb I(D_m;\theta_m|\psi)}{T}}_\text{intra document estimation error}$
+
+
+To proof this equation it suffices to show 
+
+- A) $\mathbb I(H_T^{(M)};\theta) = \mathbb I(H_T^{(M)};\psi) + \mathbb I(H_T^{(M)};\theta|\psi) $
+- B) $\mathbb I(H_T^{(M)};\theta|\psi) = M \cdot \mathbb I(D_m;\theta_m|\psi)$
+
+
+We defined earlier $D_m \bot \psi | \theta_m$, which means $ H_T^{(M)} \bot \psi | \theta$ (<- be more formal?). Therefore $\mathbb I(H_T^{(M)};\theta) = \mathbb I(H_T^{(M)};(\theta, \psi))$. Then A) follows from the chain rule of mutual information.
+
+B) follows from $\mathbb I(H_T^{(M)};\theta|\psi) \overset{a)}{=} \sum_{m=1}^M  \mathbb I(D_m;\theta_m|\psi) \overset{b)}{=} M\cdot \mathbb I(D_m;\theta_m|\psi) $. 
+
+Equation a) holds because the pairs $(D_1, \theta_1)|\psi, ..., (D_M, \theta_M)|\psi$ are independent and mutual information is additive for independent variables.(http://www.scholarpedia.org/article/Mutual_information)  
+As $ D_1,...,D_M | \psi$ are identically distributed and $\theta_1, ..., \theta_M | \psi$ are identically distributed, for any $a,b \in \{1,...,M\}$, $I(D_a;\theta_a|\psi) = I(D_b;\theta_b|\psi)$. Therefore b) is true.
+
+
+
+(<- proof not peer reviewed)
+QED  
+
+
+The authors seperate the term into two parts, the meta estimation error and the intra document estimation error. The meta estimation error describes the error, of learning information shared shared by all documents. The intra document estimation error is the error of learning the parameters of learning individual documents after having learned the shared information $\psi$. Lets say we have arbitrarily many training samples $A$ for our optimal bayesian estimator in which $D_m$ does not occur. Due to them being arbitrarily many, let's suppose $\psi$ has been well enough discovered, such that $\mathbb I(D_m;\psi | A)$ is about 0. Then the error of estimating $D_m$ is about the intra-document error. This means, that even of we perfectly train our model, there will be some error bigger than zero related to the estimation of the probability that generates the data? Or will it realy be bigger than zero? More on this cliffhanger later (<- TODO!) 
+
+
+##### Results from assumptions of bayesian prior
 
 ### Discusion of their Assumptions {#discussion-assumptions}
 
@@ -166,12 +235,16 @@ But $A(\theta)$ only has horizon of $K<T$ and $A(\Theta)$ has infinite horizon (
 This means only a bayesian estimator with horizon T can detect $\Theta$??
 
 
+conclusion from A: for each prior distribution of Theta there is a constant theta that creates a prediction error of 0 but the same distribution of X_t
+
 #### Can a Transformer learn a random transforer as the OBE does
 
 No, the AM represented by a random transformer has an event horizon of infinity.(<- TODO proof. youse math snippes from previous section>) Transformers only have a a
 
 
 #### A sparce Mixture of Transformers has an infinite horizon
+
+Suppose bernoulli distributed $\theta$ describing am with horizon of one. then $\theta$ together with am would create series with infinite horizon
 
 ## Conclusion
 
@@ -182,3 +255,11 @@ In this blog post several applications of Information Theory in Deep Learning an
 
 # References
 {{< bibliography >}} 
+
+
+https://perchance.org/emoji
+
+Theorem:
+
+Proof:
+The sequence "⚠️ 📥 😚 🛡 🚦 👹 🌿" in the beginning of the blogpost was generated at random.
