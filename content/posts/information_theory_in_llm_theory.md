@@ -14,7 +14,7 @@ bibFile: data/bibliography.json # path relative to project root
 
 ### A Brief Introduction on Information Theory
 
-![targets](/figures/assumption_sparse_mixture.png "Assumptio Sparse Mixture") 
+![targets](/figures/venn_information.png "Assumptio Sparse Mixture") 
 
 
 In this section we want to provide a brief overview on Information Theory. 
