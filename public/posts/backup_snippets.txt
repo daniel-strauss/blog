@@ -1,0 +1,9 @@
+d
+#### Can a Transformer learn a random transforer as the OBE does
+
+No, the AM represented by a random transformer has an event horizon of infinity.(<- TODO proof. youse math snippes from previous section>) Transformers only have a a
+
+
+#### A sparce Mixture of Transformers has an infinite horizon
+
+Suppose bernoulli distributed $\theta$ describing am with horizon of one. then $\theta$ together with am would create series with infinite horizon
