@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/archives/</loc>
+    <loc>https://strammermax27.github.io/archives/</loc>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://strammermax27.github.io/categories/</loc>
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://strammermax27.github.io/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/information_theory_in_llm_theory/</loc>
+    <loc>https://strammermax27.github.io/posts/information_theory_in_llm_theory/</loc>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
+    <loc>https://strammermax27.github.io/posts/</loc>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://strammermax27.github.io/tags/</loc>
   </url>
 </urlset>
