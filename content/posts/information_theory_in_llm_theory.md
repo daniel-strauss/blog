@@ -18,9 +18,9 @@ bibFile: data/bibliography.json # path relative to project root
 
 
 In this section we want to provide a brief overview on Information Theory. 
-
+<!---
 Imagine you lived $40\cdot n$ years in the future and that the population has doubled every $40$ years. For simplicity assume that in the current present just one person is alive. Conclusively $2^n$  people live at your point in the future. As you live very far in the future $n$ is very large, about $2^{10^{15}}$. "Today" is your friends birthday party and you dont have a present. In order to avoid an embarassing moment you decide to hire a hitman to kill his neighbour, such that the party will be postponed. In order to do this you have type in the id of that person (which is one Pentabit long) into the hitmans website and he completes the task within the same day. After you received a message that the birthdayparty is postponed you are very relieved, but then suddently you start wondering. You only have a 1Gbit/s upload speed (hardware did not improve so much in the last $40\cdot2^{10^{15}}$ years), how have you been able to upload $10^{15}$ bits within just one day? This seems impossible as there are $2^{10^{15}}$ people and thus the id is $10^{15}$ bits long. Then you find out why: the website did not have to send $10^{15}$ bits of information to its server. Small parts of the information have already been known by the server. For example the information that people in your region are more likely to order a kill for someone in that same region. 
-
+-->
 
 Information theory is the study on expressing the quantity of information called entropy. Entropy of an information is the minimal espected amount of bits (todo explain that it doesnt have to be bits) required to encode this information.
 
