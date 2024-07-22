@@ -6,9 +6,7 @@ bibFile: data/bibliography.json # path relative to project root
 ⚠️ 📥 😚 🛡 🚦 👹 🌿 *By reading this blogpost, you will find out, why this emoji sequence is here.*
 
 
-# Introduction
-
-# Background
+## Introduction
 
  
 
@@ -18,17 +16,23 @@ bibFile: data/bibliography.json # path relative to project root
 
 
 In this section we want to provide a brief overview on Information Theory. 
-<!---
-Imagine you lived $40\cdot n$ years in the future and that the population has doubled every $40$ years. For simplicity assume that in the current present just one person is alive. Conclusively $2^n$  people live at your point in the future. As you live very far in the future $n$ is very large, about $2^{10^{15}}$. "Today" is your friends birthday party and you dont have a present. In order to avoid an embarassing moment you decide to hire a hitman to kill his neighbour, such that the party will be postponed. In order to do this you have type in the id of that person (which is one Pentabit long) into the hitmans website and he completes the task within the same day. After you received a message that the birthdayparty is postponed you are very relieved, but then suddently you start wondering. You only have a 1Gbit/s upload speed (hardware did not improve so much in the last $40\cdot2^{10^{15}}$ years), how have you been able to upload $10^{15}$ bits within just one day? This seems impossible as there are $2^{10^{15}}$ people and thus the id is $10^{15}$ bits long. Then you find out why: the website did not have to send $10^{15}$ bits of information to its server. Small parts of the information have already been known by the server. For example the information that people in your region are more likely to order a kill for someone in that same region. 
--->
 
-Information theory is the study on expressing the quantity of information called entropy. Entropy of an information is the minimal espected amount of bits (todo explain that it doesnt have to be bits) required to encode this information.
+Imagine you lived $40\cdot n$ years in the future and that the population has doubled every $40$ years. For simplicity assume that in the current present just one person is alive. Conclusively $2^n$  people live at your point in the future. You live very far in the future and $n$ is very large $n=2^{10^{15}}$. "Today" is your friends birthday party and you dont have a present. 
+
+Therefore you decide to hire last minute a mathgician for his party as mathagicians are know to let partys go wild with their magic and math. 
+In order to hire the mathgician you have to put in your friends one PetaBit long address into the website of the mathgician-firm, such that he can find the location of the party. (The address is one PetaBit long as in the future every inhabitant has his own address, and there are $n$ people.) At the party the mathgician shows up and everyone has a good time. But then suddenly you start to wonder:
+
+You only have a 1Gbit/s upload speed (hardware did not improve so much in the last $40\cdot2^{10^{15}}$ years), how have you been able to upload $10^{15}$ bits (one PentaBit) within just one day? This seems impossible as it takes $10^6$ seconds to upload one PentaBit with your network speed. Then you find out why: the website did not have to send $10^{15}$ bits of information to its server. Small parts of the information have already been known by the server; For example the information that people in your region are more likely to order a magician for someone in the same galaxy was already present on their server. 
+Could they have used that information to such that they required less bits of information from you, such that your computer had to send them a smaller amount of bits? How can something seeming as soft as information influence something as hard as a bit length? What is the math behind this?
+
+
+Information theory is mainly the study on expressing the quantity of information called Entropy. Entropy of an information is the minimal expected amount of bits (todo explain that it doesnt have to be bits) required to encode this information.
 
 One can show, that the entropy $\mathbb H$ in bits of a discrete random variable $X$ with a known probability density function $p_X$ is
 
-$\mathbb H(X) = \sum_{x \in \mathcal X} - p_X(x) \log_2(p_X(x)) = \mathbb E[-\log_2 X]$
+$\mathbb H(X) = \sum_{x \in \mathcal X} - p_X(x) \log_2(p_X(x)) = \mathbb E[-\log_2 X]$.
 
-Often instead of the binary logarithm the natural logarithm is used to express entropy. The resulting unit is called nats instead of bits. 
+Therefore the above term is usually referred as the formal definition of entropy. Often instead of the binary logarithm the natural logarithm is used to express entropy. The resulting unit is called nats instead of bits. 
 
 $\mathbb H(X) = \sum_{x \in \mathcal X} - p_X(x) \log(p_X(x))$
 
@@ -47,6 +51,10 @@ Definition:
 
 
 $\mathbb H(X,Y)$ is just the entropy of the joint variable $(X,Y)$. $\mathbb H(X|Y)$ is the expected entropy of $X$ if $Y$ is known. And $\mathbb I(X;Y)$ completes the elements of the ven diagram. It is the expected gain of information on $X$ (with gain of information I mean reduction of entropy) if $Y$ is known and vice versa, as mutual information is kommutative (see TODO insert venn diagramm). 
+
+
+These terms act aditively as described by image TODO.
+
 
 Please note that on Wikipedia equivalent but different definitions of these terms are stated. I choose these expressions as the definitions, as they are a) better to get an intuitive understaning and b) seem resemble more what the inventor had in mind, when coming up with these definitions. 
 
@@ -79,7 +87,10 @@ Chapter Draft (everything in this draft is very vague, dont read)
 ## The Link of Information Theory and LLMs
 
 
-Information theory can be found everywhere, wherethere is uncertainty
+Information theory can be found everywhere, where uncertainty is expressed probabilisticly. As language models typically learn a probability distribution for the next token given a previous sequence parts maybe some new insights on them may be gained by looking at them from the viewpoint of information theory. How much information can a generative model generate, e.g. how much information is stored in this model? Can they solve tasks related to information theory such as data compression? 
+
+In {{< cite "deletang2024language" >}} LLMs have been used as lossles data compressors and 
+
 
 
 ## Analyzing Neural Network Architectures {#anal_nn}
@@ -138,7 +149,9 @@ So now we can finally define $\psi := (\alpha, \theta^{(1)}, ..., \theta^{(n)} )
 Therefore if $M$ grows to infinity maybe the OBE will learn $\psi$ from $H_M^T$, e.g. $\log N \geq \mathbb H(\theta_{M+1} | \psi) \approx \mathbb H(\theta_{M+1}|H_M^T)$ and this may result in a logaritmic upper bound for the estimation error of $\theta_{M+1}|H_M^T$. You wonder what the estimation error is? This will be formaly definded in the next Paragraph. On top of that the previous claim will be formally evaluated in the next paragraph.
 
 
-You might remember that earlier in this chapter I said that the authors assumed, that all training data has been generated by a transformer. And now I suddently presented a sparse mixture of transformers instead of a transformer. This is because in the conclusion the authors said, that they hope, how further mathematical analysis will be able di describe how a transformer can implement a sparce mixtrue of transformers. So actually they did not make this assumption, but this assumption might be made in the future once it has been prooven that a transformer can implement a sparce mixtre of transformers.
+You might remember that earlier in this chapter I said that the authors assumed, that all training data has been generated by a transformer. And now I suddently presented a sparse mixture of transformers instead of a transformer. This is because in the conclusion the authors said, that they hope, how further mathematical analysis will be able to describe how a transformer can implement a sparce mixtrue of transformers. In Section "Can a transformer implement a sparse mixture of transformers?" (TODO add link finish proof), we show that a transformer can not approximate a sparse mixture of transformers. (But espilon appoximate if d grows to infinity?) 
+
+So actually they made this assumption, but this assumption might be made in the future once it has been prooven that a transformer can implement a sparce mixtre of transformers.
 
 (TODO proof that a sparse mixture of transformers with fiven transformers has an infinite horizon)
 
@@ -230,12 +243,34 @@ In order to make the results about the error of the optimal bayesian estimator m
 
 - transformers can imitate every upper bounded finite horizon am model
 - but they cant imitate infinite horizon documents
-- claim A: there exists at least one document, whichs very end is dependent on the very beginning of the document, even if the middle of the document is known
-- proof of claim A is written at the very end of this document
+
+Unformal Lemma 0: There exists at least one document, whichs very end is dependent on the very beginning of the document, even if the middle of the document is known.
+
+Unformal Proof: Scroll down to the very end of this document below the references. unformal QED
 
 ### Can a transformer implement a sparse mixture of transformers?
 
-No a sparce mixture of transformers has an infinite horizon
+(No a sparce mixture of transformers has an infinite horizon.)
+
+In this section, we show that a sparce mixtrue of transformers can only be expressed $\epsilon$ approximated by an AM model, that has an infinite context length.
+
+Lemma A: Let $M_1 = (P_1,V)$ and $M_2 = (P_2,V)$ be markov chains, $P_1 \neq P_2$ and $\theta \sim Ber(a,b)$ and constants $a,b \in (0,1)$ and $a \neq b$. Let $x_0,X_1,X_2...$ be a random sequence in $V$, where $x_0$ is constant and $X_1, ...$ be described with probability $\theta$ by $M_1$ and with probability $1-\theta$ by $M_2$. Then the finite horizon $d$ optimal bayesian estimator $\mathbb P(X_{t+1}|X_{t-d}, X_{t-d+1} ..., X_t)$ does not equal the posterior distribution $\mathbb P(X_{t+1}|\theta, X_t)$.
+
+Proof: TODO
+
+
+Lemma B: when d grows to infinity posterior distribution can be epsilon approximated
+
+Proof: TODO
+
+Corolary of lemma A: A upper bounded context $d_1$ length Transformer $T$ can not express the probability distribution a non-deterministic mixture of two transformers $(R,J)$ (Romeo and Juliett).
+
+Proof: Let $\Sigma$ be the token set of the transformer and $d_2$ its context lenght of R or J.
+Any discrete autoregressive distribution with horizon d can be express by a markov chain M=(V,P), where $V = \bigcup_{i \in [d_2]} \Sigma^i$.
+Let M_R=(V,P_R) express the same distribution as R and M_J analogously. 
+The probability distribution of T can be expressed by the finite horizon d optimal bayesian estimator. Therefore T can by lemma a not implement the probability distribution if the markovchain mixture M_R and M_J, whichs distributons equals by definition distribution of the the mixture of R,J. QED 
+
+
 
 ### Does independence suffice for an upper bound of estimation error?
 <!---
@@ -370,5 +405,4 @@ https://perchance.org/emoji
 
 
 
-Proof of claim A: (<- TODO link claim A>)
 The emoji-character sequence from the beginning of the blogpost was generated randomly, after the text of this Blog Post has been written, it is: ⚠️ 📥 😚 🛡 🚦 👹 🌿 
