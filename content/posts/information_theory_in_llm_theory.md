@@ -8,8 +8,6 @@ bibFile: data/bibliography.json # path relative to project root
 
 ## Introduction
 
- 
-
 ### A Brief Introduction on Information Theory
 
 ![targets](/figures/venn_information.png "Assumptio Sparse Mixture") 
@@ -20,13 +18,13 @@ In this section we want to provide a brief overview on Information Theory.
 Imagine you lived $40\cdot n$ years in the future and that the population has doubled every $40$ years. For simplicity assume that in the current present just one person is alive. Conclusively $2^n$  people live at your point in the future. You live very far in the future and $n$ is very large $n=2^{10^{15}}$. "Today" is your friends birthday party and you dont have a present. 
 
 Therefore you decide to hire last minute a mathgician for his party as mathagicians are know to let partys go wild with their magic and math. 
-In order to hire the mathgician you have to put in your friends one PetaBit long address into the website of the mathgician-firm, such that he can find the location of the party. (The address is one PetaBit long as in the future every inhabitant has his own address, and there are $n$ people.) At the party the mathgician shows up and everyone has a good time. But then suddenly you start to wonder:
+In order to hire the mathgician you have to put in your friends one petabit ($=10^15$ bits) long address into the website of the mathgician-firm, such that he can find the location of the party. (The address is one petabit long as in the future every inhabitant has his own address, and there are $n$ people.) At the party the mathgician shows up and everyone has a good time. But then suddenly you start to wonder:
 
 You only have a 1Gbit/s upload speed (hardware did not improve so much in the last $40\cdot2^{10^{15}}$ years), how have you been able to upload $10^{15}$ bits (one PentaBit) within just one day? This seems impossible as it takes $10^6$ seconds to upload one PentaBit with your network speed. Then you find out why: the website did not have to send $10^{15}$ bits of information to its server. Small parts of the information have already been known by the server; For example the information that people in your region are more likely to order a magician for someone in the same galaxy was already present on their server. 
-Could they have used that information to such that they required less bits of information from you, such that your computer had to send them a smaller amount of bits? How can something seeming as soft as information influence something as hard as a bit length? What is the math behind this?
+Could they have used that information to such that they required less bits of information from you, such that your computer had to send them a smaller amount of bits? How can something seeming as soft as information influence something as hard as a bit-sequence length? What is the math behind this?
 
 
-Information theory is mainly the study on expressing the quantity of information called Entropy. Entropy of an information is the minimal expected amount of bits (todo explain that it doesnt have to be bits) required to encode this information.
+Information theory is mainly the study on expressing the quantity of information called Entropy. Entropy of an information is the minimal expected amount of a quantity like bits required to encode this information.
 
 One can show, that the entropy $\mathbb H$ in bits of a discrete random variable $X$ with a known probability density function $p_X$ is
 
@@ -250,26 +248,110 @@ Unformal Proof: Scroll down to the very end of this document below the reference
 
 ### Can a transformer implement a sparse mixture of transformers?
 
+
 (No a sparce mixture of transformers has an infinite horizon.)
 
-In this section, we show that a sparce mixtrue of transformers can only be expressed $\epsilon$ approximated by an AM model, that has an infinite context length.
-
-Lemma A: Let $M_1 = (P_1,V)$ and $M_2 = (P_2,V)$ be markov chains, $P_1 \neq P_2$ and $\theta \sim Ber(a,b)$ and constants $a,b \in (0,1)$ and $a \neq b$. Let $x_0,X_1,X_2...$ be a random sequence in $V$, where $x_0$ is constant and $X_1, ...$ be described with probability $\theta$ by $M_1$ and with probability $1-\theta$ by $M_2$. Then the finite horizon $d$ optimal bayesian estimator $\mathbb P(X_{t+1}|X_{t-d}, X_{t-d+1} ..., X_t)$ does not equal the posterior distribution $\mathbb P(X_{t+1}|\theta, X_t)$.
-
-Proof: TODO
+In this section, we show that a sparce mixtrue of transformers can not be $\epsilon$ approximated by a set of AM models, with upper bounded horiozons.
 
 
-Lemma B: when d grows to infinity posterior distribution can be epsilon approximated
+#### Definition: 
+Let $A$ be a set and $n \in \mathbb N$, then **$A^{[n]} := \bigcup_{i\in \{0,1,...,n\}} A^i$**. $A^i$ can be seen as the set of all words of length $i$ over alphabet $A$ and consequently $A^0$ as the set, that contains the empty word, given $A$ is not the empty set. 
 
-Proof: TODO
 
-Corolary of lemma A: A upper bounded context $d_1$ length Transformer $T$ can not express the probability distribution a non-deterministic mixture of two transformers $(R,J)$ (Romeo and Juliett).
+#### TODO Define non deterministic mixture. s_1, d_1
 
-Proof: Let $\Sigma$ be the token set of the transformer and $d_2$ its context lenght of R or J.
-Any discrete autoregressive distribution with horizon d can be express by a markov chain M=(V,P), where $V = \bigcup_{i \in [d_2]} \Sigma^i$.
-Let M_R=(V,P_R) express the same distribution as R and M_J analogously. 
-The probability distribution of T can be expressed by the finite horizon d optimal bayesian estimator. Therefore T can by lemma a not implement the probability distribution if the markovchain mixture M_R and M_J, whichs distributons equals by definition distribution of the the mixture of R,J. QED 
+#### Definition: 
+Two makrov-chains $M_1 = (P_1,V)$ and $M_2 = (P_2,V)$ are called **deterministically distinguishable (dd)** if there is transition $e \in V^2$, such that $P_1(e) + P_2(e)>0$ and $P_1(e) \cdot P_2(e) = 0$. (E.g. $M_1$ and $M_2$ are dd if one has a transition with probability zero, where the other has positive transition probability)
 
+#### Lemma A: 
+Let $M_1 = (P_1,V)$ and $M_2 = (P_2,V)$ be not dd irreducible finite makrov chains, $P_1 \neq P_2$ and $\theta \in (0,1)$. Let $x_0,X_1,X_2...$ be a random sequence in $V$, where $x_0$ is constant and the distribution of $x_0, X_1, ... $ follows with probability $\theta$, $M_1$ and with probability $1-\theta$, $M_2$. Then there is $t*$ such that for $t>t*$ the finite horizon $d$ optimal bayesian estimator $\mathbb P(X_{t+1}|X_{t-d+1}, X_{t-d+2} ..., X_t)$ does not equal the unbounded optimal bayesian estimator $ \mathbb P(X_{t+1}|X_1, ..., X_t) $.
+
+(TODO maybe you can replace irreduciblt with something weaker)
+TODO make this : we assume M_theta = M_1 more formal somehow, TODO define more clearley what doe not equal 
+#### Proof: 
+We cdenote the random markov cahin, that is $M_1$ with probability $\theta$ and otherwise $M_2$, with $M_\theta$. We first show two statemetns:
+- a) Probability of $M_\theta = M_1$ grows with t to one given sequenze H_t and if $M_1 = M_\theta$
+- b) Probability of $M_\theta = M_1$ less than one, given t is less than one.
+
+- a) $\lim_{t \to \infty} \mathbb P[M_\theta = M_1 | H_t] = 1$, if we assume $M_\theta = M_1$
+- b)  For all $t \in \mathbb N$ it holds: $\mathbb P[M_\theta = M_1 | H_t] < 1$, if we assume $M_\theta = M_1$
+
+
+
+##### Proof of a)  
+
+
+Since $P_1 \neq P_2$ there must be $(x,y)\in V^2$, such that $P_1((x,y)) \neq P_2((x,y))$. Let $T_i$ denote the random variable that $M_\theta$ visits $x$ for the $i$'th time. As $M_1$ and $M_2$ are irreducible and finite for $i \in \mathbb N$, $T_i$ is finite with probability 1. (TODO proof, argument?) Note that $X_{T_i}(\omega) = x$. For convenience we denote $p_1 := P_1(x,y)$ and $p_2 := P_2(x,y)$.
+
+Notice that the sequence $X_{T_1 +1}, X_{T_2 +1}, ... | M_\theta$ is iid. To make our life even more easier we define the binomial variable $Y_i = \bold 1[X_{T_i + 1} = y]$. Now $Y_1, Y_2... $ is an infinite sequence of coinflips, that land with probability $\theta$ with probability $p_1$ on heads and with probability $1-\theta$ with probability $p_2$ on heads.
+
+Let $A_t = \bold 1 [|\dfrac{S_y}{t} - p_1| < |\dfrac{S_y}{t} - p_2|] $
+
+
+$A_t \to_{a.s.} 1$ iif $M_1 = M_\theta$ (todo show)
+
+proof of a) finished
+
+##### Proof of b)
+
+Broof by induction:
+Assume $M_1 = M_\theta$, assume for $t \in \mathbb N$ it holds: $\mathbb P[M_\theta = M_1 | H_t] = p_t < 1$.
+
+Then $\mathbb P[M_\theta = M_1 | H_t, X_{t+1}] = \dfrac{\mathbb P[M_\theta = M_1|H_t]}{\mathbb P[ X_{t+1}| H_t]}\mathbb P[X_{t+1} | M_\theta = M_1,H_t] $
+
+$= \dfrac{p_t P_1(X_t, X_{t+1})}{p_tP_1(X_t, X_{t+1}) + (1-p_t)P_2(X_t, X_{t+1})} <1$
+
+
+Proof of b) finished.
+
+(todo make limit more formal, make this whole block below more formal!!)
+As we know from a) $\lim_{t\to \infty} \mathbb P(X_{t+1}|H_t) = \lim_{t\to \infty} \mathbb P(X_{t+1}|H_t, M_\theta = M_1) = \lim_{t \to \infty} P(X_{t+1}|X_t, M_\theta = M_1) = P_1((X_{t+1},X_t))$. (<- be more formal)
+But we also know from b) (TODO deal with non existance of d in b))that there is $0<p_t < 1$, s.t. $\lim_{t \to \infty} \mathbb P(X_{t+1}|X_{t-d+1},...,X_t ) = \lim_{t \to \infty} p_t \cdot P_1(X_t, X_{t+1}) + (1-p_t) \cdot P_2(X_t, X_{t+1})$. And as defined in the lemma there is x,y such that $P_1(x,y) \neq P_2(x,y)$ 
+
+QED
+
+
+
+Lemma A means the resulting probability distribution of $x_0, X_1, ... $ made in this simple construction can not be expressed by any finite horizon AM model, such as a transformer
+
+
+
+#### Hypothesis B: 
+when d grows to infinity posterior distribution can be epsilon approximated
+
+Proof: Left out
+
+#### Corolary of lemma A: 
+An upper bounded context $d_1$ length Transformer $T$ can not express the probability distribution a non-deterministic mixture of two transformers $(R,J)$ (Romeo and Juliett).
+
+#### Proof: 
+We start by showing the possibility of a reduction: Any discrete autoregressive distribution over alphabet $\Sigma$ with horizon $d$, $f:\Sigma^{[d]} \to \mathcal P_{|\Sigma|}$ can be express by an equivalent Markov chain $M=(V_m,P_m)$, where $V_m = \Sigma^{[d]}$. With equivalent it is meant that the new random model, has the same irreducible error, and the same bayesian estimation error (todo be formal about what you mean with equivalent (equivalen with respekt to obe), explain meaning of f!)
+To achieve the epuivalent markov chain, we construct $P_m$ like this: given $w \in \Sigma^{[d]}$, $x \in \Sigma$ and $f(w)(x) = p$, $P_m((w, s_1(w) \circ x)) = p$. If a transition $(a,b) \in V_m$ has not defined in the previous sentence (e.g. $s_1(a) \neq p_1(b)$), then its porbability is zero $P_m((a,b)) = 0$.
+
+(TODO: adapt to new version of lemma A, e.g. chains are not dd and irreducible)
+Therefore there exists an equivalent markov chain $M_R=(V,P_R)$  of $R$ and $M_J$ analogously of $J$. By lemma A the distribution of a non-deterministic mixture of $M_R$ and $M_J$ can not be approximated by a bounded optimal bayesian optimizer. But as the parameters of $T$ has context length $d$ it can only express distributions of auto regressive models with horizons of at most $d$. Thus $T$ can not implement the non-deterministic misxture of R and J.
+
+
+QED 
+
+#### Corolary of corolary of lemma A: 
+An upper bounded context $d_1$ length Transformer $T$ can not express the probability distribution a non-deterministic mixture of n transformers $\{J_1,...,J_n\}$ for any n>2.
+
+#### Proof (TODO)
+
+Assume ad absurdum: asumme n>0 exists, st a mixture of n fhAms can be implemented by an fhAM.
+TODO finish proof
+  - reduction of determening of fhAM_a, fhAM_b to determening n fhAMs.
+  - generate n-2 random fhAMs (fhAM_2, ..., fhAM_n), and generate sequence of tokens with p=0.5 by (fhAM_a, fhAM_b) and with 0.5 percent by (fhAM_2, ..., fhAM_n) 
+  - this would mean after d tokens obe must know whether it is fhAM_a and fhAM_b or not
+  - given that obe knows 
+
+ (TODO in definition of non deterministic mixture) (Romeo and Juliett).
+
+QED
+
+#### Comments: 
+We assumed in corolarry of Lemma A that R,J take every next token with positive probability. This assumption was necessary for the corrolary to be true in general. Imagine R would give for a word $w$ to be followed by a letter $x$ the probability zero and T not. Then the optimal estimator would disguise T as soon as x would follow after w. Does that mean it stays plausible that for a non deterministic mixture of tansfoermes, that are limited to only taking one of the k most likely letters as the next one,  to be implemented as one transformer. I believe only yes, if all parameters of R and J are perfektly well known. As soon there is some ambiguity in there parameters, suddenlty we can not be exactly sure wich one is among the top k next tokens and suddently again all tokens could appear with positve probability. But thats only a believe and I do not provide any qualitative argument on this comment.  
 
 
 ### Does independence suffice for an upper bound of estimation error?

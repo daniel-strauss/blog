@@ -3,16 +3,41 @@ languageCode: "en-us"
 title: "Daniels Blog"
 theme: [PaperMod,hugo-cite] 
 
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+
 params:
   homeInfoParams:
     Title: Hi there wave
     Content: Can be Info, links, about...
 
 
-  math: true
+  math:
+    use: true
+    config: |
+      MathJax.Hub.Config({
+        tex: {
+          packages: {'[+]': ['bbm']}
+        },
+        TeX: {
+          Macros: {
+            mathbbm: ["{\\mathbbm{#1}}",1]
+          }
+        }
+      });
+    version: "3.2"
+    url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
 
-  socialIcons: # optional
-    - name: "<platform>"
-      url: "<link>"
-    - name: "<platform 2>"
-      url: "<link2>"
+Modify the header.html Partial:
+
+socialIcons: # optional
+  - name: "<platform>"
+    url: "<link>"
+  - name: "<platform 2>"
+    url: "<link2>"
+
+
+      

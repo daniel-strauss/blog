@@ -7,3 +7,39 @@ No, the AM represented by a random transformer has an event horizon of infinity.
 #### A sparce Mixture of Transformers has an infinite horizon
 
 Suppose bernoulli distributed $\theta$ describing am with horizon of one. then $\theta$ together with am would create series with infinite horizon
+
+
+
+Lemma A: Let $M_1 = (P_1,V)$ and $M_2 = (P_2,V)$ be markov chains, $P_1 \neq P_2$ and $\theta \sim Ber(a,b)$ and constants $a,b \in (0,1)$ and $a \neq b$. Let $x_0,X_1,X_2...$ be a random sequence in $V$, where $x_0$ is constant and $X_1, ...$ be described with probability $\theta$ by $M_1$ and with probability $1-\theta$ by $M_2$. Then the finite horizon $d$ optimal bayesian estimator $\mathbb P(X_{t+1}|X_{t-d+1}, X_{t-d+2} ..., X_t)$ does not equal the unbounded optimal bayesian estimator $\mathbb P(X_{t+1}|X_1, ..., X_t) $ for $t>d$.
+(TODO you might be able to simplify that M_1 ~ Bin(a))
+Proof: TODO
+
+Below GRABAGE
+
+Since $P_1 \neq P_2$ there must be $(x,y)\in V^2$, such that $P_1((x,y)) \neq P_2((x,y))$. Let $T_i$ denote the random variable that $M_\theta$ visits $x$ for the $i$'th time. As $M_1$ and $M_2$ are irreducible and finite for $i \in \mathbb N$, $T_i$ is finite with probability 1. (TODO proof, argument?) Note that $X_{T_i}(\omega) = x$.
+
+Now:
+
+EQ1: $\mathbb P(X_{T_i +1} = y| H_{T_i}) = P_1(x,y) \mathbb P(M_\theta = M_1|H_{T_i}) + P_2(x,y) \mathbb P(M_\theta = M_2|H_{T_i})$
+
+  | Lets find a simpler expression for $P(M_\theta = M_1|H_{T_i})$:
+  $P(M_\theta = M_1|H_{T_i}) = $
+
+----
+
+
+$= P_1(x,y) \mathbb P(M_\theta = M_1|H_{T_i}) + P_2(x,y) \mathbb P(M_\theta = M_2|H_{T_i})$
+
+
+<!---
+Since $P_1 \neq P_2$ and $M_1$ and $M_2$ are irreducible there is $t'$, such that $P_1((X_{t'},X_{t'+1})) \neq P_2((X_{t'},X_{t'+1}))$. For simplicity we define $\hat P_1 := P_1((X_{t'},X_{t'+1}))$ and $\hat P_2 := P_2((X_{t'},X_{t'+1}))$.
+Lets analyze this probability:
+
+$\mathbb P(X_{t'+1}| H_{t'}) = \mathbb P(X_{t'} | X_{t'+1}, M_\theta =  M_1) \cdot \mathbb P(M_\theta =  M_1 | H_{t'}) + \mathbb P(X_{t'} |X_{t'+1}, M_\theta =  M_2) \cdot \mathbb P(M_\theta =  M_2 | H_{t'})$
+
+$= \hat P_1 \cdot \mathbb P(M_\theta =  M_1 | H_{t'}) + \hat P_2 \cdot \mathbb P(M_\theta =  M_2 | H_{t'})$ = .
+
+thus hat M_1 and hat M_2 have to be known (actually only a part of them has to be known)
+
+-->
+ABOVE GARBAGE
