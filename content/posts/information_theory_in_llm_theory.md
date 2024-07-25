@@ -579,15 +579,26 @@ Every autoregressive distribution $H_T=X_1, ..., X_T$ can be represented by a mo
 
 Let $\Sigma$ be the alphabet of $H_T$. Let $f: \Sigma^\infty \to \mathbb R^n$ be a bijection.
 
-We define $A(\theta) := h \to (x \to \mathbb P[f^{-1} (\theta)_{|h|+1}  = x| f^{-1}(\theta)_{1:|h|} = h])$ 
- where $f^{-1}(\theta)_{i:j}$ defines the word that goes from $i$'th cahracter of the word $f^{-1}(\theta)$ until the $j$'th character.
+<!---
+We define $A(\theta) :=$
+$ h \to (x \to \mathbb P[f^{-1}$ $(\theta)_{|h|+1} = x| f^{-1}(\theta)_{1:|h|} = h]) $
+-->
+
+We define ![Equation](https://latex.codecogs.com/png.latex?A(\theta)%20:=%20h%20\mapsto%20(x%20\mapsto%20\mathbb{P}[f^{-1}(\theta)_{|h|%2B1}%20=%20x%20\mid%20f^{-1}(\theta)_{1:|h|}%20=%20h]))
+
+
+where $f^{-1}(\theta)_{i:j}$ defines the word that goes from $i$'th cahracter of the word $f^{-1}(\theta)$ until the $j$'th character.
 I am sorry that this expression looks confusing but I will try to explain: $f^{-1}(\theta)$ is just an invinite long word. $A(\theta)(h)(x)$ returns 1 iif the word $h \circ x$ is a prefix of $f^{-1}(\theta)$. If $h$ is a prefix of $f(\theta)$, but $h \circ x$, then $A(\theta)(h)(x) = 0$ and otherwise $A(\theta)$ is undefined. $A$ will start to make more sence once $\theta$ is a random variable.
 
 Note that $A$ is a not well-defined autoregressive model, but by far not a full autoregressive model.
 
 Now for a given autoregressive sequence $H_T$, we define the random vector $\theta = f(H_T \circ 0^\infty)$.
 
-Then $A(\theta)(h_t)(x) \overset{a)}{=} \mathbb P[f^{-1} (\theta)_{t+1}  = x| f^{-1}(\theta)_{1:t} = h_t] = \mathbb P[X_{t+1}  = x| H_t = h_t]$, e.g. b) $H_T \sim A(\theta)$.
+Then $A(\theta)(h_t)(x) \overset{a)}{=} $
+
+$\mathbb P(f^{-1} (\theta)_{t+1} = x | f^{-1}(\theta)_{1:t} = h_t) $
+
+$= \mathbb P[X_{t+1}  = x| H_t = h_t]$, e.g. b) $H_T \sim A(\theta)$.
 
 
 Since $f^{-1}$ is deterministic, $\theta$ contains all information of $H_T$ and we can conclude from a) and b): $\mathbb H(H_T) = \mathbb I(H_T;\theta)$
