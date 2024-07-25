@@ -43,3 +43,11 @@ thus hat M_1 and hat M_2 have to be known (actually only a part of them has to b
 
 -->
 ABOVE GARBAGE
+
+
+
+- write how cool it would be if we where able to find for a given X distribution, the bayesian prior that maximises the estimation error
+  - would the resulting model then be the perfect model for this distribution?
+    - this is the model that would minizie H(X|Theta)   
+    - this means that for many samples better estimation performance? (no bayesian prior always perfekt, but we are not, maximal possible estimation error tells us how much randomness will be removed for many samples) 
+  - for example uniform distribution forces estimation error to be zero, e.g. every modelling of uniform distribution is equal as shit

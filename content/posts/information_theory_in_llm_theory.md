@@ -564,51 +564,45 @@ In Lemma B.1 we found, that we can do such a shitty job when modeling a dstribut
 (todo define parametrization)
 Can we also do the oposite? Imagine for a given random sequence $H_T$ we can find a parametrization $A, \mathcal Y$, s.t. the estimation error is maximal. Since this parametrization would maximize the estimation error, it would minimize $H(H_T|\Theta)$.
 Would we thereby find a model, such that it parameters can describe the sequence the best? Would we therby find the "perfect" model for this sequence? 
-Lemma B.2 shows, that for every sequence there exists a parametrization, such that $H(H_T|\Theta) = 0$, but when you read the proof you will be disappointed.
+Lemma B.2 shows, that for every random sequence there exists a parametrization, such that $H(H_T|\Theta) = 0$, but when you read the proof you will be disappointed.
 
 
-
-- write how cool it would be if we where able to find for a given X distribution, the bayesian prior that maximises the estimation error
-  - would the resulting model then be the perfect model for this distribution?
-    - this is the model that would minizie H(X|Theta)   
-    - this means that for many samples better estimation performance? (no bayesian prior always perfekt, but we are not, maximal possible estimation error tells us how much randomness will be removed for many samples) 
-  - for example uniform distribution forces estimation error to be zero, e.g. every modelling of uniform distribution is equal as shit
-
-
-----
 
 #### Lemma B.2
 
-Every autoregressive distribution $H_T=X_1, ..., X_T$ can be represented by a model with an estimation error of $\mathbb H(H_T)$.
+Every autoregressive distribution $H_T=X_1, ..., X_T$ can be represented by a model with an estimation error of $\mathbb H(H_T)/T$.
 
 
 #### Proof
 
-(doenst have to be a bijection)
+(todo doenst have to be a bijection)
 
 Let $\Sigma$ be the alphabet of $H_T$. Let $f: \Sigma^\infty \to \mathbb R^n$ be a bijection.
 
-We define $A(\theta) := h \to (x \to \mathbb P[f^{-1} (\theta)_{|h|+1}  = x)| f^{-1}(\theta)_{1:|h|} = h]$ 
+We define $A(\theta) := h \to (x \to \mathbb P[f^{-1} (\theta)_{|h|+1}  = x| f^{-1}(\theta)_{1:|h|} = h])$ 
  where $f^{-1}(\theta)_{i:j}$ defines the word that goes from $i$'th cahracter of the word $f^{-1}(\theta)$ until the $j$'th character.
-I am sorry that this expression looks confusing but I will try to explain: $f^{-1}(\theta)$ is just an invinite long word. $A(\theta)(h)(x)$ returns 1 iif the word $h \circ x$ is a prefix of $f^{-1}(\theta)$. If $h$ is a prefix of $f(\theta)$, but $h \circ x$, then $A(\theta)(h)(x) = 0$ and otherwise $A(\theta)$ is undefined. 
+I am sorry that this expression looks confusing but I will try to explain: $f^{-1}(\theta)$ is just an invinite long word. $A(\theta)(h)(x)$ returns 1 iif the word $h \circ x$ is a prefix of $f^{-1}(\theta)$. If $h$ is a prefix of $f(\theta)$, but $h \circ x$, then $A(\theta)(h)(x) = 0$ and otherwise $A(\theta)$ is undefined. $A$ will start to make more sence once $\theta$ is a random variable.
 
 Note that $A$ is a not well-defined autoregressive model, but by far not a full autoregressive model.
 
 Now for a given autoregressive sequence $H_T$, we define the random vector $\theta = f(H_T \circ 0^\infty)$.
 
-Then $A(\theta)(h_t)(x) = \mathbb P[f^{-1} (\theta)_{t+1}  = x| f^{-1}(\theta)_{1:t} = h_t] = \mathbb P[X_{t+1}  = x| H_t = h_t]$, e.g. $H_T \sim A(\theta)$.
+Then $A(\theta)(h_t)(x) \overset{a)}{=} \mathbb P[f^{-1} (\theta)_{t+1}  = x| f^{-1}(\theta)_{1:t} = h_t] = \mathbb P[X_{t+1}  = x| H_t = h_t]$, e.g. b) $H_T \sim A(\theta)$.
 
 
+Since $f^{-1}$ is deterministic, $\theta$ contains all information of $H_T$ and we can conclude from a) and b): $\mathbb H(H_T) = \mathbb I(H_T;\theta)$
 
+
+QED
 
 ----
 
 
-- write how cool it would be if we where able to find for a given X distribution, the bayesian prior that maximises the estimation error
-  - would the resulting model then be the perfect model for this distribution?
-    - this is the model that would minizie H(X|Theta)   
-    - this means that for many samples better estimation performance? (no bayesian prior always perfekt, but we are not, maximal possible estimation error tells us how much randomness will be removed for many samples) 
-  - for example uniform distribution forces estimation error to be zero, e.g. every modelling of uniform distribution is equal as shit
+So why are we disapointed after reading the proof of Lemma B.2.? Because eventhough by maximising $\mathbb I(H_T;\theta)$ we found a model that contains all output randomness in its parameters, this model is still shit, as it doesnt permit a way to make more certain probabilistic statements about $\theta$, when observing more elements of the sequence $X_1, ..., X_T$.
+
+
+So what does the content of this section have to do with its title?
+Lemma B.1 and B.2 showed that for any random sequence, we find a way to express this sequence with a model, such that a) no information of the sequence is contained in the model and b) all information of the sequence is contained in the model. Therefore in my opinion the estimation error tells us something about the model, one has choosen to describe a distribution, but less about the distribution itself. I think that from the estimation error we can learn about how much information a given neural architecture can hold in its parameters. At the same time I think that the estimation error tells us less about how well it is possible to learn something from a given distribtion as was done in {{< cite "jeon2024information" >}}. I think this as the estimation error can be zero for any distribution as well as the entires distributions entropy, solely depending on how the distribution is expressed. 
 
 
 
