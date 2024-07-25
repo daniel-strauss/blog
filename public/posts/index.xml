@@ -8,13 +8,13 @@
     <language>en-us</language>
     <atom:link href="https://strammermax27.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Information Theory in LLM Theory</title>
+      <title>Some Information Theoretic Perspectives on LLM Theory</title>
       <link>https://strammermax27.github.io/posts/information_theory_in_llm_theory/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>https://strammermax27.github.io/posts/information_theory_in_llm_theory/</guid>
       <description>⚠️ 📥 😚 🛡 🚦 👹 🌿 By reading this blogpost, you will find out, why this emoji sequence is here.
-Introduction A Brief Introduction on Information Theory In this section we want to provide a brief overview on Information Theory.
-Imagine you lived $40\cdot n$ years in the future and that the population has doubled every $40$ years. For simplicity assume that in the current present just one person is alive.</description>
+TODO rewrite thetas, random theta: big, constant theta small
+Introduction In this Blogpost you will learn about some papers, that explored LLMs through the lens of Information Theory. We will look at one paper in detail, that looked specifically at the phenomenon of in-context learning by making assumptions about the probability distribution of the training data.</description>
     </item>
   </channel>
 </rss>

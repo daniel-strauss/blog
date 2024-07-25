@@ -120,5 +120,33 @@
     },
     "title": "Language modeling is compression",
     "type": "paper-conference"
+  },
+  {
+    "DOI": "10.4249/scholarpedia.1658",
+    "author": [
+      {
+        "family": "Latham",
+        "given": "P. E."
+      },
+      {
+        "family": "Roudi",
+        "given": "Y."
+      }
+    ],
+    "container-title": "Scholarpedia",
+    "id": "latham2009",
+    "issue": "1",
+    "issued": {
+      "date-parts": [
+        [
+          2009
+        ]
+      ]
+    },
+    "note": "revision #186917",
+    "page": "1658",
+    "title": "Mutual information",
+    "type": "article-journal",
+    "volume": "4"
   }
 ]

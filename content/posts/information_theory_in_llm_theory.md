@@ -6,6 +6,8 @@ bibFile: data/bibliography.json # path relative to project root
 ⚠️ 📥 😚 🛡 🚦 👹 🌿 *By reading this blogpost, you will find out, why this emoji sequence is here.*
 
 
+TODO rewrite thetas, random theta: big, constant theta small
+
 ## Introduction
 
 In this Blogpost you will learn about some papers, that explored LLMs through the lens of Information Theory. We will look at one paper in detail, that looked specifically at the phenomenon of in-context learning by making assumptions about the probability distribution of the training data.
@@ -65,24 +67,6 @@ Please note that on Wikipedia equivalent but different definitions of these term
 - briefly name an example applications from coding theory
 - briefly name an example of neurology where neurons may maximize their entropy
 -->
-
-
-
-### Philosofical Interlude: Does Information Exist?
-
-Chapter Draft (everything in this draft is very vague, dont read)
-- make reader know that you are critic of your own ideas
- - Previous Section information relied on an assumed probability space
- - what is probability? It is a way to formally express of what can be known and what can not be known? (<- express waeknasses of that thought and derive it and be more precise and present alternatives of expressong of what can be known and what not)
-- Problems of probability:
-    - How well can be known what can not be know? Well enough to express probabilitys? (name logic example to define what can be known and what can be not and probabilistic example, and argue whether there is something inbetween)
-
-    - maybe also everything can be known and everything happens with probability one (<- drop argument, why one can not be sure that universe is not deterministic universe, by using argument based on an explanation why even anything exists)
-        - explain that under that circumstances only physically isolated can be known, using similar "proof" as holding theorems proof
-        - include limitations of calculation power into probability?
-- use previous arguments to express where probabilistic assumptions might  be off and name examples on how it could affect us practically
-- conclude if we are carefull enough with probabilistic assumptions under scenario a everything has information 0, under scenario b everything has information $\infty$ and under scenario a using limitation of physical possible calculation power information content is impossibly hard to compute
-- mention that information theory has been usefull anyway
 
 
 
@@ -194,10 +178,16 @@ In the rest of this section we will present derived expressions for $\mathcal L_
 
 Firstly we discuss two information theoretic results of $\mathcal L_{M,T}$. 
 
+----
+#### Theorem Jeon.3.2 ({{< cite "jeon2024information" >}})
+
 $\mathcal L_{M,T} = \dfrac{\mathbb I(H_T^{(M)};\theta)}{MT}$
 
 
-Proof:
+(I adapted the original theorem slightly as the apaption fits better into this explanation.)
+
+----
+#### Proof:
 
 We know $\mathbb H(X) = \mathbb H(X|Y) + \mathbb I(X;Y)$, therfore it suffices to show that $\mathbb L_{M,T} \cdot MT = \mathbb H(H_T^{(M)})$. This is true since:
 
@@ -208,8 +198,11 @@ a) follows from the chain rule of probability.
 
 QED
 
-Be  aware I often do mistakes, when proofing something.
-I presented my own version of the proof of this equation as it contains the intermediate result $\mathbb L_{M,T}  = \dfrac{\mathbb H(H_T^{(M)})}{MT}$. Thus we can see $\mathbb L_{M,T}$ as the average entropy per token.
+Disclaimer: This is my own version of the proof, I dont guarantee correctness.
+
+----
+
+As an intermediate result of the proof we obtained $\mathbb L_{M,T}  = \dfrac{\mathbb H(H_T^{(M)})}{MT}$. Thus we can see $\mathbb L_{M,T}$ as the average entropy per token.
 
 
 This equation means roughly speaking, that the estimation error consits of these parts in $\theta$, that are conveyed to $H_T^{(M)}$. For example as we often model $\theta$ as a continous random variable and $H_T^{(M)}$ as a discrete random variable, $H_T^{(M)}$ can not contain all information in $\theta$. (<- be more clear)
@@ -217,28 +210,34 @@ This equation means roughly speaking, that the estimation error consits of these
 As in previous section, we have worked out a way to separate $\theta = \theta_1, ...\theta_m$ into two independent random variables, namely $\theta|\psi$ and $\psi$, we continue by expressing $\mathcal L_{M,T}$ with these two random variables. 
 
 
-$\mathcal L_{M,T} = $
+----
+#### Theorem Juan.4.2 ({{< cite "jeon2024information" >}})
 
-$\underbrace{\dfrac{\mathbb I(H_T^{(M)};\psi)}{MT}}_\text{meta
+$\mathcal L_{M,T} = \underbrace{\dfrac{\mathbb I(H_T^{(M)};\psi)}{MT}}_\text{meta
 estimation error}$ + 
 
 $+ \underbrace{\dfrac{\mathbb I(D_m;\theta_m|\psi)}{T}}_\text{intra document estimation error}$
 
 (todo make  both  sum elements appear in the same line)
 
+----
+
+#### Proof
+
+From Theorem Jeon.3.2 we know $\mathcal L_{M,T} = \dfrac{\mathbb I(H_T^{(M)};\theta)}{MT}$.
 
 To proof this equation it suffices to show 
 
-- A) $\mathbb I(H_T^{(M)};\theta) = \mathbb I(H_T^{(M)};\psi) + \mathbb I(H_T^{(M)};\theta|\psi) $
-- B) $\mathbb I(H_T^{(M)};\theta|\psi) = M \cdot \mathbb I(D_m;\theta_m|\psi)$
+- a) $\mathbb I(H_T^{(M)};\theta) = \mathbb I(H_T^{(M)};\psi) + \mathbb I(H_T^{(M)};\theta|\psi) $
+- b) $\mathbb I(H_T^{(M)};\theta|\psi) = M \cdot \mathbb I(D_m;\theta_m|\psi)$
 
 
-We defined earlier $D_m \bot \psi | \theta_m$, which means $ H_T^{(M)} \bot \psi | \theta$ (<- be more formal?). Therefore $\mathbb I(H_T^{(M)};\theta) = \mathbb I(H_T^{(M)};(\theta, \psi))$. Then A) follows from the chain rule of mutual information.
+We defined earlier $D_m \bot \psi | \theta_m$, which means $ H_T^{(M)} \bot \psi | \theta$ (<- be more formal?). Therefore $\mathbb I(H_T^{(M)};\theta) = \mathbb I(H_T^{(M)};(\theta, \psi))$. Then b) follows from the chain rule of mutual information.
 
-B) follows from $\mathbb I(H_T^{(M)};\theta|\psi) \overset{a)}{=} \sum_{m=1}^M  \mathbb I(D_m;\theta_m|\psi) \overset{b)}{=} M\cdot \mathbb I(D_m;\theta_m|\psi) $. 
+b) follows from $\mathbb I(H_T^{(M)};\theta|\psi) \overset{b.1)}{=} \sum_{m=1}^M  \mathbb I(D_m;\theta_m|\psi) \overset{b.2)}{=} M\cdot \mathbb I(D_m;\theta_m|\psi) $. 
 
-Equation a) holds because the pairs $(D_1, \theta_1)|\psi, ..., (D_M, \theta_M)|\psi$ are independent and mutual information is additive for independent variables.(http://www.scholarpedia.org/article/Mutual_information)  
-As $ (D_1, \theta_1),..., (D_M, \theta_m) | \psi$ are identically distributed, for any $a,b \in \{1,...,M\}$, $\mathbb I(D_a;\theta_a|\psi) = \mathbb I(D_b;\theta_b|\psi)$. Therefore b) is true.
+Equation b.1) holds because the pairs $(D_1, \theta_1)|\psi, ..., (D_M, \theta_M)|\psi$ are independent and mutual information is additive for independent variable pairs  {{< cite "latham2009" >}}.
+As $ (D_1, \theta_1),..., (D_M, \theta_m) | \psi$ are identically distributed, for any $a,b \in \{1,...,M\}$, $\mathbb I(D_a;\theta_a|\psi) = \mathbb I(D_b;\theta_b|\psi)$. Therefore b.2) is true.
 
 
 
@@ -246,12 +245,16 @@ As $ (D_1, \theta_1),..., (D_M, \theta_m) | \psi$ are identically distributed, f
 QED  
 
 
+Disclaimer: This is my own version of the proof, I dont guarantee correctness.
+
+---
+
 The authors seperate the term into two parts, the meta estimation error and the intra document estimation error. The meta estimation error describes the error, of learning information shared shared by all documents. The intra document estimation error is the error of learning the parameters of learning individual documents after having learned the shared information $\psi$. Lets say we have arbitrarily many training samples $A$ for our optimal bayesian estimator in which $D_m$ does not occur. Due to them being arbitrarily many, let's suppose $\psi$ has been well enough discovered, such that $\mathbb I(D_m;\psi | A)$ is about 0. Then the error of estimating $D_m$ is about the intra-document error. This means, that even of we perfectly train our model, there will be some error bigger than zero related to the estimation of the probability that generates the data? Or will it realy be bigger than zero? More on this cliffhanger later (<- TODO!) 
 
 
 ### Results from assumptions of bayesian prior
 
-In order to make the results about the error of the optimal bayesian estimator more concrete more assumptions about the bayesian prior are required. Unfortinately as discussed in section (TODO) our view on amount of information requires the distribution of the bayesian prior to be well enough known (in this case "well enough" usually means ""). Specifically for the work of {{< cite "jeon2024information" >}} a distribution of the training documents would be well-defined, if the AMs in the sparce mixture where well defined. Therefore as discussed in section (todo: add reference), the AMs where modeled as random transformers, where the transformer parameters $\thera^{(n)}$ are random variables that stem from the same distribution and are independent. 
+In order to make the results about the error of the optimal bayesian estimator more concrete more assumptions about the bayesian prior are required. Unfortinately as discussed in section (TODO) our view on amount of information requires the distribution of the bayesian prior to be well enough known (in this case "well enough" usually means ""). Specifically for the work of {{< cite "jeon2024information" >}} a distribution of the training documents would be well-defined, if the AMs in the sparce mixture where well defined. Therefore as discussed in section (todo: add reference), the AMs where modeled as random transformers, where the transformer parameters $\theta^{(n)}$ are random variables that stem from the same distribution and are independent. 
 
 Does the independence maximise the output entropy of the resulting tokensequence under the assumption, that the distribution of the actual training data sequence can be generated by a fixed parameter transfomer? If that was true, the upper bounds of {{< cite "jeon2024information" >}}, at which we will look in this section, would be an upper bound  for any distribution of the parameters of the transformers. In Section (Does independence suffice for an upper bound of estimation error?), I provide qualitative arguments that this is not the case.
 
@@ -268,8 +271,8 @@ To define the transformer architecture they define
   - $U_{t,l}$ to be the ouput of layer $l$ at time $t$
   - $U_{t,0}$ to be the embeding of the last $K$ tokens at time $t$
   - $\sigma$ to denote the softmax function
-  - $A^(l) \in \mathbb R^{r \times r}$ to be the product of keay and query matrices of layer $l$
-  - $V^(l) \in \mathbb R^{r \times r}, V^{(L)} \in \amthbb R^{d \times r}$ to denote the value matrix of layer $l$. 
+  - $A^{(l)} \in \mathbb R^{r \times r}$ to be the product of keay and query matrices of layer $l$
+  - $V^{(l)} \in \mathbb R^{r \times r}$, $V^{(L)} \in \mathbb R^{d \times r}$ to denote the value matrix of layer $l$. 
   - $\text{Attn}^{(l)}(U_{t,l-1} = \sigma(\dfrac{U_{t,l-1}^T A^{(l)}U_{t,l-1}}{\sqrt r}))$ to be the attention matrix of layer $l$ 
 
 Therefore $U_{t,l} = \text{Clip}(V^{(l)}U_{t,l-1}\text{Attn}^{(l)}(U_{t, l-1}))$
@@ -305,11 +308,9 @@ For the case in which there are $M$ training documents and there is a sparse mix
 If $D_1,...,D_M $ is generated by the above defined sparse mixture of transformers, then
 
 $\mathcal L_T \leq 
-\dfraq{pR\ln(1+\frac{M}{R} pRL\ln(136\e K^2) }{MT}
-+ \dfraq{pR\ln(1+\frac{M}{R}) \ln(\frac{2KMT^2}{L})}{MT}
-+ \dfrac{\ln(N)}{T}$
+\dfrac{pR\ln(1+\frac{M}{R} )\ln(136 \text{e} K^2) }{MT} + \dfrac{pR\ln(1+\frac{M}{R}) \ln(\frac{2KMT^2}{L})}{MT}+ \dfrac{\ln(N)}{T}$
 
-, where $p = 2r^2(L-1) + (dr + r^2)$ denotes the parameter count of each trans transformer.
+, where $p = 2r^2(L-1) + (dr + r^2)$ denotes the parameter count of each transformer.
 
 
 ---------
@@ -325,27 +326,47 @@ $\mathcal L_T \leq
 - transformers can imitate every upper bounded finite horizon am model
 - but they cant imitate infinite horizon documents
 
-Unformal Lemma 0: There exists at least one document, whichs very end is dependent on the very beginning of the document, even if the middle of the document is known.
+----
 
-Unformal Proof: Scroll down to the very end of this document below the references. unformal QED
+#### Unformal Lemma 0: 
 
+There exists at least one document $d$, which has a word in the very end $w_e$, which is statistically dependent on the very beginning $w_b$ of the document, even given the rest of the document. 
+
+----
+
+#### Unformal Proof: 
+Scroll down to the very end of this document below the references. 
+
+QED
+
+---
 ### Can a transformer implement a sparse mixture of transformers?
 
 !!IMPORTANTE IMPORTANTE!!: adapt notation to juan et al 2024!!!!!
 
 (No a sparce mixture of transformers has an infinite horizon.)
 
-In this section, we show that a sparce mixtrue of transformers can not be $\epsilon$ approximated by a set of AM models, with upper bounded horiozons.
+In this section, we show that a sparce mixtrue of AMs can not be expressed by a set any finite horizon AM model. Furthermore we hypothesize which 
 
-
+----
 #### Definition: 
-Let $A$ be a set and $n \in \mathbb N$, then **$A^{[n]} := \bigcup_{i\in \{0,1,...,n\}} A^i$**. $A^i$ can be seen as the set of all words of length $i$ over alphabet $A$ and consequently $A^0$ as the set, that contains the empty word, given $A$ is not the empty set. 
+Let $A$ be a set and $n \in \mathbb N$, then **$A^{[n]} := \bigcup_{i\in \{0,1,...,n\}} A^i$**. 
+
+----
 
 
-#### TODO Define non deterministic mixture. s_1, d_1
+$A^i$ can be seen as the set of all words of length $i$ over alphabet/tokenset $A$ and consequently $A^0$ as the set, that contains the empty word, given $A$ is not the empty set. 
+
+----
+
+#### TODO Define s_1, d_1
+
+---
 
 #### Definition: 
 Two makrov-chains $M_1 = (P_1,V)$ and $M_2 = (P_2,V)$ are called **deterministically distinguishable (dd)** if there is transition $e \in V^2$, such that $P_1(e) + P_2(e)>0$ and $P_1(e) \cdot P_2(e) = 0$. (E.g. $M_1$ and $M_2$ are dd if one has a transition with probability zero, where the other has positive transition probability)
+
+----
 
 #### Lemma A: 
 Let $M_1 = (P_1,V)$ and $M_2 = (P_2,V)$ be not dd but irreducible and finite makrov chains, $P_1 \neq P_2$ and $\theta \in (0,1)$. Let $x_0,X_1,X_2...$ be a random sequence in $V$, where $x_0$ is constant and the distribution of $x_0, X_1, ... $ follows with probability $\theta$, $M_1$ and with probability $1-\theta$, $M_2$. Then there is $t*$ such that for infinite $t>t*$ the finite horizon $d$ optimal bayesian estimator $\mathbb P(X_{t+1}|X_{t-d+1}, X_{t-d+2} ..., X_t)$ does not equal the unbounded optimal bayesian estimator $ \mathbb P(X_{t+1}|X_1, ..., X_t) $.
@@ -394,16 +415,18 @@ But we also know from b) (TODO deal with non existance of d in b))that there is 
 
 QED
 
-
+---
 
 Lemma A means the resulting probability distribution of $x_0, X_1, ... $ made in this simple construction can not be expressed by any finite horizon AM model, such as a transformer
 
-
+----
 
 #### Hypothesis B: 
 when d grows to infinity posterior distribution can be epsilon approximated
 
 Proof: Left out
+
+----
 
 #### Corolary of lemma A: 
 An upper bounded context $d_1$ length Transformer $T$ can not express the probability distribution a non-deterministic mixture of two transformers $(R,J)$ (Romeo and Juliett).
@@ -417,6 +440,8 @@ Therefore there exists an equivalent markov chain $M_R=(V,P_R)$  of $R$ and $M_J
 
 
 QED 
+
+----
 
 #### Corolary of corolary of lemma A: 
 An upper bounded context $d_1$ length Transformer $T$ can not express the probability distribution a non-deterministic mixture of n transformers $\{J_1,...,J_n\}$ for any n>2.
@@ -434,8 +459,12 @@ TODO finish proof
 
 QED
 
+----
+
 #### Comments: 
-We assumed in corolarry of Lemma A that R,J take every next token with positive probability. This assumption was necessary for the corrolary to be true in general. Imagine R would give for a word $w$ to be followed by a letter $x$ the probability zero and T not. Then the optimal estimator would disguise T as soon as x would follow after w. Does that mean it stays plausible that for a non deterministic mixture of tansfoermes, that are limited to only taking one of the k most likely letters as the next one,  to be implemented as one transformer. I believe only yes, if all parameters of R and J are perfektly well known. As soon there is some ambiguity in there parameters, suddenlty we can not be exactly sure wich one is among the top k next tokens and suddently again all tokens could appear with positve probability. But thats only a believe and I do not provide any qualitative argument on this comment.  
+We assumed in corolarry of Lemma A that R,J take every next token with positive probability. This assumption was necessary for the corrolary to be true in general. Imagine R would give for a word $w$ to be followed by a letter $x$ the probability zero and T not. Then the optimal estimator would disguise T as soon as x would follow after w. Does that mean it stays plausible that for a non deterministic mixture of tansfoermes, that are limited to only taking one of the k most likely letters as the next one,  to be implemented as one transformer. I believe only yes, if all parameters of R and J are perfektly well known. As soon there is some ambiguity in there parameters, suddenlty we can not be exactly sure wich one is among the top k next tokens and suddently again all tokens could appear with positve probability. But thats only a believe and I do not provide any qualitative argument on that.
+
+Also if we assume that 
 
 
 ### Does independence suffice for an upper bound of estimation error?
@@ -482,9 +511,62 @@ X itself is the hardest to estimate if it is uniform distributed. But if we know
 if estimation error is bigger than zero, interesstingly X is not for sure uniform distrivuted (if we kew for sure X was uniform distributed then estimation error was zero, as we would then have no uncertainty about distribution)). Does this observation challenge the meaning of the estimation error? Maybe we should not go about maximizing the estiamtion error?
 
 
-### Does the estimation error have a meaning
+### What is the meaning of the estimation error
 
-- write down how every distribution can be represented with an estimation error of 0 (use functions A and K, use uniform instead of gausian bayesian prior)
+
+In Section (TODO add reference), we cited this result for the error of the obe:
+
+$\mathbb L_{M,T} MT= \mathbb H[H_M^{(T)}] = \mathbb I(H_M^{(T)};\theta) + \mathbb H(H_M^{(T)}|\theta)$
+
+And then the estimation error $\mathbb I(H_M^{(T)};\theta)$ got extra care in the further analysis, as it conveys how hard it is to guess model parameters.
+
+
+As we will argue in this Section, the estimation error is fully dependent on the bayesian prior model and independent of the resulting distribution. 
+E.g. a sequence generated by a random transformer, can also be generated with the same distribution by a high amount of other random or non random models.
+
+----
+#### Lemma B.1
+
+Every autoregressive distribution $X_1, ..., X_T$ over the finite alphabet $\Sigma$ can be represented by a parametrized model with an estimation error of 0.
+
+(use functions A and K, use uniform instead of gausian bayesian prior)
+
+
+#### Proof
+Let $\mathcal P_{\Sigma}$ the set of all probability distributions over $\Sigma$.
+Let $\mathcal P_{T} = \\{ \Sigma^{[T-1]} \to P_\Sigma \\}$ the set of all autoregressive probability distributions with $T$ tokens. 
+An element in $\mathcal P_{T}$ can be seen to take in a sequnce of tokens and to return the probability distribution for the next token.
+
+We call $A: \mathbb R^n \to P_T$ an autoregressive model. If a model $A$ is surjective, we call $A$ a full autoregressive model, since it can parametrize all autoregressive distributions. 
+
+At least one full model exists, since $\mathbb R^n$ and $\mathcal P_T$ have the same cardinality.
+
+A transformer is for example an autoregressive model. I dont know whether a transformers with context length T can $\epsilon$-approximate a full autoregressive model.
+
+
+
+Let $H_T$ be representable by a full autoregressive model, such that its estimation error is bigger than zero. This means there is a a full autoregressive model $A$
+and $\mathcal Y \in \mathcal P_{\mathbb R^n}$ and $\theta \sim \mathcal Y$ ($\theta$ be a random vector of some distribution), such that $H_T \sim A(\theta)$ and $\mathbb I(H_T;\theta)>0$.
+
+Notice that $A(\theta) \in \mathcal P_T$. As $A$ is surejectiv there is constant $\theta_0 \in \mathbb R^n$, such that $A(\theta_0) = A(\theta)$ and thus $H_T \sim A(\theta_0)$.
+
+If we model $H_T \sim A(\theta_0)$, then $\mathbb H(\theta_0) = 0$ and therefore we obtain an estimation error of $0$: $\mathbb I(H_T;\theta_0) = 0$.
+
+(TODO move definition of full autoregressive model above lemma statement maybe into previous section)
+
+QED
+
+----
+
+
+In Lemma B.1 we found, that we can do such a shitty job when modeling a dstribution, that by looking at the data and updating our model parameters accordingly we will never be able to describe a autoregressive distribution more precise, the more tokens we observe, e.g. we will never have to update them. (Still the model would become better at predicting the distribution by observing it, but that information would not be stored in updated model parameters.)
+
+(todo define parametrization)
+Can we also do the oposite? Imagine for a given random sequence $H_T$ we can find a parametrization $A, \mathcal Y$, s.t. the estimation error is maximal. Since this parametrization would maximize the estimation error, it would minimize $H(H_T|\Theta)$.
+Would we thereby find a model, such that it parameters can describe the sequence the best? Would we therby find the "perfect" model for this sequence? 
+Lemma B.2 shows, that for every sequence there exists a parametrization, such that $H(H_T|\Theta) = 0$, but when you read the proof you will be disappointed.
+
+
 
 - write how cool it would be if we where able to find for a given X distribution, the bayesian prior that maximises the estimation error
   - would the resulting model then be the perfect model for this distribution?
@@ -493,68 +575,42 @@ if estimation error is bigger than zero, interesstingly X is not for sure unifor
   - for example uniform distribution forces estimation error to be zero, e.g. every modelling of uniform distribution is equal as shit
 
 
+----
+
+#### Lemma B.2
+
+Every autoregressive distribution $H_T=X_1, ..., X_T$ can be represented by a model with an estimation error of $\mathbb H(H_T)$.
 
 
-|||||||| Below Unfinished Ideas |||||||
+#### Proof
 
-#### When can we make assumptions of the the familie of AMs
+(doenst have to be a bijection)
 
-Lets suppose following scenario: we have a sequence of random tokens $X_1, ..., X_T$ and know that this sequence is autoregressive with finite horizon T-d, which means $\mathbb P(X_{t+1} | X_{t-T+d}, ..., X_{t-1}) = \mathbb P(X_{t+1}|H_t, X_{t+2}, ...X_{T})$.
-Then, the distribution of $H_T$ can be charachterized by the function $f(H_t) = \mathbb P(X_{t+1} | H_t)$. Thus there is a trivial bijection from the set $\{ \Sigma^{T-d} \to \mathcal P_\Sigma \}$ to the Autoregressive distributions over the alphabet $\Sigma$ and length $T$ and horizon $T-d$. (<- warning you have to integrate the non character sign to sigma and that can only be place to the right position (change $\Sigma^T$)).
+Let $\Sigma$ be the alphabet of $H_T$. Let $f: \Sigma^\infty \to \mathbb R^n$ be a bijection.
 
-Lets suppose we are reely lucky and  find a parmatrization of all autoregressive distributions of horizon T-d by finding an injektive function $A :\mathbb J_\sigma^n \to \{\Sigma^{T-d} \to \mathcal P_\Sigma \}$, where $\mathbb J_\sigma ^n := \{||x||_2 = \sigma, \mathbb{1} ^T x=0 | x \in \mathbb R^n\}$. (injecion exist since in and output sets are the same size)
+We define $A(\theta) := h \to (x \to \mathbb P[f^{-1} (\theta)_{|h|+1}  = x)| f^{-1}(\theta)_{1:|h|} = h]$ 
+ where $f^{-1}(\theta)_{i:j}$ defines the word that goes from $i$'th cahracter of the word $f^{-1}(\theta)$ until the $j$'th character.
+I am sorry that this expression looks confusing but I will try to explain: $f^{-1}(\theta)$ is just an invinite long word. $A(\theta)(h)(x)$ returns 1 iif the word $h \circ x$ is a prefix of $f^{-1}(\theta)$. If $h$ is a prefix of $f(\theta)$, but $h \circ x$, then $A(\theta)(h)(x) = 0$ and otherwise $A(\theta)$ is undefined. 
 
-(
+Note that $A$ is a not well-defined autoregressive model, but by far not a full autoregressive model.
 
-Let now $\Theta \sim \mathcal N(0,I_n\sigma)$. Then $A(\Theta)$ is a random random distribution which itself is a random distribution. This means $A(\Theta) \in \{\Sigma^T \to \mathcal P_\Sigma \}$ (Note $X \sim \mathcal N(0,1) \to x \notin \mathbb R$) 
+Now for a given autoregressive sequence $H_T$, we define the random vector $\theta = f(H_T \circ 0^\infty)$.
 
-
-
-<!--This means there must exits $\theta \in \mathbb J^n$, such that  $A(\theta) = A^{-1}(A(\Theta))$-->
-
-<!--Try to find argument that autogenerative model can not create itsel, can not be a finite horizon thing, but I think that is going nowhere-->
-
-
-If A exists, and we  insert random vector into A, then that random variable is element of As image
-
-for every random bayesian prior there exist a constant bayesian prior!!
-
-(!!for every constant bayesian prior  model there exists another model with non constant bayesian prior (just add another theta i and make x independent of it, trivial bayesian + model modification)!!!)
-
-but not for every distribution there is a bayesian prior, such that estimation error bigger than zero (<- thats the actual inverse)hehehe
+Then $A(\theta)(h_t)(x) = \mathbb P[f^{-1} (\theta)_{t+1}  = x| f^{-1}(\theta)_{1:t} = h_t] = \mathbb P[X_{t+1}  = x| H_t = h_t]$, e.g. $H_T \sim A(\theta)$.
 
 
 
-lets find K that maps every distribution of theta to its kernel theta
 
-e.g. K: random distribution -> constant
-
-$A(K(l(\Theta)) = A(\Theta)$
-
-<!--Say that iid if theta is not the worst case assumption for our model.-->
-
-To recapulate, we assumed/showed evidence, that there can exist a pair $A_t,\theta$ that can generate any upper bounded horizon distribution, when $\theta$ is empirical gaussian and $A_t$ is a parametrization function for transformers. Lets suppose we wanted to use that knowledge to find an upper bound for the error of the optimal bayeisan optimizer e.g.  an upper bound of the mutual information H_t Theta. Can we do that by using the random random distribution $\Theta \sim \mathcal N(0,\sigma)$, as that way $\Theta$ is the probability distribution with maximal differential entropy? 
-<!-- Not sure yet whether this is the actual problem -->
-The problem is, that there exists $\theta \in \mathbb J^n$, s.t. $A(\theta) = A(\Theta)$.
-
-The problem is, that this assumes, that $A$ is the only function (it is actually class of function) that can do that (explain what). Why
- suppose B (b entagles and makes dependencies) 
+----
 
 
-
-)
-!!!!!!
-But $A(\theta)$ only has horizon of $K<T$ and $A(\Theta)$ has infinite horizon (if A is paramatrization of transformers) and thus models and thus A can only exist for AMs with horizin at least T or with AMs that do not increase the horizon.  
-
-
-This means only a bayesian estimator with horizon T can detect $\Theta$??
+- write how cool it would be if we where able to find for a given X distribution, the bayesian prior that maximises the estimation error
+  - would the resulting model then be the perfect model for this distribution?
+    - this is the model that would minizie H(X|Theta)   
+    - this means that for many samples better estimation performance? (no bayesian prior always perfekt, but we are not, maximal possible estimation error tells us how much randomness will be removed for many samples) 
+  - for example uniform distribution forces estimation error to be zero, e.g. every modelling of uniform distribution is equal as shit
 
 
-conclusion from A: for each prior distribution of Theta there is a constant theta that creates a prediction error of 0 but the same distribution of X_t
-
-
-
-can A be inverted for arbitrarili long horizon case? by definition yes. so also for unbounded case we find good and shit model?
 
 ## Conclusion
 

@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" dir="auto">
 
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<head><meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="index, follow">
 <title>Some Information Theoretic Perspectives on LLM Theory | Daniels Blog</title>
 <meta name="keywords" content="">
 <meta name="description" content="⚠️ 📥 😚 🛡 🚦 👹 🌿 By reading this blogpost, you will find out, why this emoji sequence is here.
-Introduction In this Blogpost you will learn about some papers, that explored LLMs through the lens of Information Theory. We will look at one paper in detail, that looked specifically at the phenomenon of in-context learning by making assumptions about the probability distribution of the training data. Then we will carefully examine the assumptions made in that paper.">
+TODO rewrite thetas, random theta: big, constant theta small
+Introduction In this Blogpost you will learn about some papers, that explored LLMs through the lens of Information Theory. We will look at one paper in detail, that looked specifically at the phenomenon of in-context learning by making assumptions about the probability distribution of the training data.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/posts/information_theory_in_llm_theory/">
+<link rel="canonical" href="https://strammermax27.github.io/posts/information_theory_in_llm_theory/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
 <link rel="stylesheet" type="text/css" href="/hugo-cite.css" />
 
-<link rel="icon" href="http://localhost:1313/favicon.ico">
-<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
-<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
-<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<link rel="icon" href="https://strammermax27.github.io/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="https://strammermax27.github.io/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://strammermax27.github.io/favicon-32x32.png">
+<link rel="apple-touch-icon" href="https://strammermax27.github.io/apple-touch-icon.png">
+<link rel="mask-icon" href="https://strammermax27.github.io/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/information_theory_in_llm_theory/">
+<link rel="alternate" hreflang="en" href="https://strammermax27.github.io/posts/information_theory_in_llm_theory/">
 <noscript>
     <style>
         #theme-toggle,
@@ -101,6 +102,73 @@ MathJax.Hub.Config({
 
 
 
+  
+
+<meta property="og:title" content="Some Information Theoretic Perspectives on LLM Theory" />
+<meta property="og:description" content="⚠️ 📥 😚 🛡 🚦 👹 🌿 By reading this blogpost, you will find out, why this emoji sequence is here.
+TODO rewrite thetas, random theta: big, constant theta small
+Introduction In this Blogpost you will learn about some papers, that explored LLMs through the lens of Information Theory. We will look at one paper in detail, that looked specifically at the phenomenon of in-context learning by making assumptions about the probability distribution of the training data." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://strammermax27.github.io/posts/information_theory_in_llm_theory/" /><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Some Information Theoretic Perspectives on LLM Theory"/>
+<meta name="twitter:description" content="⚠️ 📥 😚 🛡 🚦 👹 🌿 By reading this blogpost, you will find out, why this emoji sequence is here.
+TODO rewrite thetas, random theta: big, constant theta small
+Introduction In this Blogpost you will learn about some papers, that explored LLMs through the lens of Information Theory. We will look at one paper in detail, that looked specifically at the phenomenon of in-context learning by making assumptions about the probability distribution of the training data."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "https://strammermax27.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Some Information Theoretic Perspectives on LLM Theory",
+      "item": "https://strammermax27.github.io/posts/information_theory_in_llm_theory/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Some Information Theoretic Perspectives on LLM Theory",
+  "name": "Some Information Theoretic Perspectives on LLM Theory",
+  "description": "⚠️ 📥 😚 🛡 🚦 👹 🌿 By reading this blogpost, you will find out, why this emoji sequence is here.\nTODO rewrite thetas, random theta: big, constant theta small\nIntroduction In this Blogpost you will learn about some papers, that explored LLMs through the lens of Information Theory. We will look at one paper in detail, that looked specifically at the phenomenon of in-context learning by making assumptions about the probability distribution of the training data.",
+  "keywords": [
+    
+  ],
+  "articleBody": "⚠️ 📥 😚 🛡 🚦 👹 🌿 By reading this blogpost, you will find out, why this emoji sequence is here.\nTODO rewrite thetas, random theta: big, constant theta small\nIntroduction In this Blogpost you will learn about some papers, that explored LLMs through the lens of Information Theory. We will look at one paper in detail, that looked specifically at the phenomenon of in-context learning by making assumptions about the probability distribution of the training data. Then we will carefully examine the assumptions made in that paper. To do that well we will proof some of our own statements, to get more insight into the validity of these assumptions.\nA Brief Introduction on Information Theory In this section we want to provide a brief overview on Information Theory.\nImagine you lived $40\\cdot n$ years in the future and that the population has doubled every $40$ years. For simplicity assume that in the current present just one person is alive. Conclusively $2^n$ people live at your point in the future. You live very far in the future and $n$ is very large $n=2^{10^{15}}$. “Today” is your friends birthday party and you dont have a present.\nTherefore you decide to hire last minute a mathgician for his party as mathagicians are know to let partys go wild with their magic and math. In order to hire the mathgician you have to put in your friends one petabit ($=10^15$ bits) long address into the website of the mathgician-firm, such that he can find the location of the party. (The address is one petabit long as in the future every inhabitant has his own address, and there are $n$ people.) At the party the mathgician shows up and everyone has a good time. But then suddenly you start to wonder:\nYou only have a 1Gbit/s upload speed (hardware did not improve so much in the last $40\\cdot2^{10^{15}}$ years), how have you been able to upload $10^{15}$ bits (one PentaBit) within just one day? This seems impossible as it takes $10^6$ seconds to upload one PentaBit with your network speed. Then you find out why: the website did not have to send $10^{15}$ bits of information to its server. Small parts of the information have already been known by the server; For example the information that people in your region are more likely to order a magician for someone in the same galaxy was already present on their server. Could they have used that information to such that they required less bits of information from you, such that your computer had to send them a smaller amount of bits? How can something seeming as soft as information influence something as hard as a bit-sequence length? What is the math behind this?\nInformation theory is mainly the study on expressing the quantity of information called Entropy. Entropy of an information is the minimal expected amount of a quantity like bits required to encode this information.\nOne can show, that the entropy $\\mathbb H$ in bits of a discrete random variable $X$ with a known probability density function $p_X$ is\n$\\mathbb H(X) = \\sum_{x \\in \\mathcal X} - p_X(x) \\log_2(p_X(x)) = \\mathbb E[-\\log_2 X]$.\nTherefore the above term is usually referred as the formal definition of entropy. Often instead of the binary logarithm the natural logarithm is used to express entropy. The resulting unit is called nats instead of bits.\n$\\mathbb H(X) = \\sum_{x \\in \\mathcal X} - p_X(x) \\log(p_X(x))$\nThe entropy of continoous random variables is infinity, as they can have infinetly many outcomes (TODO provide source). But the differential entropy $\\bold h$ of a continous random variable. (TODO explain use of diferential entropy)\n$\\bold h(X) = \\mathbb E[-\\log(X)]$\nInformation theory provides several expressions for how the information of different random variables relate. This is useful in many different scenarios. (\u003c- TODO example) Definition:\nJoint Entropy: $\\mathbb H(X,Y) := \\mathbb H((X,Y))$ Conditional Entropy: $\\mathbb H(X|Y) := \\mathbb E[(y \\to \\mathbb H(X|Y=y))(Y)] = \\sum_{y \\in \\mathcal Y} p_y(y) \\sum_{x \\in \\mathcal X} p_{X|Y=y}(x) - \\log(p_{X|Y=y}(x))$ (\u003c- todo chec correct) Mutual Information: $\\mathbb I(X;Y) := \\mathbb H(X) - \\mathbb H(X|Y)$ $\\mathbb H(X,Y)$ is just the entropy of the joint variable $(X,Y)$. $\\mathbb H(X|Y)$ is the expected entropy of $X$ if $Y$ is known. And $\\mathbb I(X;Y)$ completes the elements of the ven diagram. It is the expected gain of information on $X$ (with gain of information I mean reduction of entropy) if $Y$ is known and vice versa, as mutual information is kommutative (see TODO insert venn diagramm).\nThese terms act aditively as described by image TODO.\nPlease note that on Wikipedia equivalent but different definitions of these terms are stated. I choose these expressions as the definitions, as they are a) better to get an intuitive understaning and b) seem resemble more what the inventor had in mind, when coming up with these definitions.\nThe Link of Information Theory and LLMs Information theory can be found everywhere, where uncertainty is expressed probabilisticly. As language models typically learn a probability distribution for the next token given a previous sequence parts maybe some new insights on them may be gained by looking at them from the viewpoint of information theory. How much information can a generative model generate, e.g. how much information is stored in this model? Can they solve tasks related to information theory such as data compression?\nIn ( Citation: Deletang, Ruoss \u0026 al., 2024 Deletang, G., Ruoss, A., Duquenne, P., Catt, E., Genewein, T., Mattern, C., Grau-Moya, J., Wenliang, L., Aitchison, M., Orseau, L., Hutter, M. \u0026 Veness, J. (2024). Language modeling is compression. Retrieved from https://openreview.net/forum?id=jznbgiynus ) LLMs have been used as lossles data compressors and\nAnalyzing Neural Network Architectures In this chapter results from ( Citation: Jeon, Zhu \u0026 al., 2022 Jeon, H., Zhu, Y. \u0026 Van Roy, B. (2022). An information-theoretic framework for supervised learning. arXiv preprint arXiv:2203.00246. ) and ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) will be discussed. For several generative models models upper bounds have been established of how much information they can generate. These results can be used make statements about the expressiveness of different neuronal architecture. (\u003c- be more precise about expressivemness)\nAn Information Theoretic Perspective Analysis on In-Context Learning In ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) assumptions about the origin of the trianing data of LLMs have been made from which an explanation of in context learning was stated.\nWhat is In-Context Learning In-context learning describes the phenomenon, where llms learned from the information inside the context window. (todo provide resouces). Examples on context learning are a, where b happened, c where d happend (todo provide examples from presentaitosn in class maybe?)\nHere we also provide a brief example, where we tried to teach the anguage model ___ that war is good.\n(TODO add screenshoooots)\nResults and Methodology ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) TODO: add theorem numerations of original paper.\nQuick Overview In Analyzing Neural Network Architecture we discussed, how much information a given neural architecture can generate. The infered bounds can also be used to make statements about the training data probability space, if a certain assumption about that training data probability space was made. Which? The training data was generated by a random neural network of a given architecture. We will evaluate the pros and cons of such an assumption in Discusion of their Assumptions. Once the distribution of the distribution (basically the bayesian prior) which generates the data is formalized, we can make formal statements about the optimal (optimal with respect to a chosen loss function) estimator of the distribution of the training data. We call this estimator the optimal Bayesian estimator (OBE). If additionaly one assumes that a well trained transformer acts similarily as well as the oOBE, one can infer from the theoretic performance of the bayesian estimator on the performance on the transformer. When making these assumptions one has to be aware about certain dangers:\nIs the bayesian prior distributio - the assumed distribution of distributions - plausible? Mor on that in Discusion of their Assumptions The estiamtion of the OBE strongly depends on the bayesian prior distribution. If you change this distribution the OBE changes as well. If you assume transformers are really good, such that they are as good as an OBE, then the have to be as good as the OBE that makes correct assumptions on the bayesian prior The Assumed Bayesian Prior Figure 1: The model of ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) of the training data for LLMs. Each square represents a training Document, which has been randomly generated by a sparse mixture of AMs like transformers. Each Pink circle represents a randomly generated AM and for each document a random AM is assigned based on a random random distribution.\nIn this paragraph we will formally state the probabilistic model of ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) for the generation of the training data and in-context window of LLMs.\nWe denote the $M$ as the number of training documents and the training documents with ${D_1,…D_M}$. $D_i$ is the sequence of tokens in the i’th document. $H_{m,t} := (D_1,…,D_{m-1}, X_1^{(m)},…,X_t^{(m-1)}) $ is an abreviation for the sequence of tokens created by the tokens in the first $m-1$ documents and the first $t$ tokens in the $m$‘th document. $D_{M+1}$ denotes in-context document.\nWe say the distributions of ${D_1,…D_{M+1}}$ can described by autoregressive models (as are transformers) that are parametrized by the random vectors ${\\theta_1,…,\\theta_m }$. We pack for practicality all parameter vectors into one $\\theta := {\\theta_1,…,\\theta_m }$\nThe authors wanted to model $\\theta_1,…,\\theta_m $ such that they have some universal common information, which can be stored in a random variable $\\psi$. This means that the sequence $\\theta_1,…,\\theta_m | \\psi$ shall be iid.\nAdditionally $\\psi$ shall not contain information about any $\\theta_m$ that could not be deducted from enough samples of $\\theta_i$, $D_m \\bot \\psi | \\theta$. Since we sayd $\\theta_1,…,\\theta_m | \\psi$ shall be iid, it holds $D_m \\bot \\psi | \\theta \\iff D_m \\bot \\psi | \\theta_m$. (\u003c- not peer reviewed)\n(\u003c- Check if this is correct) How can the random sequence $\\theta_1,…,\\theta_m$ be modeled to satisfy that constraint in such a way, that the distributions of $\\theta_1,…,\\theta_m$ and $\\psi$ are well enough defined. In ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) the authors came up with the clever solution for satisfying these constraints. They defined a random set of $N$ randomly initialized autoregressive models $T = {\\theta^{(1)},…, \\theta^{(N)} }$, where $N$ is an unknown number. Then they defined a random assignment of Documents and autoregresive models in T parametrized by random random distribution $\\alpha \\sim \\text{Dirichlet}(N, (R/N, …, R/N))$, with $R«N$. $\\alpha$ defines for a random autoregressive model $\\theta^{(n)}$ its probability to be assigned for Documents. For the case, in which the autoregressive models where transformers, $\\theta^{(n)}$ represented a vector of gaussian independently distributed variables, describing the wheight parameters. The smaller the values in the parameter-tuple $(R/N,…,R/N)$ of the Dirichlet distribution, the more sparse the distribution. Lets suppose for example if you have a factory that produces factories, which in return produce each $k$ dices and you want the dieces to be fair (each side appears with same probability). Then the dirichlet distribution, parametrized by $k, (a,…,a)$, which describes the distribution of the probability distribution dices created by a given dice factory should have a high value of $a$ in its paramatrization. So now we can finally define $\\psi := (\\alpha, \\theta^{(1)}, …, \\theta^{(n)} )$. Note that $\\theta_m | \\psi$ is a discrete random variable with at most $N$ outcomes, therefore its entropy has an upper bound of $\\log N$. Therefore if $M$ grows to infinity maybe the OBE will learn $\\psi$ from $H_M^T$, e.g. $\\log N \\geq \\mathbb H(\\theta_{M+1} | \\psi) \\approx \\mathbb H(\\theta_{M+1}|H_M^T)$ and this may result in a logaritmic upper bound for the estimation error of $\\theta_{M+1}|H_M^T$. You wonder what the estimation error is? This will be formaly definded in the next Paragraph. On top of that the previous claim will be formally evaluated in the next paragraph.\nYou might remember that earlier in this chapter I said that the authors assumed, that all training data has been generated by a transformer. And now I suddently presented a sparse mixture of transformers instead of a transformer. This is because in the conclusion the authors said, that they hope, how further mathematical analysis will be able to describe how a transformer can implement a sparce mixtrue of transformers. In Section “Can a transformer implement a sparse mixture of transformers?” (TODO add link finish proof), we show that a transformer can not approximate a sparse mixture of transformers. (But espilon appoximate if d grows to infinity?)\nSo actually they made this assumption, but this assumption might be made in the future once it has been prooven that a transformer can implement a sparce mixtre of transformers.\n(TODO proof that a sparse mixture of transformers with fiven transformers has an infinite horizon)\nResults for in-context learning Results without making assumptions about the bayesian prior In this paragraph we outline the results ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) drew from this models of data generation, by analyzing the optimal bayesian estimator $\\hat P$ for the probability distribution of $X^{(m)}_{t+1}$ given $H_t^{(m)}$.\nThe optimal bayesian estimator is defined to be the estimator for the probability $P$ that minimizes this loss function:\n$\\mathbb L_{M,T}(P) = \\frac{1}{TM} \\sum_{m=1}^{M} \\sum_{t=0}^{T-1} \\mathbb E[ - \\ln P(H_t^{(m)})(X_{t+1}^{(m)})]$\nA little remark on the expression $P(H_t^{(m)})(X_{t+1}^{(m)})$: $P$ is a function that takes in an event like $H_t^{(m)}$, and returns a function, namely an estmated distribution for $X_{t+1}^{(m)}$. Therefore there are two braket pairs after $P$ in the above equation.\nIn ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) it was shown, that $\\hat P(H_t^{(m)}) = (x \\to \\mathbb P[X_{t+1}^{(m)} = x|H_t^{(m)}])$ (If $X$ is not discrete the left equation has to be expressed slightly differently).\nLet’s denote the loss of the minimal bayesian optimizer with $\\mathbb L_{M,T} := \\mathbb L_{M,T}(\\hat P) = \\frac{1}{TM} \\sum_{m=1}^{M} \\sum_{t=0}^{T-1} \\mathbb E[ - \\ln \\mathbb P[X_{t+1}^{(m)}|H_t^{(m)}]]$.\nAs autoregressive models such as transformers define a probability distribution one can not predict a sequence of tokens they generate with probability 1, even if one knows all of their parameters $\\theta$ (Expect of course if they are deterministic autoregressive models). This means that $\\mathbb H(H_T^{(M)}|\\theta)$, e.g. the hardness of predicting the sequence even if the autoregressive model is known, has a value above 0 and might grow to infinity with T or M. The Authors named this error “the irreducible error”. As we are interessted in how hard it is to estimate not the series of tokens itself, but their distribution, the error $\\mathcal L_{M,T} = \\mathbb L_{M,T} - \\dfrac{\\mathbb H(H_T^{(M)}|\\theta)}{MT}$ will be more insightfull in our exploration. They call this error “estimation error”.\nIn the rest of this section we will present derived expressions for $\\mathcal L_{M,T}$, that provide insights in how easy or hard it is to estimate model parameters, if the data was generated as discussed. Then we derive from this result an expression of the in-context error $\\mathbb L_\\tau := \\frac{1}{\\tau} \\sum_{t=0}^{\\tau-1} \\mathbb E \\ln \\mathbb P(X_{t+1}^{(M+1)}| H_t^{(M+1)})$, where $\\tau$ is the length of the in-context document.\nFirstly we discuss two information theoretic results of $\\mathcal L_{M,T}$.\nTheorem Jeon.3.2 ( ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) ) $\\mathcal L_{M,T} = \\dfrac{\\mathbb I(H_T^{(M)};\\theta)}{MT}$\n(I adapted the original theorem slightly as the apaption fits better into this explanation.)\nProof: We know $\\mathbb H(X) = \\mathbb H(X|Y) + \\mathbb I(X;Y)$, therfore it suffices to show that $\\mathbb L_{M,T} \\cdot MT = \\mathbb H(H_T^{(M)})$. This is true since:\n$\\sum_{m=1}^{M} \\sum_{t=0}^{T-1} \\mathbb E[ - \\ln \\mathbb P[X_{t+1}^{(m)}|H_t^{(m)}]] = \\mathbb E[-\\ln \\prod_{m=1}^{M} \\prod_{t=0}^{T-1} \\mathbb P[X_{t+1}^{(m)}|H_t^{(m)}]] \\overset{a)}{=} \\mathbb E[-\\ln \\mathbb P[H_T^{(M)}]]= \\mathbb H(H_T^{(M)})$\na) follows from the chain rule of probability.\nQED\nDisclaimer: This is my own version of the proof, I dont guarantee correctness.\nAs an intermediate result of the proof we obtained $\\mathbb L_{M,T} = \\dfrac{\\mathbb H(H_T^{(M)})}{MT}$. Thus we can see $\\mathbb L_{M,T}$ as the average entropy per token.\nThis equation means roughly speaking, that the estimation error consits of these parts in $\\theta$, that are conveyed to $H_T^{(M)}$. For example as we often model $\\theta$ as a continous random variable and $H_T^{(M)}$ as a discrete random variable, $H_T^{(M)}$ can not contain all information in $\\theta$. (\u003c- be more clear)\nAs in previous section, we have worked out a way to separate $\\theta = \\theta_1, …\\theta_m$ into two independent random variables, namely $\\theta|\\psi$ and $\\psi$, we continue by expressing $\\mathcal L_{M,T}$ with these two random variables.\nTheorem Juan.4.2 ( ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) ) $\\mathcal L_{M,T} = \\underbrace{\\dfrac{\\mathbb I(H_T^{(M)};\\psi)}{MT}}_\\text{meta estimation error}$ +\n$+ \\underbrace{\\dfrac{\\mathbb I(D_m;\\theta_m|\\psi)}{T}}_\\text{intra document estimation error}$\n(todo make both sum elements appear in the same line)\nProof From Theorem Jeon.3.2 we know $\\mathcal L_{M,T} = \\dfrac{\\mathbb I(H_T^{(M)};\\theta)}{MT}$.\nTo proof this equation it suffices to show\na) $\\mathbb I(H_T^{(M)};\\theta) = \\mathbb I(H_T^{(M)};\\psi) + \\mathbb I(H_T^{(M)};\\theta|\\psi) $ b) $\\mathbb I(H_T^{(M)};\\theta|\\psi) = M \\cdot \\mathbb I(D_m;\\theta_m|\\psi)$ We defined earlier $D_m \\bot \\psi | \\theta_m$, which means $ H_T^{(M)} \\bot \\psi | \\theta$ (\u003c- be more formal?). Therefore $\\mathbb I(H_T^{(M)};\\theta) = \\mathbb I(H_T^{(M)};(\\theta, \\psi))$. Then b) follows from the chain rule of mutual information.\nb) follows from $\\mathbb I(H_T^{(M)};\\theta|\\psi) \\overset{b.1)}{=} \\sum_{m=1}^M \\mathbb I(D_m;\\theta_m|\\psi) \\overset{b.2)}{=} M\\cdot \\mathbb I(D_m;\\theta_m|\\psi) $.\nEquation b.1) holds because the pairs $(D_1, \\theta_1)|\\psi, …, (D_M, \\theta_M)|\\psi$ are independent and mutual information is additive for independent variable pairs ( Citation: Latham \u0026 Roudi, 2009 Latham, P. \u0026 Roudi, Y. (2009). Mutual information. Scholarpedia, 4(1). 1658. https://doi.org/10.4249/scholarpedia.1658 ) . As $ (D_1, \\theta_1),…, (D_M, \\theta_m) | \\psi$ are identically distributed, for any $a,b \\in {1,…,M}$, $\\mathbb I(D_a;\\theta_a|\\psi) = \\mathbb I(D_b;\\theta_b|\\psi)$. Therefore b.2) is true.\n(\u003c- proof not peer reviewed) QED\nDisclaimer: This is my own version of the proof, I dont guarantee correctness.\nThe authors seperate the term into two parts, the meta estimation error and the intra document estimation error. The meta estimation error describes the error, of learning information shared shared by all documents. The intra document estimation error is the error of learning the parameters of learning individual documents after having learned the shared information $\\psi$. Lets say we have arbitrarily many training samples $A$ for our optimal bayesian estimator in which $D_m$ does not occur. Due to them being arbitrarily many, let’s suppose $\\psi$ has been well enough discovered, such that $\\mathbb I(D_m;\\psi | A)$ is about 0. Then the error of estimating $D_m$ is about the intra-document error. This means, that even of we perfectly train our model, there will be some error bigger than zero related to the estimation of the probability that generates the data? Or will it realy be bigger than zero? More on this cliffhanger later (\u003c- TODO!)\nResults from assumptions of bayesian prior In order to make the results about the error of the optimal bayesian estimator more concrete more assumptions about the bayesian prior are required. Unfortinately as discussed in section (TODO) our view on amount of information requires the distribution of the bayesian prior to be well enough known (in this case “well enough” usually means “”). Specifically for the work of ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) a distribution of the training documents would be well-defined, if the AMs in the sparce mixture where well defined. Therefore as discussed in section (todo: add reference), the AMs where modeled as random transformers, where the transformer parameters $\\theta^{(n)}$ are random variables that stem from the same distribution and are independent.\nDoes the independence maximise the output entropy of the resulting tokensequence under the assumption, that the distribution of the actual training data sequence can be generated by a fixed parameter transfomer? If that was true, the upper bounds of ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) , at which we will look in this section, would be an upper bound for any distribution of the parameters of the transformers. In Section (Does independence suffice for an upper bound of estimation error?), I provide qualitative arguments that this is not the case.\nLets present their results.\nLet\n$\\Sigma$ be the set of tokens $d := |\\Sigma|$ be the size of the vocabulary $K$ be the context length $L$ be the transformer depth $r$ be the attention dimension To define the transformer architecture they define\n$U_{t,l}$ to be the ouput of layer $l$ at time $t$ $U_{t,0}$ to be the embeding of the last $K$ tokens at time $t$ $\\sigma$ to denote the softmax function $A^{(l)} \\in \\mathbb R^{r \\times r}$ to be the product of keay and query matrices of layer $l$ $V^{(l)} \\in \\mathbb R^{r \\times r}$, $V^{(L)} \\in \\mathbb R^{d \\times r}$ to denote the value matrix of layer $l$. $\\text{Attn}^{(l)}(U_{t,l-1} = \\sigma(\\dfrac{U_{t,l-1}^T A^{(l)}U_{t,l-1}}{\\sqrt r}))$ to be the attention matrix of layer $l$ Therefore $U_{t,l} = \\text{Clip}(V^{(l)}U_{t,l-1}\\text{Attn}^{(l)}(U_{t, l-1}))$\nGiven this transformer setup, they defined to be the parameters in the matrices $A_l$ to be distributed iid from $\\mathcal N(0,1)$ and the parameters of the value matrices $V^{(l)}$ iid from $\\mathcal N(0,1/r)$.\nFor the single sequence of tokens and single random transformer parametriued $\\theta$ as described above they could show this opper bound for the estimation error $\\mathcal L_T = \\dfrac{\\mathbb I(X_T;\\theta)}{T}$:\nTherorem Juan.3.5 ( ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) ) If $X_1,…,X_T$ is generated by the above defined transformer environment, then\n$$\\mathcal L_T \\leq \\dfrac{pL\\ln(136 \\text e K^2) + p \\ln(\\frac{2KT^2}{L})}{T}$$\n, where $p = 2r^2(L-1) + (dr + r^2)$ denotes the parameter count of the transformer.\nThis theorem does not only convey meaning for the case, in which $X_1, …, X_T$ is generated as described above by a not well known (=random) transformer, but also how much “learned information” a trasformer can transmit per token to someone who doesnt know the parameters of the transformer. This result could could be compared to the results of Juan et al 2022 for fully connected neural networks and other models, to get insight in which architectures can learn how many bits of information. In order to be properly compared the results of Juan et al 2022 have to be adapted a bit, to the same in and outputs. (todo you might move above paragraph to section (Analyzing Neural Network Architectures)) The\nFor the case in which there are $M$ training documents and there is a sparse mixture of trasformers $\\theta^{(1)}, …, \\theta^{(n)}$ another result for the upper bound of the estimation error $\\mathcal L_{M,T} = \\dfrac{\\mathcal I(H_{M,T};\\psi)}{MT} + \\dfrac{\\mathcal I(D_m;\\theta_m|\\psi)}{M}$.\nTheorem Juan.4.5 ( ( Citation: Jeon, Lee \u0026 al., 2024 Jeon, H., Lee, J., Lei, Q. \u0026 Van Roy, B. (2024). An information-theoretic analysis of in-context learning. arXiv preprint arXiv:2401.15530. ) ) If $D_1,…,D_M $ is generated by the above defined sparse mixture of transformers, then\n$\\mathcal L_T \\leq \\dfrac{pR\\ln(1+\\frac{M}{R} )\\ln(136 \\text{e} K^2) }{MT} + \\dfrac{pR\\ln(1+\\frac{M}{R}) \\ln(\\frac{2KMT^2}{L})}{MT}+ \\dfrac{\\ln(N)}{T}$\n, where $p = 2r^2(L-1) + (dr + r^2)$ denotes the parameter count of each transformer.\n(TODO talk about rate distortion error bounds?)\nDiscusion of their Assumptions Can we assume the existance of a transformer, generating all training documents transformers can imitate every upper bounded finite horizon am model but they cant imitate infinite horizon documents Unformal Lemma 0: There exists at least one document $d$, which has a word in the very end $w_e$, which is statistically dependent on the very beginning $w_b$ of the document, even given the rest of the document.\nUnformal Proof: Scroll down to the very end of this document below the references.\nQED\nCan a transformer implement a sparse mixture of transformers? !!IMPORTANTE IMPORTANTE!!: adapt notation to juan et al 2024!!!!!\n(No a sparce mixture of transformers has an infinite horizon.)\nIn this section, we show that a sparce mixtrue of AMs can not be expressed by a set any finite horizon AM model. Furthermore we hypothesize which\nDefinition: Let $A$ be a set and $n \\in \\mathbb N$, then $A^{[n]} := \\bigcup_{i\\in {0,1,…,n}} A^i$.\n$A^i$ can be seen as the set of all words of length $i$ over alphabet/tokenset $A$ and consequently $A^0$ as the set, that contains the empty word, given $A$ is not the empty set.\nTODO Define s_1, d_1 Definition: Two makrov-chains $M_1 = (P_1,V)$ and $M_2 = (P_2,V)$ are called deterministically distinguishable (dd) if there is transition $e \\in V^2$, such that $P_1(e) + P_2(e)\u003e0$ and $P_1(e) \\cdot P_2(e) = 0$. (E.g. $M_1$ and $M_2$ are dd if one has a transition with probability zero, where the other has positive transition probability)\nLemma A: Let $M_1 = (P_1,V)$ and $M_2 = (P_2,V)$ be not dd but irreducible and finite makrov chains, $P_1 \\neq P_2$ and $\\theta \\in (0,1)$. Let $x_0,X_1,X_2…$ be a random sequence in $V$, where $x_0$ is constant and the distribution of $x_0, X_1, … $ follows with probability $\\theta$, $M_1$ and with probability $1-\\theta$, $M_2$. Then there is $t*$ such that for infinite $t\u003et*$ the finite horizon $d$ optimal bayesian estimator $\\mathbb P(X_{t+1}|X_{t-d+1}, X_{t-d+2} …, X_t)$ does not equal the unbounded optimal bayesian estimator $ \\mathbb P(X_{t+1}|X_1, …, X_t) $.\n(TODO maybe you can replace irreduciblt with something weaker) TODO make this : we assume M_theta = M_1 more formal somehow, TODO define more clearley what doe not equal\nProof: We cdenote the random markov cahin, that is $M_1$ with probability $\\theta$ and otherwise $M_2$, with $M_\\theta$. We first show two statemetns:\na) Probability of $M_\\theta = M_1$ grows with t to one given sequenze H_t and if $M_1 = M_\\theta$\nb) Probability of $M_\\theta = M_1$ less than one, given t is less than one.\na) $\\lim_{t \\to \\infty} \\mathbb P[M_\\theta = M_1 | H_t] = 1$, if we assume $M_\\theta = M_1$\nb) For all $t \\in \\mathbb N$ it holds: $\\mathbb P[M_\\theta = M_1 | H_t] \u003c 1$, if we assume $M_\\theta = M_1$\nProof of a) Since $P_1 \\neq P_2$ there must be $(x,y)\\in V^2$, such that $P_1((x,y)) \\neq P_2((x,y))$. Let $T_i$ denote the random variable that $M_\\theta$ visits $x$ for the $i$‘th time. As $M_1$ and $M_2$ are irreducible and finite for $i \\in \\mathbb N$, $T_i$ is finite with probability 1. (TODO proof, argument?) Note that $X_{T_i}(\\omega) = x$. For convenience we denote $p_1 := P_1(x,y)$ and $p_2 := P_2(x,y)$.\nNotice that the sequence $X_{T_1 +1}, X_{T_2 +1}, … | M_\\theta$ is iid. To make our life even more easier we define the binomial variable $Y_i = \\bold 1[X_{T_i + 1} = y]$. Now $Y_1, Y_2… $ is an infinite sequence of coinflips, that land with probability $\\theta$ with probability $p_1$ on heads and with probability $1-\\theta$ with probability $p_2$ on heads.\nLet $A_t = \\bold 1 [|\\dfrac{S_y}{t} - p_1| \u003c |\\dfrac{S_y}{t} - p_2|] $\n$A_t \\to_{a.s.} 1$ iif $M_1 = M_\\theta$ (todo show)\nproof of a) finished\nProof of b) Broof by induction: Assume $M_1 = M_\\theta$, assume for $t \\in \\mathbb N$ it holds: $\\mathbb P[M_\\theta = M_1 | H_t] = p_t \u003c 1$.\nThen $\\mathbb P[M_\\theta = M_1 | H_t, X_{t+1}] = \\dfrac{\\mathbb P[M_\\theta = M_1|H_t]}{\\mathbb P[ X_{t+1}| H_t]}\\mathbb P[X_{t+1} | M_\\theta = M_1,H_t] $\n$= \\dfrac{p_t P_1(X_t, X_{t+1})}{p_tP_1(X_t, X_{t+1}) + (1-p_t)P_2(X_t, X_{t+1})} \u003c1$\nProof of b) finished.\n(todo make limit more formal, make this whole block below more formal!!) As we know from a) $\\lim_{t\\to \\infty} \\mathbb P(X_{t+1}|H_t) = \\lim_{t\\to \\infty} \\mathbb P(X_{t+1}|H_t, M_\\theta = M_1) = \\lim_{t \\to \\infty} P(X_{t+1}|X_t, M_\\theta = M_1) = P_1((X_{t+1},X_t))$. (\u003c- be more formal) But we also know from b) (TODO deal with non existance of d in b))that there is $0",
+  "wordCount" : "6977",
+  "inLanguage": "en",
+  "datePublished": "0001-01-01T00:00:00Z",
+  "dateModified": "0001-01-01T00:00:00Z",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://strammermax27.github.io/posts/information_theory_in_llm_theory/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Daniels Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://strammermax27.github.io/favicon.ico"
+    }
+  }
+}
+</script>
 </head>
 
 <body class="" id="top">
@@ -118,7 +186,7 @@ MathJax.Hub.Config({
 <header class="header">
     <nav class="nav">
         <div class="logo">
-            <a href="http://localhost:1313/" accesskey="h" title="Daniels Blog (Alt + H)">Daniels Blog</a>
+            <a href="https://strammermax27.github.io/" accesskey="h" title="Daniels Blog (Alt + H)">Daniels Blog</a>
             <div class="logo-switches">
                 <button id="theme-toggle" accesskey="t" title="(Alt + T)">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
@@ -159,6 +227,7 @@ MathJax.Hub.Config({
 </div>
   </header> 
   <div class="post-content"><p>⚠️ 📥 😚 🛡 🚦 👹 🌿 <em>By reading this blogpost, you will find out, why this emoji sequence is here.</em></p>
+<p>TODO rewrite thetas, random theta: big, constant theta small</p>
 <h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
 <p>In this Blogpost you will learn about some papers, that explored LLMs through the lens of Information Theory. We will look at one paper in detail, that looked specifically at the phenomenon of in-context learning by making assumptions about the probability distribution of the training data.
 Then we will carefully examine the assumptions made in that paper. To do that well we will proof some of our own statements, to get more insight into the validity of these assumptions.</p>
@@ -192,30 +261,6 @@ Definition:</p>
 - briefly name an example applications from coding theory
 - briefly name an example of neurology where neurons may maximize their entropy
 -->
-<h3 id="philosofical-interlude-does-information-exist">Philosofical Interlude: Does Information Exist?<a hidden class="anchor" aria-hidden="true" href="#philosofical-interlude-does-information-exist">#</a></h3>
-<p>Chapter Draft (everything in this draft is very vague, dont read)</p>
-<ul>
-<li>make reader know that you are critic of your own ideas</li>
-<li>Previous Section information relied on an assumed probability space</li>
-<li>what is probability? It is a way to formally express of what can be known and what can not be known? (&lt;- express waeknasses of that thought and derive it and be more precise and present alternatives of expressong of what can be known and what not)</li>
-<li>Problems of probability:
-<ul>
-<li>
-<p>How well can be known what can not be know? Well enough to express probabilitys? (name logic example to define what can be known and what can be not and probabilistic example, and argue whether there is something inbetween)</p>
-</li>
-<li>
-<p>maybe also everything can be known and everything happens with probability one (&lt;- drop argument, why one can not be sure that universe is not deterministic universe, by using argument based on an explanation why even anything exists)</p>
-<ul>
-<li>explain that under that circumstances only physically isolated can be known, using similar &ldquo;proof&rdquo; as holding theorems proof</li>
-<li>include limitations of calculation power into probability?</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>use previous arguments to express where probabilistic assumptions might  be off and name examples on how it could affect us practically</li>
-<li>conclude if we are carefull enough with probabilistic assumptions under scenario a everything has information 0, under scenario b everything has information $\infty$ and under scenario a using limitation of physical possible calculation power information content is impossibly hard to compute</li>
-<li>mention that information theory has been usefull anyway</li>
-</ul>
 <h2 id="the-link-of-information-theory-and-llms">The Link of Information Theory and LLMs<a hidden class="anchor" aria-hidden="true" href="#the-link-of-information-theory-and-llms">#</a></h2>
 <p>Information theory can be found everywhere, where uncertainty is expressed probabilisticly. As language models typically learn a probability distribution for the next token given a previous sequence parts maybe some new insights on them may be gained by looking at them from the viewpoint of information theory. How much information can a generative model generate, e.g. how much information is stored in this model? Can they solve tasks related to information theory such as data compression?</p>
 <p>In 
@@ -420,7 +465,7 @@ Definition:</p>
 Examples on context learning are a, where b happened, c where d happend (todo provide examples from presentaitosn in class maybe?)</p>
 <p>Here we also provide a brief example, where we tried to teach the anguage model ___ that war is good.</p>
 <p>(TODO add screenshoooots)</p>
-<h3 id="results-and-methodology-hahahugoshortcode1018s4hbhb">Results and Methodology 
+<h3 id="results-and-methodology-hahahugoshortcode1s4hbhb">Results and Methodology 
 
 
 
@@ -709,32 +754,165 @@ Therefore if $M$ grows to infinity maybe the OBE will learn $\psi$ from $H_M^T$,
 They call this error &ldquo;estimation error&rdquo;.</p>
 <p>In the rest of this section we will present derived expressions for $\mathcal L_{M,T}$, that provide insights in how easy or hard it is to estimate model parameters, if the data was generated as discussed. Then we derive from this result an expression of the in-context error $\mathbb L_\tau := \frac{1}{\tau} \sum_{t=0}^{\tau-1} \mathbb E \ln \mathbb P(X_{t+1}^{(M+1)}| H_t^{(M+1)})$, where $\tau$ is the length of the in-context document.</p>
 <p>Firstly we discuss two information theoretic results of $\mathcal L_{M,T}$.</p>
+<hr>
+<h4 id="theorem-jeon32-hahahugoshortcode1s10hbhb">Theorem Jeon.3.2 (
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#jeon2024information"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Hong Jun"><span itemprop="familyName">Jeon</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Jason D"><span itemprop="familyName">Lee</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2024</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Jeon</span>,&#32;
+    <meta itemprop="givenName" content="Hong Jun" />
+    H.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lee</span>,&#32;
+    <meta itemprop="givenName" content="Jason D" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lei</span>,&#32;
+    <meta itemprop="givenName" content="Qi" />
+    Q.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Van Roy</span>,&#32;
+    <meta itemprop="givenName" content="Benjamin" />
+    B.</span>
+  &#32;
+    (<span itemprop="datePublished">2024</span>).
+  &#32;<span itemprop="name">An information-theoretic analysis of in-context learning</span>.<i>
+    <span itemprop="about">arXiv preprint arXiv:2401.15530</span></i>.</span>
+
+
+
+
+</span></span>)</span>
+)</h4>
 <p>$\mathcal L_{M,T} = \dfrac{\mathbb I(H_T^{(M)};\theta)}{MT}$</p>
-<p>Proof:</p>
+<p>(I adapted the original theorem slightly as the apaption fits better into this explanation.)</p>
+<hr>
+<h4 id="proof">Proof:<a hidden class="anchor" aria-hidden="true" href="#proof">#</a></h4>
 <p>We know $\mathbb H(X) = \mathbb H(X|Y) + \mathbb I(X;Y)$, therfore it suffices to show that $\mathbb L_{M,T} \cdot MT = \mathbb H(H_T^{(M)})$. This is true since:</p>
 <p>$\sum_{m=1}^{M} \sum_{t=0}^{T-1} \mathbb E[ - \ln \mathbb P[X_{t+1}^{(m)}|H_t^{(m)}]] = \mathbb E[-\ln \prod_{m=1}^{M} \prod_{t=0}^{T-1} \mathbb P[X_{t+1}^{(m)}|H_t^{(m)}]] \overset{a)}{=} \mathbb E[-\ln  \mathbb P[H_T^{(M)}]]= \mathbb H(H_T^{(M)})$</p>
 <p>a) follows from the chain rule of probability.</p>
 <p>QED</p>
-<p>Be  aware I often do mistakes, when proofing something.
-I presented my own version of the proof of this equation as it contains the intermediate result $\mathbb L_{M,T}  = \dfrac{\mathbb H(H_T^{(M)})}{MT}$. Thus we can see $\mathbb L_{M,T}$ as the average entropy per token.</p>
+<p>Disclaimer: This is my own version of the proof, I dont guarantee correctness.</p>
+<hr>
+<p>As an intermediate result of the proof we obtained $\mathbb L_{M,T}  = \dfrac{\mathbb H(H_T^{(M)})}{MT}$. Thus we can see $\mathbb L_{M,T}$ as the average entropy per token.</p>
 <p>This equation means roughly speaking, that the estimation error consits of these parts in $\theta$, that are conveyed to $H_T^{(M)}$. For example as we often model $\theta$ as a continous random variable and $H_T^{(M)}$ as a discrete random variable, $H_T^{(M)}$ can not contain all information in $\theta$. (&lt;- be more clear)</p>
 <p>As in previous section, we have worked out a way to separate $\theta = \theta_1, &hellip;\theta_m$ into two independent random variables, namely $\theta|\psi$ and $\psi$, we continue by expressing $\mathcal L_{M,T}$ with these two random variables.</p>
-<p>$\mathcal L_{M,T} = $</p>
-<p>$\underbrace{\dfrac{\mathbb I(H_T^{(M)};\psi)}{MT}}_\text{meta
+<hr>
+<h4 id="theorem-juan42-hahahugoshortcode1s11hbhb">Theorem Juan.4.2 (
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#jeon2024information"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Hong Jun"><span itemprop="familyName">Jeon</span></span>,&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Jason D"><span itemprop="familyName">Lee</span></span>
+                  <em>&amp; al.</em>,&#32;<span itemprop="datePublished">2024</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Jeon</span>,&#32;
+    <meta itemprop="givenName" content="Hong Jun" />
+    H.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lee</span>,&#32;
+    <meta itemprop="givenName" content="Jason D" />
+    J.</span>,&#32;
+  <span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Lei</span>,&#32;
+    <meta itemprop="givenName" content="Qi" />
+    Q.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Van Roy</span>,&#32;
+    <meta itemprop="givenName" content="Benjamin" />
+    B.</span>
+  &#32;
+    (<span itemprop="datePublished">2024</span>).
+  &#32;<span itemprop="name">An information-theoretic analysis of in-context learning</span>.<i>
+    <span itemprop="about">arXiv preprint arXiv:2401.15530</span></i>.</span>
+
+
+
+
+</span></span>)</span>
+)</h4>
+<p>$\mathcal L_{M,T} = \underbrace{\dfrac{\mathbb I(H_T^{(M)};\psi)}{MT}}_\text{meta
 estimation error}$ +</p>
 <p>$+ \underbrace{\dfrac{\mathbb I(D_m;\theta_m|\psi)}{T}}_\text{intra document estimation error}$</p>
 <p>(todo make  both  sum elements appear in the same line)</p>
+<hr>
+<h4 id="proof-1">Proof<a hidden class="anchor" aria-hidden="true" href="#proof-1">#</a></h4>
+<p>From Theorem Jeon.3.2 we know $\mathcal L_{M,T} = \dfrac{\mathbb I(H_T^{(M)};\theta)}{MT}$.</p>
 <p>To proof this equation it suffices to show</p>
 <ul>
-<li>A) $\mathbb I(H_T^{(M)};\theta) = \mathbb I(H_T^{(M)};\psi) + \mathbb I(H_T^{(M)};\theta|\psi) $</li>
-<li>B) $\mathbb I(H_T^{(M)};\theta|\psi) = M \cdot \mathbb I(D_m;\theta_m|\psi)$</li>
+<li>a) $\mathbb I(H_T^{(M)};\theta) = \mathbb I(H_T^{(M)};\psi) + \mathbb I(H_T^{(M)};\theta|\psi) $</li>
+<li>b) $\mathbb I(H_T^{(M)};\theta|\psi) = M \cdot \mathbb I(D_m;\theta_m|\psi)$</li>
 </ul>
-<p>We defined earlier $D_m \bot \psi | \theta_m$, which means $ H_T^{(M)} \bot \psi | \theta$ (&lt;- be more formal?). Therefore $\mathbb I(H_T^{(M)};\theta) = \mathbb I(H_T^{(M)};(\theta, \psi))$. Then A) follows from the chain rule of mutual information.</p>
-<p>B) follows from $\mathbb I(H_T^{(M)};\theta|\psi) \overset{a)}{=} \sum_{m=1}^M  \mathbb I(D_m;\theta_m|\psi) \overset{b)}{=} M\cdot \mathbb I(D_m;\theta_m|\psi) $.</p>
-<p>Equation a) holds because the pairs $(D_1, \theta_1)|\psi, &hellip;, (D_M, \theta_M)|\psi$ are independent and mutual information is additive for independent variables.(<a href="http://www.scholarpedia.org/article/Mutual_information">http://www.scholarpedia.org/article/Mutual_information</a>)<br>
-As $ (D_1, \theta_1),&hellip;, (D_M, \theta_m) | \psi$ are identically distributed, for any $a,b \in {1,&hellip;,M}$, $\mathbb I(D_a;\theta_a|\psi) = \mathbb I(D_b;\theta_b|\psi)$. Therefore b) is true.</p>
+<p>We defined earlier $D_m \bot \psi | \theta_m$, which means $ H_T^{(M)} \bot \psi | \theta$ (&lt;- be more formal?). Therefore $\mathbb I(H_T^{(M)};\theta) = \mathbb I(H_T^{(M)};(\theta, \psi))$. Then b) follows from the chain rule of mutual information.</p>
+<p>b) follows from $\mathbb I(H_T^{(M)};\theta|\psi) \overset{b.1)}{=} \sum_{m=1}^M  \mathbb I(D_m;\theta_m|\psi) \overset{b.2)}{=} M\cdot \mathbb I(D_m;\theta_m|\psi) $.</p>
+<p>Equation b.1) holds because the pairs $(D_1, \theta_1)|\psi, &hellip;, (D_M, \theta_M)|\psi$ are independent and mutual information is additive for independent variable pairs  
+
+
+
+
+<span class="hugo-cite-intext"
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#latham2009"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="P. E."><span itemprop="familyName">Latham</span></span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Y."><span itemprop="familyName">Roudi</span></span>,&#32;<span itemprop="datePublished">2009</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Latham</span>,&#32;
+    <meta itemprop="givenName" content="P. E." />
+    P.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Roudi</span>,&#32;
+    <meta itemprop="givenName" content="Y." />
+    Y.</span>
+  &#32;
+    (<span itemprop="datePublished">2009</span>).
+  &#32;<span itemprop="name">Mutual information</span>.<i>
+    <span itemprop="about">Scholarpedia</span>,&#32;4(1)</i>.&#32;<span itemprop="pagination">1658</span>.
+  <a href="https://doi.org/10.4249/scholarpedia.1658"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.4249/scholarpedia.1658</a></span>
+
+
+
+
+</span></span>)</span>
+.
+As $ (D_1, \theta_1),&hellip;, (D_M, \theta_m) | \psi$ are identically distributed, for any $a,b \in {1,&hellip;,M}$, $\mathbb I(D_a;\theta_a|\psi) = \mathbb I(D_b;\theta_b|\psi)$. Therefore b.2) is true.</p>
 <p>(&lt;- proof not peer reviewed)
 QED</p>
+<p>Disclaimer: This is my own version of the proof, I dont guarantee correctness.</p>
+<hr>
 <p>The authors seperate the term into two parts, the meta estimation error and the intra document estimation error. The meta estimation error describes the error, of learning information shared shared by all documents. The intra document estimation error is the error of learning the parameters of learning individual documents after having learned the shared information $\psi$. Lets say we have arbitrarily many training samples $A$ for our optimal bayesian estimator in which $D_m$ does not occur. Due to them being arbitrarily many, let&rsquo;s suppose $\psi$ has been well enough discovered, such that $\mathbb I(D_m;\psi | A)$ is about 0. Then the error of estimating $D_m$ is about the intra-document error. This means, that even of we perfectly train our model, there will be some error bigger than zero related to the estimation of the probability that generates the data? Or will it realy be bigger than zero? More on this cliffhanger later (&lt;- TODO!)</p>
 <h3 id="results-from-assumptions-of-bayesian-prior">Results from assumptions of bayesian prior<a hidden class="anchor" aria-hidden="true" href="#results-from-assumptions-of-bayesian-prior">#</a></h3>
 <p>In order to make the results about the error of the optimal bayesian estimator more concrete more assumptions about the bayesian prior are required. Unfortinately as discussed in section (TODO) our view on amount of information requires the distribution of the bayesian prior to be well enough known (in this case &ldquo;well enough&rdquo; usually means &ldquo;&rdquo;). Specifically for the work of 
@@ -779,7 +957,7 @@ QED</p>
 
 
 </span></span>)</span>
- a distribution of the training documents would be well-defined, if the AMs in the sparce mixture where well defined. Therefore as discussed in section (todo: add reference), the AMs where modeled as random transformers, where the transformer parameters $\thera^{(n)}$ are random variables that stem from the same distribution and are independent.</p>
+ a distribution of the training documents would be well-defined, if the AMs in the sparce mixture where well defined. Therefore as discussed in section (todo: add reference), the AMs where modeled as random transformers, where the transformer parameters $\theta^{(n)}$ are random variables that stem from the same distribution and are independent.</p>
 <p>Does the independence maximise the output entropy of the resulting tokensequence under the assumption, that the distribution of the actual training data sequence can be generated by a fixed parameter transfomer? If that was true, the upper bounds of 
 
 
@@ -837,15 +1015,15 @@ QED</p>
 <li>$U_{t,l}$ to be the ouput of layer $l$ at time $t$</li>
 <li>$U_{t,0}$ to be the embeding of the last $K$ tokens at time $t$</li>
 <li>$\sigma$ to denote the softmax function</li>
-<li>$A^(l) \in \mathbb R^{r \times r}$ to be the product of keay and query matrices of layer $l$</li>
-<li>$V^(l) \in \mathbb R^{r \times r}, V^{(L)} \in \amthbb R^{d \times r}$ to denote the value matrix of layer $l$.</li>
+<li>$A^{(l)} \in \mathbb R^{r \times r}$ to be the product of keay and query matrices of layer $l$</li>
+<li>$V^{(l)} \in \mathbb R^{r \times r}$, $V^{(L)} \in \mathbb R^{d \times r}$ to denote the value matrix of layer $l$.</li>
 <li>$\text{Attn}^{(l)}(U_{t,l-1} = \sigma(\dfrac{U_{t,l-1}^T A^{(l)}U_{t,l-1}}{\sqrt r}))$ to be the attention matrix of layer $l$</li>
 </ul>
 <p>Therefore $U_{t,l} = \text{Clip}(V^{(l)}U_{t,l-1}\text{Attn}^{(l)}(U_{t, l-1}))$</p>
 <p>Given this transformer setup, they defined to be the parameters in the matrices $A_l$ to be distributed iid from $\mathcal N(0,1)$ and the parameters of the value matrices $V^{(l)}$ iid from $\mathcal N(0,1/r)$.</p>
 <p>For the single sequence of tokens and single random transformer parametriued $\theta$ as described above they could show this opper bound for the estimation error $\mathcal L_T = \dfrac{\mathbb I(X_T;\theta)}{T}$:</p>
 <hr>
-<h4 id="therorem-juan35-hahahugoshortcode1018s12hbhb">Therorem Juan.3.5 (
+<h4 id="therorem-juan35-hahahugoshortcode1s15hbhb">Therorem Juan.3.5 (
 
 
 
@@ -895,7 +1073,7 @@ QED</p>
 <p>This theorem does not only convey meaning for the case, in which $X_1, &hellip;, X_T$ is generated as described above by a not well known (=random) transformer, but also how much &ldquo;learned information&rdquo; a trasformer can transmit per token to someone who doesnt know the parameters of the transformer.  This result could could be compared to the results of Juan et al 2022 for fully connected neural networks and other models, to get insight in which architectures can learn how many bits of information. In order to be properly compared the results of Juan et al 2022 have to be adapted a bit, to the same in and outputs.
 (todo you might move above paragraph to section (Analyzing Neural Network Architectures)) The</p>
 <p>For the case in which there are $M$ training documents and there is a sparse mixture of trasformers $\theta^{(1)}, &hellip;, \theta^{(n)}$ another result for the upper bound of the estimation error $\mathcal L_{M,T} = \dfrac{\mathcal I(H_{M,T};\psi)}{MT} + \dfrac{\mathcal I(D_m;\theta_m|\psi)}{M}$.</p>
-<h4 id="theorem-juan45-hahahugoshortcode1018s13hbhb">Theorem Juan.4.5 (
+<h4 id="theorem-juan45-hahahugoshortcode1s16hbhb">Theorem Juan.4.5 (
 
 
 
@@ -940,12 +1118,8 @@ QED</p>
 )</h4>
 <p>If $D_1,&hellip;,D_M $ is generated by the above defined sparse mixture of transformers, then</p>
 <p>$\mathcal L_T \leq
-\dfraq{pR\ln(1+\frac{M}{R} pRL\ln(136\e K^2) }{MT}</p>
-<ul>
-<li>\dfraq{pR\ln(1+\frac{M}{R}) \ln(\frac{2KMT^2}{L})}{MT}</li>
-<li>\dfrac{\ln(N)}{T}$</li>
-</ul>
-<p>, where $p = 2r^2(L-1) + (dr + r^2)$ denotes the parameter count of each trans transformer.</p>
+\dfrac{pR\ln(1+\frac{M}{R} )\ln(136 \text{e} K^2) }{MT} + \dfrac{pR\ln(1+\frac{M}{R}) \ln(\frac{2KMT^2}{L})}{MT}+ \dfrac{\ln(N)}{T}$</p>
+<p>, where $p = 2r^2(L-1) + (dr + r^2)$ denotes the parameter count of each transformer.</p>
 <hr>
 <p>(TODO talk about rate distortion error bounds?)</p>
 <h2 id="discussion-assumptions">Discusion of their Assumptions<a hidden class="anchor" aria-hidden="true" href="#discussion-assumptions">#</a></h2>
@@ -954,22 +1128,34 @@ QED</p>
 <li>transformers can imitate every upper bounded finite horizon am model</li>
 <li>but they cant imitate infinite horizon documents</li>
 </ul>
-<p>Unformal Lemma 0: There exists at least one document, whichs very end is dependent on the very beginning of the document, even if the middle of the document is known.</p>
-<p>Unformal Proof: Scroll down to the very end of this document below the references. unformal QED</p>
+<hr>
+<h4 id="unformal-lemma-0">Unformal Lemma 0:<a hidden class="anchor" aria-hidden="true" href="#unformal-lemma-0">#</a></h4>
+<p>There exists at least one document $d$, which has a word in the very end $w_e$, which is statistically dependent on the very beginning $w_b$ of the document, even given the rest of the document.</p>
+<hr>
+<h4 id="unformal-proof">Unformal Proof:<a hidden class="anchor" aria-hidden="true" href="#unformal-proof">#</a></h4>
+<p>Scroll down to the very end of this document below the references.</p>
+<p>QED</p>
+<hr>
 <h3 id="can-a-transformer-implement-a-sparse-mixture-of-transformers">Can a transformer implement a sparse mixture of transformers?<a hidden class="anchor" aria-hidden="true" href="#can-a-transformer-implement-a-sparse-mixture-of-transformers">#</a></h3>
 <p>!!IMPORTANTE IMPORTANTE!!: adapt notation to juan et al 2024!!!!!</p>
 <p>(No a sparce mixture of transformers has an infinite horizon.)</p>
-<p>In this section, we show that a sparce mixtrue of transformers can not be $\epsilon$ approximated by a set of AM models, with upper bounded horiozons.</p>
+<p>In this section, we show that a sparce mixtrue of AMs can not be expressed by a set any finite horizon AM model. Furthermore we hypothesize which</p>
+<hr>
 <h4 id="definition">Definition:<a hidden class="anchor" aria-hidden="true" href="#definition">#</a></h4>
-<p>Let $A$ be a set and $n \in \mathbb N$, then <strong>$A^{[n]} := \bigcup_{i\in {0,1,&hellip;,n}} A^i$</strong>. $A^i$ can be seen as the set of all words of length $i$ over alphabet $A$ and consequently $A^0$ as the set, that contains the empty word, given $A$ is not the empty set.</p>
-<h4 id="todo-define-non-deterministic-mixture-s_1-d_1">TODO Define non deterministic mixture. s_1, d_1<a hidden class="anchor" aria-hidden="true" href="#todo-define-non-deterministic-mixture-s_1-d_1">#</a></h4>
+<p>Let $A$ be a set and $n \in \mathbb N$, then <strong>$A^{[n]} := \bigcup_{i\in {0,1,&hellip;,n}} A^i$</strong>.</p>
+<hr>
+<p>$A^i$ can be seen as the set of all words of length $i$ over alphabet/tokenset $A$ and consequently $A^0$ as the set, that contains the empty word, given $A$ is not the empty set.</p>
+<hr>
+<h4 id="todo-define-s_1-d_1">TODO Define s_1, d_1<a hidden class="anchor" aria-hidden="true" href="#todo-define-s_1-d_1">#</a></h4>
+<hr>
 <h4 id="definition-1">Definition:<a hidden class="anchor" aria-hidden="true" href="#definition-1">#</a></h4>
 <p>Two makrov-chains $M_1 = (P_1,V)$ and $M_2 = (P_2,V)$ are called <strong>deterministically distinguishable (dd)</strong> if there is transition $e \in V^2$, such that $P_1(e) + P_2(e)&gt;0$ and $P_1(e) \cdot P_2(e) = 0$. (E.g. $M_1$ and $M_2$ are dd if one has a transition with probability zero, where the other has positive transition probability)</p>
+<hr>
 <h4 id="lemma-a">Lemma A:<a hidden class="anchor" aria-hidden="true" href="#lemma-a">#</a></h4>
 <p>Let $M_1 = (P_1,V)$ and $M_2 = (P_2,V)$ be not dd but irreducible and finite makrov chains, $P_1 \neq P_2$ and $\theta \in (0,1)$. Let $x_0,X_1,X_2&hellip;$ be a random sequence in $V$, where $x_0$ is constant and the distribution of $x_0, X_1, &hellip; $ follows with probability $\theta$, $M_1$ and with probability $1-\theta$, $M_2$. Then there is $t*$ such that for infinite $t&gt;t*$ the finite horizon $d$ optimal bayesian estimator $\mathbb P(X_{t+1}|X_{t-d+1}, X_{t-d+2} &hellip;, X_t)$ does not equal the unbounded optimal bayesian estimator $ \mathbb P(X_{t+1}|X_1, &hellip;, X_t) $.</p>
 <p>(TODO maybe you can replace irreduciblt with something weaker)
 TODO make this : we assume M_theta = M_1 more formal somehow, TODO define more clearley what doe not equal</p>
-<h4 id="proof">Proof:<a hidden class="anchor" aria-hidden="true" href="#proof">#</a></h4>
+<h4 id="proof-2">Proof:<a hidden class="anchor" aria-hidden="true" href="#proof-2">#</a></h4>
 <p>We cdenote the random markov cahin, that is $M_1$ with probability $\theta$ and otherwise $M_2$, with $M_\theta$. We first show two statemetns:</p>
 <ul>
 <li>
@@ -1001,18 +1187,22 @@ Assume $M_1 = M_\theta$, assume for $t \in \mathbb N$ it holds: $\mathbb P[M_\th
 As we know from a) $\lim_{t\to \infty} \mathbb P(X_{t+1}|H_t) = \lim_{t\to \infty} \mathbb P(X_{t+1}|H_t, M_\theta = M_1) = \lim_{t \to \infty} P(X_{t+1}|X_t, M_\theta = M_1) = P_1((X_{t+1},X_t))$. (&lt;- be more formal)
 But we also know from b) (TODO deal with non existance of d in b))that there is $0&lt;p_t &lt; 1$, s.t. $\lim_{t \to \infty} \mathbb P(X_{t+1}|X_{t-d+1},&hellip;,X_t ) = \lim_{t \to \infty} p_t \cdot P_1(X_t, X_{t+1}) + (1-p_t) \cdot P_2(X_t, X_{t+1})$. And as defined in the lemma there is x,y such that $P_1(x,y) \neq P_2(x,y)$</p>
 <p>QED</p>
+<hr>
 <p>Lemma A means the resulting probability distribution of $x_0, X_1, &hellip; $ made in this simple construction can not be expressed by any finite horizon AM model, such as a transformer</p>
+<hr>
 <h4 id="hypothesis-b">Hypothesis B:<a hidden class="anchor" aria-hidden="true" href="#hypothesis-b">#</a></h4>
 <p>when d grows to infinity posterior distribution can be epsilon approximated</p>
 <p>Proof: Left out</p>
+<hr>
 <h4 id="corolary-of-lemma-a">Corolary of lemma A:<a hidden class="anchor" aria-hidden="true" href="#corolary-of-lemma-a">#</a></h4>
 <p>An upper bounded context $d_1$ length Transformer $T$ can not express the probability distribution a non-deterministic mixture of two transformers $(R,J)$ (Romeo and Juliett).</p>
-<h4 id="proof-1">Proof:<a hidden class="anchor" aria-hidden="true" href="#proof-1">#</a></h4>
+<h4 id="proof-3">Proof:<a hidden class="anchor" aria-hidden="true" href="#proof-3">#</a></h4>
 <p>We start by showing the possibility of a reduction: Any discrete autoregressive distribution over alphabet $\Sigma$ with horizon $d$, $f:\Sigma^{[d]} \to \mathcal P_{|\Sigma|}$ can be express by an equivalent Markov chain $M=(V_m,P_m)$, where $V_m = \Sigma^{[d]}$. With equivalent it is meant that the new random model, has the same irreducible error, and the same bayesian estimation error (todo be formal about what you mean with equivalent (equivalen with respekt to obe), explain meaning of f!)
 To achieve the epuivalent markov chain, we construct $P_m$ like this: given $w \in \Sigma^{[d]}$, $x \in \Sigma$ and $f(w)(x) = p$, $P_m((w, s_1(w) \circ x)) = p$. If a transition $(a,b) \in V_m$ has not defined in the previous sentence (e.g. $s_1(a) \neq p_1(b)$), then its porbability is zero $P_m((a,b)) = 0$.</p>
 <p>(TODO: adapt to new version of lemma A, e.g. chains are not dd and irreducible)
 Therefore there exists an equivalent markov chain $M_R=(V,P_R)$  of $R$ and $M_J$ analogously of $J$. By lemma A the distribution of a non-deterministic mixture of $M_R$ and $M_J$ can not be approximated by a bounded optimal bayesian optimizer. But as the parameters of $T$ has context length $d$ it can only express distributions of auto regressive models with horizons of at most $d$. Thus $T$ can not implement the non-deterministic misxture of R and J.</p>
 <p>QED</p>
+<hr>
 <h4 id="corolary-of-corolary-of-lemma-a">Corolary of corolary of lemma A:<a hidden class="anchor" aria-hidden="true" href="#corolary-of-corolary-of-lemma-a">#</a></h4>
 <p>An upper bounded context $d_1$ length Transformer $T$ can not express the probability distribution a non-deterministic mixture of n transformers ${J_1,&hellip;,J_n}$ for any n&gt;2.</p>
 <h4 id="proof-todo">Proof (TODO)<a hidden class="anchor" aria-hidden="true" href="#proof-todo">#</a></h4>
@@ -1026,8 +1216,10 @@ TODO finish proof</p>
 </ul>
 <p>(TODO in definition of non deterministic mixture) (Romeo and Juliett).</p>
 <p>QED</p>
+<hr>
 <h4 id="comments">Comments:<a hidden class="anchor" aria-hidden="true" href="#comments">#</a></h4>
-<p>We assumed in corolarry of Lemma A that R,J take every next token with positive probability. This assumption was necessary for the corrolary to be true in general. Imagine R would give for a word $w$ to be followed by a letter $x$ the probability zero and T not. Then the optimal estimator would disguise T as soon as x would follow after w. Does that mean it stays plausible that for a non deterministic mixture of tansfoermes, that are limited to only taking one of the k most likely letters as the next one,  to be implemented as one transformer. I believe only yes, if all parameters of R and J are perfektly well known. As soon there is some ambiguity in there parameters, suddenlty we can not be exactly sure wich one is among the top k next tokens and suddently again all tokens could appear with positve probability. But thats only a believe and I do not provide any qualitative argument on this comment.</p>
+<p>We assumed in corolarry of Lemma A that R,J take every next token with positive probability. This assumption was necessary for the corrolary to be true in general. Imagine R would give for a word $w$ to be followed by a letter $x$ the probability zero and T not. Then the optimal estimator would disguise T as soon as x would follow after w. Does that mean it stays plausible that for a non deterministic mixture of tansfoermes, that are limited to only taking one of the k most likely letters as the next one,  to be implemented as one transformer. I believe only yes, if all parameters of R and J are perfektly well known. As soon there is some ambiguity in there parameters, suddenlty we can not be exactly sure wich one is among the top k next tokens and suddently again all tokens could appear with positve probability. But thats only a believe and I do not provide any qualitative argument on that.</p>
+<p>Also if we assume that</p>
 <h3 id="does-independence-suffice-for-an-upper-bound-of-estimation-error">Does independence suffice for an upper bound of estimation error?<a hidden class="anchor" aria-hidden="true" href="#does-independence-suffice-for-an-upper-bound-of-estimation-error">#</a></h3>
 <!---
 Lets suppose there was a transformer, that could generate all training documents, that we have. (For this the documents should have an upper bound regarding length. Also the documents should be independent if the transformer is known). 
@@ -1052,13 +1244,37 @@ Thus the problem can be reduced to estimating a bernoulli dsitribution.
 <p>explain why problem is ultra hard to solve, explain on easy example.</p>
 <p>X itself is the hardest to estimate if it is uniform distributed. But if we know that X is uniform distributed, then estimation error is minimal.
 if estimation error is bigger than zero, interesstingly X is not for sure uniform distrivuted (if we kew for sure X was uniform distributed then estimation error was zero, as we would then have no uncertainty about distribution)). Does this observation challenge the meaning of the estimation error? Maybe we should not go about maximizing the estiamtion error?</p>
-<h3 id="does-the-estimation-error-have-a-meaning">Does the estimation error have a meaning<a hidden class="anchor" aria-hidden="true" href="#does-the-estimation-error-have-a-meaning">#</a></h3>
+<h3 id="what-is-the-meaning-of-the-estimation-error">What is the meaning of the estimation error<a hidden class="anchor" aria-hidden="true" href="#what-is-the-meaning-of-the-estimation-error">#</a></h3>
+<p>In Section (TODO add reference), we cited this result for the error of the obe:</p>
+<p>$\mathbb L_{M,T} MT= \mathbb H[H_M^{(T)}] = \mathbb I(H_M^{(T)};\theta) + \mathbb H(H_M^{(T)}|\theta)$</p>
+<p>And then the estimation error $\mathbb I(H_M^{(T)};\theta)$ got extra care in the further analysis, as it conveys how hard it is to guess model parameters.</p>
+<p>As we will argue in this Section, the estimation error is fully dependent on the bayesian prior model and independent of the resulting distribution.
+E.g. a sequence generated by a random transformer, can also be generated with the same distribution by a high amount of other random or non random models.</p>
+<hr>
+<h4 id="lemma-b1">Lemma B.1<a hidden class="anchor" aria-hidden="true" href="#lemma-b1">#</a></h4>
+<p>Every autoregressive distribution $X_1, &hellip;, X_T$ over the finite alphabet $\Sigma$ can be represented by a parametrized model with an estimation error of 0.</p>
+<p>(use functions A and K, use uniform instead of gausian bayesian prior)</p>
+<h4 id="proof-4">Proof<a hidden class="anchor" aria-hidden="true" href="#proof-4">#</a></h4>
+<p>Let $\mathcal P_{\Sigma}$ the set of all probability distributions over $\Sigma$.
+Let $\mathcal P_{T} = \{ \Sigma^{[T-1]} \to P_\Sigma \}$ the set of all autoregressive probability distributions with $T$ tokens.
+An element in $\mathcal P_{T}$ can be seen to take in a sequnce of tokens and to return the probability distribution for the next token.</p>
+<p>We call $A: \mathbb R^n \to P_T$ an autoregressive model. If a model $A$ is surjective, we call $A$ a full autoregressive model, since it can parametrize all autoregressive distributions.</p>
+<p>At least one full model exists, since $\mathbb R^n$ and $\mathcal P_T$ have the same cardinality.</p>
+<p>A transformer is for example an autoregressive model. I dont know whether a transformers with context length T can $\epsilon$-approximate a full autoregressive model.</p>
+<p>Let $H_T$ be representable by a full autoregressive model, such that its estimation error is bigger than zero. This means there is a a full autoregressive model $A$
+and $\mathcal Y \in \mathcal P_{\mathbb R^n}$ and $\theta \sim \mathcal Y$ ($\theta$ be a random vector of some distribution), such that $H_T \sim A(\theta)$ and $\mathbb I(H_T;\theta)&gt;0$.</p>
+<p>Notice that $A(\theta) \in \mathcal P_T$. As $A$ is surejectiv there is constant $\theta_0 \in \mathbb R^n$, such that $A(\theta_0) = A(\theta)$ and thus $H_T \sim A(\theta_0)$.</p>
+<p>If we model $H_T \sim A(\theta_0)$, then $\mathbb H(\theta_0) = 0$ and therefore we obtain an estimation error of $0$: $\mathbb I(H_T;\theta_0) = 0$.</p>
+<p>(TODO move definition of full autoregressive model above lemma statement maybe into previous section)</p>
+<p>QED</p>
+<hr>
+<p>In Lemma B.1 we found, that we can do such a shitty job when modeling a dstribution, that by looking at the data and updating our model parameters accordingly we will never be able to describe a autoregressive distribution more precise, the more tokens we observe, e.g. we will never have to update them. (Still the model would become better at predicting the distribution by observing it, but that information would not be stored in updated model parameters.)</p>
+<p>(todo define parametrization)
+Can we also do the oposite? Imagine for a given random sequence $H_T$ we can find a parametrization $A, \mathcal Y$, s.t. the estimation error is maximal. Since this parametrization would maximize the estimation error, it would minimize $H(H_T|\Theta)$.
+Would we thereby find a model, such that it parameters can describe the sequence the best? Would we therby find the &ldquo;perfect&rdquo; model for this sequence?
+Lemma B.2 shows, that for every sequence there exists a parametrization, such that $H(H_T|\Theta) = 0$, but when you read the proof you will be disappointed.</p>
 <ul>
-<li>
-<p>write down how every distribution can be represented with an estimation error of 0 (use functions A and K, use uniform instead of gausian bayesian prior)</p>
-</li>
-<li>
-<p>write how cool it would be if we where able to find for a given X distribution, the bayesian prior that maximises the estimation error</p>
+<li>write how cool it would be if we where able to find for a given X distribution, the bayesian prior that maximises the estimation error
 <ul>
 <li>would the resulting model then be the perfect model for this distribution?
 <ul>
@@ -1070,34 +1286,32 @@ if estimation error is bigger than zero, interesstingly X is not for sure unifor
 </ul>
 </li>
 </ul>
-<p>|||||||| Below Unfinished Ideas |||||||</p>
-<h4 id="when-can-we-make-assumptions-of-the-the-familie-of-ams">When can we make assumptions of the the familie of AMs<a hidden class="anchor" aria-hidden="true" href="#when-can-we-make-assumptions-of-the-the-familie-of-ams">#</a></h4>
-<p>Lets suppose following scenario: we have a sequence of random tokens $X_1, &hellip;, X_T$ and know that this sequence is autoregressive with finite horizon T-d, which means $\mathbb P(X_{t+1} | X_{t-T+d}, &hellip;, X_{t-1}) = \mathbb P(X_{t+1}|H_t, X_{t+2}, &hellip;X_{T})$.
-Then, the distribution of $H_T$ can be charachterized by the function $f(H_t) = \mathbb P(X_{t+1} | H_t)$. Thus there is a trivial bijection from the set ${ \Sigma^{T-d} \to \mathcal P_\Sigma }$ to the Autoregressive distributions over the alphabet $\Sigma$ and length $T$ and horizon $T-d$. (&lt;- warning you have to integrate the non character sign to sigma and that can only be place to the right position (change $\Sigma^T$)).</p>
-<p>Lets suppose we are reely lucky and  find a parmatrization of all autoregressive distributions of horizon T-d by finding an injektive function $A :\mathbb J_\sigma^n \to {\Sigma^{T-d} \to \mathcal P_\Sigma }$, where $\mathbb J_\sigma ^n := {||x||_2 = \sigma, \mathbb{1} ^T x=0 | x \in \mathbb R^n}$. (injecion exist since in and output sets are the same size)</p>
-<p>(</p>
-<p>Let now $\Theta \sim \mathcal N(0,I_n\sigma)$. Then $A(\Theta)$ is a random random distribution which itself is a random distribution. This means $A(\Theta) \in {\Sigma^T \to \mathcal P_\Sigma }$ (Note $X \sim \mathcal N(0,1) \to x \notin \mathbb R$)</p>
-<!--This means there must exits $\theta \in \mathbb J^n$, such that  $A(\theta) = A^{-1}(A(\Theta))$-->
-<!--Try to find argument that autogenerative model can not create itsel, can not be a finite horizon thing, but I think that is going nowhere-->
-<p>If A exists, and we  insert random vector into A, then that random variable is element of As image</p>
-<p>for every random bayesian prior there exist a constant bayesian prior!!</p>
-<p>(!!for every constant bayesian prior  model there exists another model with non constant bayesian prior (just add another theta i and make x independent of it, trivial bayesian + model modification)!!!)</p>
-<p>but not for every distribution there is a bayesian prior, such that estimation error bigger than zero (&lt;- thats the actual inverse)hehehe</p>
-<p>lets find K that maps every distribution of theta to its kernel theta</p>
-<p>e.g. K: random distribution -&gt; constant</p>
-<p>$A(K(l(\Theta)) = A(\Theta)$</p>
-<!--Say that iid if theta is not the worst case assumption for our model.-->
-<p>To recapulate, we assumed/showed evidence, that there can exist a pair $A_t,\theta$ that can generate any upper bounded horizon distribution, when $\theta$ is empirical gaussian and $A_t$ is a parametrization function for transformers. Lets suppose we wanted to use that knowledge to find an upper bound for the error of the optimal bayeisan optimizer e.g.  an upper bound of the mutual information H_t Theta. Can we do that by using the random random distribution $\Theta \sim \mathcal N(0,\sigma)$, as that way $\Theta$ is the probability distribution with maximal differential entropy?</p>
-<!-- Not sure yet whether this is the actual problem -->
-<p>The problem is, that there exists $\theta \in \mathbb J^n$, s.t. $A(\theta) = A(\Theta)$.</p>
-<p>The problem is, that this assumes, that $A$ is the only function (it is actually class of function) that can do that (explain what). Why
-suppose B (b entagles and makes dependencies)</p>
-<p>)
-!!!!!!
-But $A(\theta)$ only has horizon of $K&lt;T$ and $A(\Theta)$ has infinite horizon (if A is paramatrization of transformers) and thus models and thus A can only exist for AMs with horizin at least T or with AMs that do not increase the horizon.</p>
-<p>This means only a bayesian estimator with horizon T can detect $\Theta$??</p>
-<p>conclusion from A: for each prior distribution of Theta there is a constant theta that creates a prediction error of 0 but the same distribution of X_t</p>
-<p>can A be inverted for arbitrarili long horizon case? by definition yes. so also for unbounded case we find good and shit model?</p>
+<hr>
+<h4 id="lemma-b2">Lemma B.2<a hidden class="anchor" aria-hidden="true" href="#lemma-b2">#</a></h4>
+<p>Every autoregressive distribution $H_T=X_1, &hellip;, X_T$ can be represented by a model with an estimation error of $\mathbb H(H_T)$.</p>
+<h4 id="proof-5">Proof<a hidden class="anchor" aria-hidden="true" href="#proof-5">#</a></h4>
+<p>(doenst have to be a bijection)</p>
+<p>Let $\Sigma$ be the alphabet of $H_T$. Let $f: \Sigma^\infty \to \mathbb R^n$ be a bijection.</p>
+<p>We define $A(\theta) := h \to (x \to \mathbb P[f^{-1} (\theta)<em>{|h|+1}  = x)| f^{-1}(\theta)</em>{1:|h|} = h]$
+where $f^{-1}(\theta)_{i:j}$ defines the word that goes from $i$&lsquo;th cahracter of the word $f^{-1}(\theta)$ until the $j$&lsquo;th character.
+I am sorry that this expression looks confusing but I will try to explain: $f^{-1}(\theta)$ is just an invinite long word. $A(\theta)(h)(x)$ returns 1 iif the word $h \circ x$ is a prefix of $f^{-1}(\theta)$. If $h$ is a prefix of $f(\theta)$, but $h \circ x$, then $A(\theta)(h)(x) = 0$ and otherwise $A(\theta)$ is undefined.</p>
+<p>Note that $A$ is a not well-defined autoregressive model, but by far not a full autoregressive model.</p>
+<p>Now for a given autoregressive sequence $H_T$, we define the random vector $\theta = f(H_T \circ 0^\infty)$.</p>
+<p>Then $A(\theta)(h_t)(x) = \mathbb P[f^{-1} (\theta)<em>{t+1}  = x| f^{-1}(\theta)</em>{1:t} = h_t] = \mathbb P[X_{t+1}  = x| H_t = h_t]$, e.g. $H_T \sim A(\theta)$.</p>
+<hr>
+<ul>
+<li>write how cool it would be if we where able to find for a given X distribution, the bayesian prior that maximises the estimation error
+<ul>
+<li>would the resulting model then be the perfect model for this distribution?
+<ul>
+<li>this is the model that would minizie H(X|Theta)</li>
+<li>this means that for many samples better estimation performance? (no bayesian prior always perfekt, but we are not, maximal possible estimation error tells us how much randomness will be removed for many samples)</li>
+</ul>
+</li>
+<li>for example uniform distribution forces estimation error to be zero, e.g. every modelling of uniform distribution is equal as shit</li>
+</ul>
+</li>
+</ul>
 <h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
 <p>In this blog post several applications of Information Theory in Deep Learning and LLMs where presented.</p>
 <h2 id="take-home-messages">Take home messages<a hidden class="anchor" aria-hidden="true" href="#take-home-messages">#</a></h2>
@@ -1285,6 +1499,47 @@ But $A(\theta)$ only has horizon of $K&lt;T$ and $A(\Theta)$ has infinite horizo
 </dd>
 
       </div>
+
+      <div id="latham2009">
+        <dt>
+          Latham&#32;&amp;&#32;Roudi
+
+          
+          (2009)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Latham</span>,&#32;
+    <meta itemprop="givenName" content="P. E." />
+    P.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Roudi</span>,&#32;
+    <meta itemprop="givenName" content="Y." />
+    Y.</span>
+  &#32;
+    (<span itemprop="datePublished">2009</span>).
+  &#32;<span itemprop="name">Mutual information</span>.<i>
+    <span itemprop="about">Scholarpedia</span>,&#32;4(1)</i>.&#32;<span itemprop="pagination">1658</span>.
+  <a href="https://doi.org/10.4249/scholarpedia.1658"
+     itemprop="identifier"
+     itemtype="https://schema.org/URL">https://doi.org/10.4249/scholarpedia.1658</a></span>
+
+
+
+
+</dd>
+
+      </div>
   </dl>
 </section>
 
@@ -1304,7 +1559,7 @@ But $A(\theta)$ only has horizon of $K&lt;T$ and $A(\Theta)$ has infinite horizo
     </main>
     
 <footer class="footer">
-        <span>&copy; 2024 <a href="http://localhost:1313/">Daniels Blog</a></span> · 
+        <span>&copy; 2024 <a href="https://strammermax27.github.io/">Daniels Blog</a></span> · 
 
     <span>
         Powered by
