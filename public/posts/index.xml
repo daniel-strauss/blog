@@ -4,7 +4,7 @@
     <title>Posts on Daniels Blog</title>
     <link>https://strammermax27.github.io/posts/</link>
     <description>Recent content in Posts on Daniels Blog</description>
-    <generator>Hugo -- 0.128.2</generator>
+    <generator>Hugo -- 0.129.0</generator>
     <language>en-us</language>
     <atom:link href="https://strammermax27.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -14,7 +14,7 @@
       <guid>https://strammermax27.github.io/posts/information_theory_in_llm_theory/</guid>
       <description>⚠️ 📥 😚 🛡 🚦 👹 🌿 By reading this blogpost, you will find out, why this emoji sequence is here.
 TODO rewrite thetas, random theta: big, constant theta small
-Introduction In this Blogpost you will learn about some papers, that explored LLMs through the lens of Information Theory. We will look at one paper in detail, that looked specifically at the phenomenon of in-context learning by making assumptions about the probability distribution of the training data.</description>
+Introduction In this Blogpost you will first learn about information theory and we will look at one example application of information theory in llm theory. Then we will look at one paper in detail, that looked specifically at the phenomenon of in-context learning by making assumptions about the probability distribution of the training data.</description>
     </item>
   </channel>
 </rss>

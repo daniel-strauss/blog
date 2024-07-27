@@ -1,4 +1,17 @@
 d
+
+## Analyzing Neural Network Architectures using Information Theory {#anal_nn}
+
+
+![targets](/figures/assumption_for_ideal_bayesian_estimator.png "Assumption AM") 
+
+
+Information theory can be found everywhere, where uncertainty is expressed probabilisticly. As language models typically learn a probability distribution for the next token given a previous sequence parts maybe some new insights on them may be gained by looking at them from the viewpoint of information theory. How much information can a generative model generate, e.g. how much information is stored in this model? Can they solve tasks related to information theory such as data compression? 
+
+In this chapter results from {{< cite "jeon2022information" >}} and {{< cite "jeon2024information" >}} will be discussed. For several generative models models upper bounds have been established of how much information they can generate. These results can be used make statements about the expressiveness of different neuronal architecture. (<- be more precise about expressivemness)
+
+
+
 #### Can a Transformer learn a random transforer as the OBE does
 
 No, the AM represented by a random transformer has an event horizon of infinity.(<- TODO proof. youse math snippes from previous section>) Transformers only have a a

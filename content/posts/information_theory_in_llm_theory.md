@@ -10,21 +10,20 @@ TODO rewrite thetas, random theta: big, constant theta small
 
 ## Introduction
 
-In this Blogpost you will learn about some papers, that explored LLMs through the lens of Information Theory. We will look at one paper in detail, that looked specifically at the phenomenon of in-context learning by making assumptions about the probability distribution of the training data.
-Then we will carefully examine the assumptions made in that paper. To do that well we will proof some of our own statements, to get more insight into the validity of these assumptions.
+In this Blogpost you will first learn about information theory and we will look at one example application of information theory in llm theory. Then we will look at one paper in detail, that looked specifically at the phenomenon of in-context learning by making assumptions about the probability distribution of the training data.
+Then we will carefully examine the assumptions made in that paper. To do that well we will proof some of our own statements, to get more insight into the validity of these assumptions. Specifically we show a) that a transformer can not implement a sparse mixture of transformers and b) that any discrete autoregressive distribution, can be both modeled, such that the estimation error is zero and, such that the estimation error equals the entropy of the distribution.
 
 
 ### A Brief Introduction on Information Theory
 
 ![targets](/figures/venn_information.png "Assumptio Sparse Mixture") 
 
-
-In this section we want to provide a brief overview on Information Theory. 
+ 
 
 Imagine you lived $40\cdot n$ years in the future and that the population has doubled every $40$ years. For simplicity assume that in the current present just one person is alive. Conclusively $2^n$  people live at your point in the future. You live very far in the future and $n$ is very large $n=2^{10^{15}}$. "Today" is your friends birthday party and you dont have a present. 
 
 Therefore you decide to hire last minute a mathgician for his party as mathagicians are know to let partys go wild with their magic and math. 
-In order to hire the mathgician you have to put in your friends one petabit ($=10^15$ bits) long address into the website of the mathgician-firm, such that he can find the location of the party. (The address is one petabit long as in the future every inhabitant has his own address, and there are $n$ people.) At the party the mathgician shows up and everyone has a good time. But then suddenly you start to wonder:
+In order to hire the mathgician you have to put in your friends one petabit ($=10^{15}$ bits) long address into the website of the mathgician-firm, such that he can find the location of the party. (The address is one petabit long as in the future every inhabitant has his own address, and there are $n$ people.) At the party the mathgician shows up and everyone has a good time. But then suddenly you start to wonder:
 
 You only have a 1Gbit/s upload speed (hardware did not improve so much in the last $40\cdot2^{10^{15}}$ years), how have you been able to upload $10^{15}$ bits (one PentaBit) within just one day? This seems impossible as it takes $10^6$ seconds to upload one PentaBit with your network speed. Then you find out why: the website did not have to send $10^{15}$ bits of information to its server. Small parts of the information have already been known by the server; For example the information that people in your region are more likely to order a magician for someone in the same galaxy was already present on their server. 
 Could they have used that information to such that they required less bits of information from you, such that your computer had to send them a smaller amount of bits? How can something seeming as soft as information influence something as hard as a bit-sequence length? What is the math behind this?
@@ -34,7 +33,7 @@ Information theory is mainly the study on expressing the quantity of information
 
 One can show, that the entropy $\mathbb H$ in bits of a discrete random variable $X$ with a known probability density function $p_X$ is
 
-$\mathbb H(X) = \sum_{x \in \mathcal X} - p_X(x) \log_2(p_X(x)) = \mathbb E[-\log_2 X]$.
+$\mathbb H(X) = \sum_{x \in \mathcal X} - p_X(x) \log_2(p_X(x)) = \mathbb E[-\log_2 X]$. {{<cite "shannon1948mathematical">}}
 
 Therefore the above term is usually referred as the formal definition of entropy. Often instead of the binary logarithm the natural logarithm is used to express entropy. The resulting unit is called nats instead of bits. 
 
@@ -70,26 +69,23 @@ Please note that on Wikipedia equivalent but different definitions of these term
 
 
 
-## The Link of Information Theory and LLMs
+## Data Compression and LLMs
+
+As one might be able deduct from the definition of entropy made in previous Section, there is a strong link between data compression and information theory. Entropy of an information source is the amount of bits its optimal lossless compression holds on average. Basically ever since humanity developed new lossles compression techniques to express the same data with less bits. To do that, modeling the probability space, that generates the data, well is helpfull. In several work neural networks as transformers or other architectures have been used to compress data and ahieved good performances. <!--- in the online (Bellard, 2021; Mao et al., 2022) and offline settings (Valmeekam et al., 2023).-->
 
 
-Information theory can be found everywhere, where uncertainty is expressed probabilisticly. As language models typically learn a probability distribution for the next token given a previous sequence parts maybe some new insights on them may be gained by looking at them from the viewpoint of information theory. How much information can a generative model generate, e.g. how much information is stored in this model? Can they solve tasks related to information theory such as data compression? 
+Also in {{< cite "deletang2024language" >}} the performance of several LLMs as lossles data compressors has been evaluated. They did not only test the performance of LLMs on the compression of text data, but also on image and audio data. Interestingly the compresion rates of LLMs, such as of Llama 2 (7B) and of Chinchilla 70B, outperformed PNG on the compression on image data, and FLAC on the compression on audio data. 
+Note, that if you add the size of the LLMs themleves into the compression rate, then a high amount of data has to be compressed, before a positive compression rate has been reached.
 
-In {{< cite "deletang2024language" >}} LLMs have been used as lossles data compressors and 
-
-
-
-## Analyzing Neural Network Architectures {#anal_nn}
-
-
-![targets](/figures/assumption_for_ideal_bayesian_estimator.png "Assumption AM") 
-
-
-In this chapter results from {{< cite "jeon2022information" >}} and {{< cite "jeon2024information" >}} will be discussed. For several generative models models upper bounds have been established of how much information they can generate. These results can be used make statements about the expressiveness of different neuronal architecture. (<- be more precise about expressivemness)
+Whilst using these LLMs to compress data, has the big disatvantage that the LLMs themselves take up a lot of space and that compression with an LLM is computationally expensive, I still am impressed by that result. Since the LLMs in that work where primarily trained on text-data, I am surprised that they showed such good results in the compression of image and audio data. This shows that the probability spaces generating text vs image or audio data have common features. There seems to exist a nature of the data we encounter. On the other hand a non-neglectable fraction of that common nature might be not hard to find (not hard = humanly understandable). By examining humanly understanable compression algorithms, such as LZMA2, that also perform well on all three types of data one might be able to learn a good part of these commonalities, but not all, since LLMs still performed a bit better {{< cite "deletang2024language" >}}. 
 
 
 
-# An Information Theoretic Perspective Analysis on In-Context Learning
+<!---
+## Analyzing Neural Network Architectures using Information Theory {#anal_nn}
+-->
+
+## An Information Theoretic Perspective Analysis on In-Context Learning
 
 In {{< cite "jeon2024information" >}} assumptions about the origin of the trianing data of LLMs have been made from which an explanation of in context learning was stated.
 
@@ -143,7 +139,7 @@ The authors wanted to model $\theta_1,...,\theta_m $ such that they have some un
 Additionally $\psi$ shall not contain information about any $\theta_m$ that could not be deducted from enough samples of $\theta_i$,   $D_m \bot \psi | \theta$. Since we sayd $\theta_1,...,\theta_m | \psi$ shall be iid, it holds  $D_m \bot \psi | \theta \iff D_m \bot \psi | \theta_m$. (<- not peer reviewed)
 
 (<- Check if this is correct) 
-How can the random sequence $\theta_1,...,\theta_m$ be modeled to satisfy that constraint in such a way, that the distributions of $\theta_1,...,\theta_m$ and $\psi$ are well enough defined. In {{< cite "jeon2024information" >}} the authors came up with the clever solution for satisfying these constraints. They defined a random set of $N$ randomly initialized autoregressive models $T = \{\theta^{(1)},..., \theta^{(N)} \}$, where $N$ is an unknown number. Then they defined a random assignment of Documents and autoregresive models in T parametrized by random random distribution $\alpha \sim \text{Dirichlet}(N, (R/N, ..., R/N))$, with $R<<N$. $\alpha$ defines for a random autoregressive model $\theta^{(n)}$ its probability to be assigned for Documents. For the case, in which the autoregressive models where transformers, $\theta^{(n)}$ represented a vector of gaussian independently distributed variables, describing the wheight parameters. The smaller the values in the parameter-tuple $(R/N,...,R/N)$ of the Dirichlet distribution, the more sparse the distribution. Lets suppose for example if you have a factory that produces factories, which in return produce each $k$ dices and you want the dieces to be fair (each side appears with same probability). Then the dirichlet distribution, parametrized by $k, (a,...,a)$, which describes the distribution of the probability distribution dices created by a given dice factory should have a high value of $a$ in its paramatrization. <!--example is unintuitive + maybe be a bit more formal what alpha does--> 
+How can the random sequence $\theta_1,...,\theta_m$ be modeled to satisfy that constraint in such a way, that the distributions of $\theta_1,...,\theta_m$ and $\psi$ are well enough defined. In {{< cite "jeon2024information" >}} the authors came up with the clever solution for satisfying these constraints. They defined a random set of $N$ randomly initialized autoregressive models $T = \{\theta^{(1)},..., \theta^{(N)} \}$, where $N$ is an unknown number. Then they defined a random assignment of Documents and autoregresive models in T parametrized by random random distribution $\alpha \sim \text{Dirichlet}(N, (R/N, ..., R/N))$, with $R<<N$. $\alpha$ defines for a random autoregressive model $\theta^{(n)}$ its probability to be assigned for Documents. For the case, in which the autoregressive models where transformers, $\theta^{(n)}$ represented a vector of gaussian independently distributed variables, describing the wheight parameters. The smaller the values in the parameter-tuple $(R/N,...,R/N)$ of the Dirichlet distribution, the more sparse the distribution. 
 So now we can finally define $\psi := (\alpha, \theta^{(1)}, ..., \theta^{(n)} )$. Note that $\theta_m | \psi$ is a discrete random variable with at most $N$ outcomes, therefore its entropy has an upper bound of $\log N$.
 Therefore if $M$ grows to infinity maybe the OBE will learn $\psi$ from $H_M^T$, e.g. $\log N \geq \mathbb H(\theta_{M+1} | \psi) \approx \mathbb H(\theta_{M+1}|H_M^T)$ and this may result in a logaritmic upper bound for the estimation error of $\theta_{M+1}|H_M^T$. You wonder what the estimation error is? This will be formaly definded in the next Paragraph. On top of that the previous claim will be formally evaluated in the next paragraph.
 
@@ -211,14 +207,12 @@ As in previous section, we have worked out a way to separate $\theta = \theta_1,
 
 
 ----
-#### Theorem Juan.4.2 ({{< cite "jeon2024information" >}})
+#### Theorem Jeon.4.2 ({{< cite "jeon2024information" >}})
 
-$\mathcal L_{M,T} = \underbrace{\dfrac{\mathbb I(H_T^{(M)};\psi)}{MT}}_\text{meta
-estimation error}$ + 
+$\mathcal L\_{M,T} = \underbrace{\dfrac{\mathbb I(H\_T^{(M)};\psi)}{MT}}\_\text{meta
+estimation error} + \underbrace{\dfrac{\mathbb I(D_m;\theta_m|\psi)}{T}}\_\text{intra document estimation error}$
 
-$+ \underbrace{\dfrac{\mathbb I(D_m;\theta_m|\psi)}{T}}_\text{intra document estimation error}$
 
-(todo make  both  sum elements appear in the same line)
 
 ----
 
@@ -284,7 +278,7 @@ For the single sequence of tokens and single random transformer parametriued $\t
 
 -----
 
-#### Therorem Juan.3.5 ({{< cite "jeon2024information" >}})
+#### Therorem Jeon.3.5 ({{< cite "jeon2024information" >}})
 
 If $X_1,...,X_T$ is generated by the above defined transformer environment, then
 
@@ -294,7 +288,7 @@ $$\mathcal L_T \leq \dfrac{pL\ln(136 \text e K^2) + p \ln(\frac{2KT^2}{L})}{T}$$
 
 ----
 
- This theorem does not only convey meaning for the case, in which $X_1, ..., X_T$ is generated as described above by a not well known (=random) transformer, but also how much "learned information" a trasformer can transmit per token to someone who doesnt know the parameters of the transformer.  This result could could be compared to the results of Juan et al 2022 for fully connected neural networks and other models, to get insight in which architectures can learn how many bits of information. In order to be properly compared the results of Juan et al 2022 have to be adapted a bit, to the same in and outputs. 
+ This theorem does not only convey meaning for the case, in which $X_1, ..., X_T$ is generated as described above by a not well known (=random) transformer, but also how much "learned information" a trasformer can transmit per token to someone who doesnt know the parameters of the transformer.  This result could could be compared to the results of Jeon et al 2022 (todo add resouce) for fully connected neural networks and other models, to get insight in which architectures can learn how many bits of information. In order to be properly compared the results of Jeon et al 2022 have to be adapted a bit, to the same in and outputs. 
  (todo you might move above paragraph to section (Analyzing Neural Network Architectures)) The
 
 
@@ -302,7 +296,7 @@ $$\mathcal L_T \leq \dfrac{pL\ln(136 \text e K^2) + p \ln(\frac{2KT^2}{L})}{T}$$
 For the case in which there are $M$ training documents and there is a sparse mixture of trasformers $\theta^{(1)}, ..., \theta^{(n)}$ another result for the upper bound of the estimation error $\mathcal L_{M,T} = \dfrac{\mathcal I(H_{M,T};\psi)}{MT} + \dfrac{\mathcal I(D_m;\theta_m|\psi)}{M}$.
 
 
-#### Theorem Juan.4.5 ({{< cite "jeon2024information" >}})
+#### Theorem Jeon.4.5 ({{< cite "jeon2024information" >}})
 
 
 If $D_1,...,D_M $ is generated by the above defined sparse mixture of transformers, then
@@ -342,7 +336,7 @@ QED
 ---
 ### Can a transformer implement a sparse mixture of transformers?
 
-!!IMPORTANTE IMPORTANTE!!: adapt notation to juan et al 2024!!!!!
+!!IMPORTANTE IMPORTANTE!!: adapt notation to Jeon et al 2024!!!!!
 
 (No a sparce mixture of transformers has an infinite horizon.)
 
@@ -483,7 +477,7 @@ As transformers can express any distribution within our frame and if we start to
 If we would find that upper bound, then we would have found an upper bound, which holds independent of the bayesian prior and we would never have to worry again if your assumptions are valid!!! So here is why it fails:
 
 
-As the parameter space is bounded $[a,a]$, the highes entropy would be from $\theta ~ unif^n$ e.g. all thetas iid. Lets call this $\Theta$
+As the parameter space is bounded $[-a,a]$, the highes entropy would be from $\theta \sim \text{unif}([-a,a])^n$ e.g. all thetas iid. Lets call this $\Theta$
 
 Intuitively if using $A_t(\Theta)$, should work to create the highest bayesian error, then for any $A_x(\Theta)$ this should work as well as there is nothing special with transfomers. $A_x$ could be like $A(\Theta)$ but first convert all thetas to gaussians. 
 
@@ -545,21 +539,21 @@ A transformer is for example an autoregressive model. I dont know whether a tran
 
 
 
-Let $H_T$ be representable by a full autoregressive model, such that its estimation error is bigger than zero. This means there is a a full autoregressive model $A$
-and $\mathcal Y \in \mathcal P_{\mathbb R^n}$ and $\theta \sim \mathcal Y$ ($\theta$ be a random vector of some distribution), such that $H_T \sim A(\theta)$ and $\mathbb I(H_T;\theta)>0$.
+Let $H_T$ be any random sequence and representented by an autoregressive model $A$, such that its estimation error is bigger than zero. This means there $\mathcal Y \in \mathcal P_{\mathbb R^n}$ and $\theta \sim \mathcal Y$ ($\theta$ be a random vector of some distribution), such that $H_T \sim A(\theta)$ and $\mathbb I(H_T;\theta)>0$.
 
-Notice that $A(\theta) \in \mathcal P_T$. As $A$ is surejectiv there is constant $\theta_0 \in \mathbb R^n$, such that $A(\theta_0) = A(\theta)$ and thus $H_T \sim A(\theta_0)$.
+Notice that $A(\theta) \in \mathcal P_T$. Let $A_f$
+be a full autoregressive model . As $A_f$ is surejectiv there is constant $\theta_0 \in \mathbb R^n$, such that $A_f(\theta_0) = A(\theta)$ and thus $H_T \sim A_f(\theta_0)$.
 
-If we model $H_T \sim A(\theta_0)$, then $\mathbb H(\theta_0) = 0$ and therefore we obtain an estimation error of $0$: $\mathbb I(H_T;\theta_0) = 0$.
+If we model $H_T \sim A_f(\theta_0)$, then $\mathbb H(\theta_0) = 0$ and therefore we obtain an estimation error of $0$: $\mathbb I(H_T;\theta_0) = 0$.
 
 (TODO move definition of full autoregressive model above lemma statement maybe into previous section)
 
 QED
 
 ----
-
-
-In Lemma B.1 we found, that we can do such a shitty job when modeling a dstribution, that by looking at the data and updating our model parameters accordingly we will never be able to describe a autoregressive distribution more precise, the more tokens we observe, e.g. we will never have to update them. (Still the model would become better at predicting the distribution by observing it, but that information would not be stored in updated model parameters.)
+I hope this made people, who say that in-context learning is not learning because parameters are not getting updated, think.
+(TODO write this down in a good way.)
+In Lemma B.1 we found, that we can do such a shitty job when trying to  find a model to express a posterior dstribution, that by looking at the data and updating our model parameters accordingly we will never be able to describe the posterior distribution more precise with the updated parameters, the more tokens we observe, e.g. we will never have to update them. (Still the model would become better at predicting the distribution by observing it, but that information would not be stored in updated model parameters.)
 
 (todo define parametrization)
 Can we also do the oposite? Imagine for a given random sequence $H_T$ we can find a parametrization $A, \mathcal Y$, s.t. the estimation error is maximal. Since this parametrization would maximize the estimation error, it would minimize $H(H_T|\Theta)$.
@@ -579,13 +573,12 @@ Every autoregressive distribution $H_T=X_1, ..., X_T$ can be represented by a mo
 
 Let $\Sigma$ be the alphabet of $H_T$. Let $f: \Sigma^\infty \to \mathbb R^n$ be a bijection.
 
+
+We define $A(\theta) := h \to (x \to \mathbb P[f^{-1}$ $(\theta)\_{|h|+1} = x| f^{-1}(\theta)\_{1:|h|} = h]) $
+
 <!---
-We define $A(\theta) :=$
-$ h \to (x \to \mathbb P[f^{-1}$ $(\theta)_{|h|+1} = x| f^{-1}(\theta)_{1:|h|} = h]) $
--->
-
 We define ![Equation](https://latex.codecogs.com/png.latex?A(\theta)%20:=%20h%20\mapsto%20(x%20\mapsto%20\mathbb{P}[f^{-1}(\theta)_{|h|%2B1}%20=%20x%20\mid%20f^{-1}(\theta)_{1:|h|}%20=%20h]))
-
+--->
 
 where $f^{-1}(\theta)_{i:j}$ defines the word that goes from $i$'th cahracter of the word $f^{-1}(\theta)$ until the $j$'th character.
 I am sorry that this expression looks confusing but I will try to explain: $f^{-1}(\theta)$ is just an invinite long word. $A(\theta)(h)(x)$ returns 1 iif the word $h \circ x$ is a prefix of $f^{-1}(\theta)$. If $h$ is a prefix of $f(\theta)$, but $h \circ x$, then $A(\theta)(h)(x) = 0$ and otherwise $A(\theta)$ is undefined. $A$ will start to make more sence once $\theta$ is a random variable.
@@ -594,9 +587,7 @@ Note that $A$ is a not well-defined autoregressive model, but by far not a full 
 
 Now for a given autoregressive sequence $H_T$, we define the random vector $\theta = f(H_T \circ 0^\infty)$.
 
-Then $A(\theta)(h_t)(x) \overset{a)}{=} $
-
-$\mathbb P(f^{-1} (\theta)_{t+1} = x | f^{-1}(\theta)_{1:t} = h_t) $
+Then $A(\theta)(h_t)(x) \overset{a)}{=} \mathbb P(f^{-1} (\theta)\_{t+1} = x | f^{-1}(\theta)\_{1:t} = h\_t) $
 
 $= \mathbb P[X_{t+1}  = x| H_t = h_t]$, e.g. b) $H_T \sim A(\theta)$.
 
@@ -613,16 +604,13 @@ So why are we disapointed after reading the proof of Lemma B.2.? Because eventho
 
 
 So what does the content of this section have to do with its title?
-Lemma B.1 and B.2 showed that for any random sequence, we find a way to express this sequence with a model, such that a) no information of the sequence is contained in the model and b) all information of the sequence is contained in the model. Therefore in my opinion the estimation error tells us something about the model, one has choosen to describe a distribution, but less about the distribution itself. I think that from the estimation error we can learn about how much information a given neural architecture can hold in its parameters. At the same time I think that the estimation error tells us less about how well it is possible to learn something from a given distribtion as was done in {{< cite "jeon2024information" >}}. I think this as the estimation error can be zero for any distribution as well as the entires distributions entropy, solely depending on how the distribution is expressed. 
+Lemma B.1 and B.2 showed that for any random sequence, we find a way to express this sequence with a model, such that a) no information of the sequence is contained in the model and b) all information of the sequence is contained in the model. Therefore in my opinion the estimation error tells us something about the model, one has choosen to describe a distribution, but less about the distribution itself. I think that from the estimation error we can learn about how much information a given neural architecture can hold in its parameters. At the same time I think that the estimation error tells us less about how well it is possible to learn something from a given distribtion as was done in {{< cite "jeon2024information" >}} (todo add scaling law paper ) (Disclaimer: I didnt look at these papers at such detail to have an established opinion about it, but I will after my exams and update the blogpost accordingly ). I think this as the estimation error can be zero for any distribution as well as the entires distributions entropy, solely depending on how the distribution is modeled. 
 
 
 
 ## Conclusion
 
-In this blog post several applications of Information Theory in Deep Learning and LLMs where presented. 
-
-## Take home messages
-
+In this blog post we discussed the basics of information theory and presented an example application for data compression with LLMs. Then we discussed the work of Jeon et al 2024 (insert reference), which aimed at finding an explanation for in-context learning through assumptions on the data generating process. We then discussed the paper and challenged the idea of assuming the data-generation process was made by transformers. We also provided qualitative arguments on that the estimation error says more about a model of data generation, than it says about the distribution of data itself.  Therefore I think that further work has to be done in this analysis to gain insights that are more meaningfull. On the other hand using the information theoretic tool of the estimation error, for analysing neural architectures and scaling laws, as was done in (todo add references), seem promising to me. I didnt look at these papers at such detail to have an established opinion about it, but I will after my exams and update the blogpost accordingly.
 
 # References
 {{< bibliography >}} 
@@ -633,3 +621,6 @@ https://perchance.org/emoji
 
 
 The emoji-character sequence from the beginning of the blogpost was generated randomly, after the text of this Blog Post has been written, it is: ⚠️ 📥 😚 🛡 🚦 👹 🌿 
+
+![targets](/figures/gpt_finite_kontext_lenght.png "Assumptio Sparse Mixture") 
+
