@@ -6,7 +6,7 @@ bibFile: data/bibliography.json # path relative to the project root
 ---
 Author: Daniel Strauß, Supervisor: Suvrit Sra
 
-⚠️ �� �� �� �� �� �� *By reading this blogpost, you will find out why this emoji sequence is here.*
+🍳 😯 🔲 📥 🚤 🌧 *By reading this blogpost, you will find out why this emoji sequence is here.*
 
 
 ## Introduction
@@ -100,7 +100,7 @@ Here we also provide a brief example where we tried to teach the language model 
 ![targets](/figures/screenshot_control.png "b") 
 
 
-In this screenshot, you see the control prompt for Mistral 7B and its text completion. The fact, that the language model did not complete the text with such a neutral statement about war might stem from the way, in which that LLM was trained, such that balanced responses are more promoted as Suvrit Sra told me.
+In this screenshot, you see the control prompt for Mistral 7B and its text completion. The fact, that the language model did not complete the text with such a neutral statement about war might stem from the way, in which that LLM was trained, such that balanced responses are more promoted as Suvrit Sra mentioned.
 
 ----
 
@@ -683,7 +683,7 @@ In this blog post, we discussed the basics of information theory and presented a
 -----
 -----
 
-The emoji-character sequence from the beginning of the blog post was generated randomly (see: https://perchance.org/emoji) after the text of this Blog Post has been written, it is: ⚠️ �� �� �� �� �� �� 
+The emoji-character sequence from the beginning of the blog post was generated randomly (see: https://perchance.org/emoji) after the text of this Blog Post has been written, it is: 🍳 😯 🔲 📥 🚤 🌧
 
  
 
