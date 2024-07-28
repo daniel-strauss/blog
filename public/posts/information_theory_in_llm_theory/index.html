@@ -183,7 +183,33 @@ Could they have used that information so that they required fewer bits of inform
 
 
 <span class="hugo-cite-intext"
-        itemprop="citation">(<span style="background-color: #f00; color: #fff;">No matching key was found for `shannon1948mathematical` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#shannon1948mathematical"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Claude Elwood"><span itemprop="familyName">Shannon</span></span>,&#32;<span itemprop="datePublished">1948</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Shannon</span>,&#32;
+    <meta itemprop="givenName" content="Claude Elwood" />
+    C.</span>
+  &#32;
+    (<span itemprop="datePublished">1948</span>).
+  &#32;<span itemprop="name">A mathematical theory of communication</span>.<i>
+    <span itemprop="about">The Bell system technical journal</span>,&#32;27(3)</i>.&#32;<span itemprop="pagination">379–423</span>.</span>
+
+
+
+
+</span></span>)</span>
 </p>
 <p>Therefore, the above term is usually called the formal definition of entropy. Instead of the binary logarithm, the natural logarithm is often used to express entropy. The resulting unit is called nats instead of bits.</p>
 <p>$\mathbb H(X) = \sum_{x \in \mathcal X} - p_X(x) \log(p_X(x))$</p>
@@ -389,13 +415,15 @@ Note that if you add the size of the LLMs themselves into the compression rate, 
 <p>In-context learning describes the phenomenon where LLMs  learn from the information inside the context window and generate relevant responses based on the context provided within a single input sequence. Unlike traditional models that rely on extensive training with labeled datasets, in-context learning allows models to adapt and respond to new tasks using examples in the prompt. Essentially, the model leverages the information in the context window to perform tasks without requiring additional training.</p>
 <p>Here we also provide a brief example where we tried to teach the language model Mistral 7B that war is good.</p>
 <hr>
-<p>(TODO add screenshoooot)
-In this screenshot, you see the control prompt for Mistral 7B and its text competition.</p>
+<p><img loading="lazy" src="/figures/screenshot_control.png" alt="targets"  title="b"  />
+</p>
+<p>In this screenshot, you see the control prompt for Mistral 7B and its text completion. The fact, that the language model did not complete the text with such a neutral statement about war might stem from the way, in which that LLM was trained, such that balanced responses are more promoted as Suvrit Sra told me.</p>
 <hr>
-<p>(TODO add screenshoooot)
-In this screenshot, you see how the in-context window was provided with information that should teach the LLM that war is good.</p>
+<p><img loading="lazy" src="/figures/screenshot_test.png" alt="targets"  title="a"  />
+</p>
+<p>In this screenshot, you see how the in-context window was provided with information that should teach the LLM that war is good.</p>
 <hr>
-<h2 id="results-and-methodology-of-the-work-hahahugoshortcode29s4hbhb">Results and Methodology of the Work: 
+<h2 id="results-and-methodology-of-the-work-hahahugoshortcode41s4hbhb">Results and Methodology of the Work: 
 
 
 
@@ -683,7 +711,7 @@ Therefore if $M$ grows to infinity maybe the OBE will learn $\psi$ from $H_M^T$,
 <p>In the rest of this section, we will present derived expressions for $\mathcal L_{M,T}$ that provide insights into how easy or hard it is to estimate model parameters if the data was generated as discussed. Then we derive from this result an expression of the in-context error $\mathbb L_\tau := \frac{1}{\tau} \sum_{t=0}^{\tau-1} \mathbb E \ln \mathbb P(X_{t+1}^{(M+1)}| H_t^{(M+1)})$, where $\tau$ is the length of the in-context document.</p>
 <p>Firstly we discuss two information theoretic results of $\mathcal L_{M,T}$.</p>
 <hr>
-<h4 id="theorem-jeon32-hahahugoshortcode29s10hbhb">Theorem Jeon.3.2 (
+<h4 id="theorem-jeon32-hahahugoshortcode41s10hbhb">Theorem Jeon.3.2 
 
 
 
@@ -725,7 +753,7 @@ Therefore if $M$ grows to infinity maybe the OBE will learn $\psi$ from $H_M^T$,
 
 
 </span></span>)</span>
-)</h4>
+</h4>
 <p>$\mathcal L_{M,T} = \dfrac{\mathbb I(H_T^{(M)};\theta)}{MT}$</p>
 <p>(I adapted the original theorem very slightly as the adaption fits better into this post.)</p>
 <hr>
@@ -740,7 +768,7 @@ Therefore if $M$ grows to infinity maybe the OBE will learn $\psi$ from $H_M^T$,
 <p>This equation means, roughly speaking, that the estimation error consists of these parts in $\theta$ that are conveyed to $H_T^{(M)}$. For example, as we often model $\theta$ as a continuous random variable and $H_T^{(M)}$ as a discrete random variable, $H_T^{(M)}$ can not contain all information in $\theta$.</p>
 <p>As in the previous section, we have worked out a way to separate $\theta = \theta_1, &hellip;\theta_m$ into two independent random variables, namely $\theta|\psi$ and $\psi$, we continue by expressing $\mathcal L_{M,T}$ with these two random variables.</p>
 <hr>
-<h4 id="theorem-jeon42-hahahugoshortcode29s11hbhb">Theorem Jeon.4.2 (
+<h4 id="theorem-jeon42-hahahugoshortcode41s11hbhb">Theorem Jeon.4.2 
 
 
 
@@ -782,7 +810,7 @@ Therefore if $M$ grows to infinity maybe the OBE will learn $\psi$ from $H_M^T$,
 
 
 </span></span>)</span>
-)</h4>
+</h4>
 <p>$\mathcal L_{M,T} = \underbrace{\dfrac{\mathbb I(H_T^{(M)};\psi)}{MT}}_\text{meta
 estimation error} + \underbrace{\dfrac{\mathbb I(D_m;\theta_m|\psi)}{T}}_\text{intra document estimation error}$</p>
 <hr>
@@ -925,7 +953,7 @@ As $ (D_1, \theta_1),&hellip;, (D_M, \theta_m) | \psi$ are identically distribut
 
 
 </span></span>)</span>
-, at which we will look in this section, would be an upper bound  for any distribution of the parameters of the transformers. In Section (Does independence suffice for an upper bound of estimation error?), we further discuss this question.</p>
+, at which we will look in this section, would be an upper bound for any distribution of the parameters of the transformers. In Section (Does independence suffice for an upper bound of estimation error?), we further discuss this question.</p>
 <p>Let&rsquo;s present their results.</p>
 <p>Let</p>
 <ul>
@@ -948,7 +976,7 @@ As $ (D_1, \theta_1),&hellip;, (D_M, \theta_m) | \psi$ are identically distribut
 <p>Given this transformer setup, they defined to be the parameters in the matrices $A_l$ to be distributed iid from $\mathcal N(0,1)$ and the parameters of the value matrices $V^{(l)}$ iid from $\mathcal N(0,1/r)$.</p>
 <p>For the single sequence of tokens and single random transformer parametrized $\theta$ as described above they could show this upper bound for the estimation error $\mathcal L_T = \dfrac{\mathbb I(X_T;\theta)}{T}$:</p>
 <hr>
-<h4 id="therorem-jeon35-hahahugoshortcode29s15hbhb">Therorem Jeon.3.5 (
+<h4 id="therorem-jeon35-hahahugoshortcode41s15hbhb">Therorem Jeon.3.5 
 
 
 
@@ -990,12 +1018,12 @@ As $ (D_1, \theta_1),&hellip;, (D_M, \theta_m) | \psi$ are identically distribut
 
 
 </span></span>)</span>
-)</h4>
+</h4>
 <p>If $X_1,&hellip;,X_T$ is generated by the above-defined transformer environment, then</p>
 <p>$$\mathcal L_T \leq \dfrac{pL\ln(136 \text e K^2) + p \ln(\frac{2KT^2}{L})}{T}$$</p>
 <p>, where $p = 2r^2(L-1) + (dr + r^2)$ denotes the parameter count of the transformer.</p>
 <hr>
-<p>This theorem does not only convey meaning for the case in which $X_1, &hellip;, X_T$ is generated as described above by a not well-known (=random) transformer, but also how much &ldquo;learned information&rdquo; a transformer can transmit per token to someone who doesn&rsquo;t know the parameters of the transformer.  This result could be compared to the results of (
+<p>This theorem does not only convey meaning for the case in which $X_1, &hellip;, X_T$ is generated as described above by a not well-known (=random) transformer, but also how much &ldquo;learned information&rdquo; a transformer can transmit per token to someone who doesn&rsquo;t know the parameters of the transformer.  This result could be compared to the results of 
 
 
 
@@ -1034,7 +1062,7 @@ As $ (D_1, \theta_1),&hellip;, (D_M, \theta_m) | \psi$ are identically distribut
 
 
 </span></span>)</span>
-) for fully connected neural networks and other models to get insight into which architectures can learn how many bits of information. In order to be properly compared, the results of (
+ for fully connected neural networks and other models to get insight into which architectures can learn how many bits of information. In order to be properly compared, the results of 
 
 
 
@@ -1073,9 +1101,9 @@ As $ (D_1, \theta_1),&hellip;, (D_M, \theta_m) | \psi$ are identically distribut
 
 
 </span></span>)</span>
-) have to be adapted a bit to the same in and outputs.</p>
+ have to be adapted a bit to the same in and outputs.</p>
 <p>For the case in which there are $M$ training documents and there is a sparse mixture of trasformers $\theta^{(1)}, &hellip;, \theta^{(n)}$ another result for the upper bound of the estimation error $\mathbb L_{M,T} = \dfrac{\mathcal I(H_{M,T};\psi)}{MT} + \dfrac{\mathbb I(D_m;\theta_m|\psi)}{T}$.</p>
-<h4 id="theorem-jeon45-hahahugoshortcode29s18hbhb">Theorem Jeon.4.5 (
+<h4 id="theorem-jeon45-hahahugoshortcode41s18hbhb">Theorem Jeon.4.5 
 
 
 
@@ -1117,7 +1145,7 @@ As $ (D_1, \theta_1),&hellip;, (D_M, \theta_m) | \psi$ are identically distribut
 
 
 </span></span>)</span>
-)</h4>
+</h4>
 <p>If $D_1,&hellip;,D_M $ is generated by the above-defined sparse mixture of transformers, then</p>
 <p>$\mathcal L_T \leq
 \dfrac{pR\ln(1+\frac{M}{R} )\ln(136 \text{e} K^2) }{MT} + \dfrac{pR\ln(1+\frac{M}{R}) \ln(\frac{2KMT^2}{L})}{MT}+ \dfrac{\ln(N)}{T}$</p>
@@ -1386,7 +1414,35 @@ Lemma B.1 and B.2 showed that for any random sequence, we find a way to express 
 
 
 <span class="hugo-cite-intext"
-        itemprop="citation">(<span style="background-color: #f00; color: #fff;">No matching key was found for `jeon2024scale` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#jeon2024scale"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Hong Jun"><span itemprop="familyName">Jeon</span></span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Benjamin"><span itemprop="familyName">Van Roy</span></span>,&#32;<span itemprop="datePublished">2024</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Jeon</span>,&#32;
+    <meta itemprop="givenName" content="Hong Jun" />
+    H.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Van Roy</span>,&#32;
+    <meta itemprop="givenName" content="Benjamin" />
+    B.</span>
+  &#32;
+    (<span itemprop="datePublished">2024</span>).
+  &#32;<span itemprop="name">Information-theoretic foundations for neural scaling laws</span>.<i>
+    <span itemprop="about">arXiv e-prints</span></i>.&#32;<span itemprop="pagination">arXiv–2407</span>.</span>
+
+
+
+
+</span></span>)</span>
  and possibly in 
 
 
@@ -1476,7 +1532,35 @@ Lemma B.1 and B.2 showed that for any random sequence, we find a way to express 
 
 
 <span class="hugo-cite-intext"
-        itemprop="citation">(<span style="background-color: #f00; color: #fff;">No matching key was found for `jeon2024scaling` in the references. Please make sure to provide an available ID in your `bib.json` file.</span>)</span>
+        itemprop="citation">(<span class="hugo-cite-group">
+
+          <a href="#jeon2024scale"><span class="visually-hidden">Citation: </span><span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Hong Jun"><span itemprop="familyName">Jeon</span></span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><meta itemprop="givenName" content="Benjamin"><span itemprop="familyName">Van Roy</span></span>,&#32;<span itemprop="datePublished">2024</span></a><span class="hugo-cite-citation"> 
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Jeon</span>,&#32;
+    <meta itemprop="givenName" content="Hong Jun" />
+    H.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Van Roy</span>,&#32;
+    <meta itemprop="givenName" content="Benjamin" />
+    B.</span>
+  &#32;
+    (<span itemprop="datePublished">2024</span>).
+  &#32;<span itemprop="name">Information-theoretic foundations for neural scaling laws</span>.<i>
+    <span itemprop="about">arXiv e-prints</span></i>.&#32;<span itemprop="pagination">arXiv–2407</span>.</span>
+
+
+
+
+</span></span>)</span>
 , seems promising to me. I didn&rsquo;t look at these papers in such detail to have an established opinion about it, but I will, after my exams, update the blog post accordingly.</p>
 <h1 id="references">References<a hidden class="anchor" aria-hidden="true" href="#references">#</a></h1>
 
@@ -1534,6 +1618,44 @@ Lemma B.1 and B.2 showed that for any random sequence, we find a way to express 
     (<span itemprop="datePublished">2024</span>).
   &#32;<span itemprop="name">An information-theoretic analysis of in-context learning</span>.<i>
     <span itemprop="about">arXiv preprint arXiv:2401.15530</span></i>.</span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="jeon2024scale">
+        <dt>
+          Jeon&#32;&amp;&#32;Van Roy
+
+          
+          (2024)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Jeon</span>,&#32;
+    <meta itemprop="givenName" content="Hong Jun" />
+    H.</span>&#32;&amp;&#32;<span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Van Roy</span>,&#32;
+    <meta itemprop="givenName" content="Benjamin" />
+    B.</span>
+  &#32;
+    (<span itemprop="datePublished">2024</span>).
+  &#32;<span itemprop="name">Information-theoretic foundations for neural scaling laws</span>.<i>
+    <span itemprop="about">arXiv e-prints</span></i>.&#32;<span itemprop="pagination">arXiv–2407</span>.</span>
 
 
 
@@ -1696,6 +1818,42 @@ Lemma B.1 and B.2 showed that for any random sequence, we find a way to express 
   <a href="https://doi.org/10.4249/scholarpedia.1658"
      itemprop="identifier"
      itemtype="https://schema.org/URL">https://doi.org/10.4249/scholarpedia.1658</a></span>
+
+
+
+
+</dd>
+
+      </div>
+
+      <div id="shannon1948mathematical">
+        <dt>
+          Shannon
+
+          
+          (1948)</dt>
+
+        <dd>
+          
+
+
+
+
+
+
+
+
+
+
+<span itemscope
+      itemtype="https://schema.org/Article"
+      data-type="article"><span itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="familyName">Shannon</span>,&#32;
+    <meta itemprop="givenName" content="Claude Elwood" />
+    C.</span>
+  &#32;
+    (<span itemprop="datePublished">1948</span>).
+  &#32;<span itemprop="name">A mathematical theory of communication</span>.<i>
+    <span itemprop="about">The Bell system technical journal</span>,&#32;27(3)</i>.&#32;<span itemprop="pagination">379–423</span>.</span>
 
 
 
