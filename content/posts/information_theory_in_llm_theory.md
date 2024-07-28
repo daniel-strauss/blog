@@ -380,8 +380,8 @@ $A^i$ can be seen as the set of all words of length $i$ over alphabet/token set 
 
 #### Definition:
 Let $K \in \mathbb N$ and $\Sigma$ an alphabet.
- - $s_K: \Sigma^* \mapsto \Sigma^[K]$, is the suffix of length $K$ of a word. E.g. $s_2(\text{CAR}) = \text{AR}$
-  - $p_K: \Sigma^* \mapsto \Sigma^[K]$, is the prefix of length $K$ of a word. E.g. $s_2(\text{CAR}) = \text{CA}$
+ - $s_K: \Sigma^* \mapsto \Sigma^{[K]}$, is the suffix of length $K$ of a word. E.g. $s_2(\text{CAR}) = \text{AR}$
+  - $p_K: \Sigma^* \mapsto \Sigma^{[K]}$, is the prefix of length $K$ of a word. E.g. $s_2(\text{CAR}) = \text{CA}$
 
 ---
 
