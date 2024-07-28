@@ -9,43 +9,43 @@ Author: Daniel Strauß, Supervisor: Suvrit Sra
 
 TODO rewrite thetas, random theta: big, constant theta small
 
-TODO: when you reference them say "they", when you reference you say "we"
+TODO: when you reference them, say "they", when you reference you say "we"
 
-TODO correct all sentences with gramarly
+TODO correct all sentences with Grammarly
 
 ## Introduction
 
-In this blog post, you will first learn about information theory and we will look at one example application of information theory in LLM theory. Then, we will look at one paper in detail that specifically examines the phenomenon of in-context learning by making assumptions about the probability distribution of the training data. Next, we will carefully examine the assumptions made in that paper. To do that well, we will prove some of our own statements based on the results of that paper.
+In this blog post, you will first learn about information theory, and we will look at one example of the application of information theory in LLM theory. Then, we will look at one paper in detail that specifically examines the phenomenon of in-context learning by making assumptions about the probability distribution of the training data {{< cite "jeon2024information" >}}. Next, we will carefully examine the assumptions made in that paper. To do that well, we will prove some of our own statements based on the results of that paper.
 
-- The authors called for further analysis on how a transformer can implement a sparse mixture of transformers. In this blog post, we prove that a transformer cannot implement a sparse mixture of transformers.
-- Furthermore, we prove that any discrete autoregressive distribution can be modeled such that the estimation error is zero and such that the estimation error equals the entropy of the distribution. We discuss this result and state our opinion on how to use this result to better interpret the estimation error.
+- The authors called for further analysis of how a transformer can implement a sparse mixture of transformers. In this blog post, we prove that a transformer cannot implement a sparse mixture of transformers.
+- Furthermore, we prove that any discrete autoregressive distribution can be modeled both such that the estimation error defined in that paper is zero and that the estimation error equals the entropy of the distribution. We discuss this result and state our opinion on how to use this result to better interpret the estimation error.
 
-### A Brief Introduction on Information Theory
+### A Brief Introduction to Information Theory
 
 ![targets](/figures/venn_information.png "Assumptio Sparse Mixture") 
 
  
 
-Imagine you lived $40\cdot n$ years in the future and that the population has doubled every $40$ years. For simplicity assume that in the current present just one person is alive. Conclusively $2^n$  people live at your point in the future. You live very far in the future and $n$ is very large $n=2^{10^{15}}$. "Today" is your friends birthday party and you dont have a present. 
+Imagine you lived 40⋅n40\cdot n years in the future and the population has doubled every 40 years. For simplicity, assume that in the current present, just one person is alive. Conclusively 2n2^n  people live at your point in the future. You live very far in the future and nn is very large $n=2^{10^{15}}$. "Today" is your friends birthday party and you dont have a present. 
 
 Therefore you decide to hire last minute a mathgician for his party as mathagicians are know to let partys go wild with their magic and math. 
-In order to hire the mathgician you have to put in your friends one petabit ($=10^{15}$ bits) long address into the website of the mathgician-firm, such that he can find the location of the party. (The address is one petabit long as in the future every inhabitant has his own address, and there are $n$ people.) At the party the mathgician shows up and everyone has a good time. But then suddenly you start to wonder:
+In order to hire the mathgician you have to put in your friends one petabit (=1015=10^{15} bits) long address into the website of the mathgician-firm, such that he can find the location of the party. (The address is one petabit long as in the future every inhabitant has his own address, and there are nn people.) At the party the mathgician shows up and everyone has a good time. But then suddenly you start to wonder:
 
-You only have a 1Gbit/s upload speed (hardware did not improve so much in the last $40\cdot2^{10^{15}}$ years), how have you been able to upload $10^{15}$ bits (one PentaBit) within just one day? This seems impossible as it takes $10^6$ seconds to upload one PentaBit with your network speed. Then you find out why: the website did not have to send $10^{15}$ bits of information to its server. Small parts of the information have already been known by the server; For example the information that people in your region are more likely to order a magician for someone in the same galaxy was already present on their server. 
+You only have a 1Gbit/s upload speed (hardware did not improve so much in the last $40\cdot2^{10^{15}}years),howhaveyoubeenabletoupload years), how have you been able to upload 10^{15}bits(onePentaBit)withinjustoneday?Thisseemsimpossibleasittakes bits (one PentaBit) within just one day? This seems impossible as it takes 10^6secondstouploadonePentaBitwithyournetworkspeed.Thenyoufindoutwhy:thewebsitedidnothavetosend seconds to upload one PentaBit with your network speed. Then you find out why: the website did not have to send 10^{15}$ bits of information to its server. Small parts of the information have already been known by the server; For example the information that people in your region are more likely to order a magician for someone in the same galaxy was already present on their server. 
 Could they have used that information to such that they required less bits of information from you, such that your computer had to send them a smaller amount of bits? How can something seeming as soft as information influence something as hard as a bit-sequence length? What is the math behind this?
 
 
 Information theory is mainly the study on expressing the quantity of information called Entropy. Entropy of an information is the minimal expected amount of a quantity like bits required to encode this information.
 
-One can show, that the entropy $\mathbb H$ in bits of a discrete random variable $X$ with a known probability density function $p_X$ is
+One can show, that the entropy H\mathbb H in bits of a discrete random variable XX with a known probability density function pXp_X is
 
 $\mathbb H(X) = \sum_{x \in \mathcal X} - p_X(x) \log_2(p_X(x)) = \mathbb E[-\log_2 X]$. {{<cite "shannon1948mathematical">}}
 
 Therefore the above term is usually referred as the formal definition of entropy. Often instead of the binary logarithm the natural logarithm is used to express entropy. The resulting unit is called nats instead of bits. 
 
-$\mathbb H(X) = \sum_{x \in \mathcal X} - p_X(x) \log(p_X(x))$
+H(X)=∑x∈X−pX(x)log(pX(x))\mathbb H(X) = \sum_{x \in \mathcal X} - p_X(x) \log(p_X(x))
 
-The entropy of continoous random variables is infinity, as they can have infinetly many outcomes (TODO provide source). But the differential entropy $\bold h$ of a continous random variable. (TODO explain use of diferential entropy)
+The entropy of continoous random variables is infinity, as they can have infinetly many outcomes (TODO provide source). But the differential entropy \boldh\bold h of a continous random variable. (TODO explain use of diferential entropy)
 
 
 $\bold h(X) = \mathbb E[-\log(X)]$
@@ -54,12 +54,12 @@ $\bold h(X) = \mathbb E[-\log(X)]$
 Information theory provides several expressions for how the information of different random variables relate.  This is useful in many different scenarios. (<- TODO example)
 Definition:
 
-- Joint Entropy: $\mathbb H(X,Y) := \mathbb H((X,Y))$
+- Joint Entropy: H(X,Y):=H((X,Y))\mathbb H(X,Y) := \mathbb H((X,Y))
 - Conditional Entropy: $\mathbb H(X|Y) := \mathbb E[(y \to \mathbb H(X|Y=y))(Y)] = \sum_{y \in \mathcal Y} p_y(y) \sum_{x \in \mathcal X} p_{X|Y=y}(x) - \log(p_{X|Y=y}(x))$ (<- todo chec correct)
-- Mutual Information: $\mathbb I(X;Y) := \mathbb H(X) - \mathbb H(X|Y)$
+- Mutual Information: I(X;Y):=H(X)−H(X|Y)\mathbb I(X;Y) := \mathbb H(X) - \mathbb H(X|Y)
 
 
-$\mathbb H(X,Y)$ is just the entropy of the joint variable $(X,Y)$. $\mathbb H(X|Y)$ is the expected entropy of $X$ if $Y$ is known. And $\mathbb I(X;Y)$ completes the elements of the ven diagram. It is the expected gain of information on $X$ (with gain of information I mean reduction of entropy) if $Y$ is known and vice versa, as mutual information is kommutative (see TODO insert venn diagramm). 
+H(X,Y)\mathbb H(X,Y) is just the entropy of the joint variable (X,Y)(X,Y). H(X|Y)\mathbb H(X|Y) is the expected entropy of XX if YY is known. And I(X;Y)\mathbb I(X;Y) completes the elements of the ven diagram. It is the expected gain of information on XX (with gain of information I mean reduction of entropy) if YY is known and vice versa, as mutual information is kommutative (see TODO insert venn diagramm). 
 
 
 These terms act aditively as described by image TODO.
@@ -136,18 +136,18 @@ Figure 1: The model of {{< cite "jeon2024information" >}} of the training data f
 
 In this paragraph we will formally state the probabilistic model of {{< cite "jeon2024information" >}} for the generation of the training data and in-context window of LLMs.
 
-We denote the $M$ as the number of training documents and the training documents with $\lbrace D_1,...D_M\rbrace$. $D_i$ is the sequence of tokens in the i'th document. $H_{m,t} := (D_1,...,D_{m-1}, X_1^{(m)},...,X_t^{(m-1)}) $ is an abreviation for the sequence of tokens created by the tokens in the first $m-1$ documents and the first $t$ tokens in the $m$'th document. $D_{M+1}$ denotes in-context document.
+We denote the MM as the number of training documents and the training documents with {D1,...DM}\lbrace D_1,...D_M\rbrace. DiD_i is the sequence of tokens in the i'th document. $H_{m,t} := (D_1,...,D_{m-1}, X_1^{(m)},...,X_t^{(m-1)}) isanabreviationforthesequenceoftokenscreatedbythetokensinthefirst is an abreviation for the sequence of tokens created by the tokens in the first m-1documentsandthefirst documents and the first ttokensinthe tokens in the m′thdocument.'th document. D_{M+1}$ denotes in-context document.
 
-We say the distributions of $\lbrace D_1,...D_{M+1}\rbrace$ can described by autoregressive models (as are transformers) that are parametrized by the random vectors $\lbrace \theta_1,...,\theta_m \rbrace$. We pack for practicality all parameter vectors into one $\theta := \lbrace \theta_1,...,\theta_m \rbrace$
+We say the distributions of {D1,...DM+1}\lbrace D_1,...D_{M+1}\rbrace can described by autoregressive models (as are transformers) that are parametrized by the random vectors {θ1,...,θm}\lbrace \theta_1,...,\theta_m \rbrace. We pack for practicality all parameter vectors into one θ:={θ1,...,θm}\theta := \lbrace \theta_1,...,\theta_m \rbrace
 
-The authors wanted to model $\theta_1,...,\theta_m $ such that they have some universal common information, which can be stored in a random variable $\psi$. This means that the sequence $\theta_1,...,\theta_m | \psi$ shall be iid. 
+The authors wanted to model θ1,...,θm\theta_1,...,\theta_m  such that they have some universal common information, which can be stored in a random variable ψ\psi. This means that the sequence θ1,...,θm|ψ\theta_1,...,\theta_m | \psi shall be iid. 
 
-Additionally $\psi$ shall not contain information about any $\theta_m$ that could not be deducted from enough samples of $\theta_i$,   $D_m \bot \psi | \theta$. Since we sayd $\theta_1,...,\theta_m | \psi$ shall be iid, it holds  $D_m \bot \psi | \theta \iff D_m \bot \psi | \theta_m$. (<- not peer reviewed)
+Additionally ψ\psi shall not contain information about any θm\theta_m that could not be deducted from enough samples of θi\theta_i,   Dm⊥ψ|θD_m \bot \psi | \theta. Since we sayd θ1,...,θm|ψ\theta_1,...,\theta_m | \psi shall be iid, it holds  Dm⊥ψ|θ⟺Dm⊥ψ|θmD_m \bot \psi | \theta \iff D_m \bot \psi | \theta_m. (<- not peer reviewed)
 
 (<- Check if this is correct) 
-How can the random sequence $\theta_1,...,\theta_m$ be modeled to satisfy that constraint in such a way, that the distributions of $\theta_1,...,\theta_m$ and $\psi$ are well enough defined. In {{< cite "jeon2024information" >}} the authors came up with the clever solution for satisfying these constraints. They defined a random set of $N$ randomly initialized autoregressive models $T = \lbrace \theta^{(1)},..., \theta^{(N)} \rbrace$, where $N$ is an unknown number. Then they defined a random assignment of Documents and autoregresive models in T parametrized by random random distribution $\alpha \sim \text{Dirichlet}(N, (R/N, ..., R/N))$, with $R<<N$. $\alpha$ defines for a random autoregressive model $\theta^{(n)}$ its probability to be assigned for Documents. For the case, in which the autoregressive models where transformers, $\theta^{(n)}$ represented a vector of gaussian independently distributed variables, describing the wheight parameters. The smaller the values in the parameter-tuple $(R/N,...,R/N)$ of the Dirichlet distribution, the more sparse the distribution. 
-So now we can finally define $\psi := (\alpha, \theta^{(1)}, ..., \theta^{(n)} )$. Note that $\theta_m | \psi$ is a discrete random variable with at most $N$ outcomes, therefore its entropy has an upper bound of $\log N$.
-Therefore if $M$ grows to infinity maybe the OBE will learn $\psi$ from $H_M^T$, e.g. $\log N \geq \mathbb H(\theta_{M+1} | \psi) \approx \mathbb H(\theta_{M+1}|H_M^T)$ and this may result in a logaritmic upper bound for the estimation error of $\theta_{M+1}|H_M^T$. You wonder what the estimation error is? This will be formaly definded in the next Paragraph. On top of that the previous claim will be formally evaluated in the next paragraph.
+How can the random sequence θ1,...,θm\theta_1,...,\theta_m be modeled to satisfy that constraint in such a way, that the distributions of θ1,...,θm\theta_1,...,\theta_m and ψ\psi are well enough defined. In {{< cite "jeon2024information" >}} the authors came up with the clever solution for satisfying these constraints. They defined a random set of NN randomly initialized autoregressive models T={θ(1),...,θ(N)}T = \lbrace \theta^{(1)},..., \theta^{(N)} \rbrace, where NN is an unknown number. Then they defined a random assignment of Documents and autoregresive models in T parametrized by random random distribution α∼Dirichlet(N,(R/N,...,R/N))\alpha \sim \text{Dirichlet}(N, (R/N, ..., R/N)), with R<<NR<<N. α\alpha defines for a random autoregressive model θ(n)\theta^{(n)} its probability to be assigned for Documents. For the case, in which the autoregressive models where transformers, θ(n)\theta^{(n)} represented a vector of gaussian independently distributed variables, describing the wheight parameters. The smaller the values in the parameter-tuple (R/N,...,R/N)(R/N,...,R/N) of the Dirichlet distribution, the more sparse the distribution. 
+So now we can finally define ψ:=(α,θ(1),...,θ(n))\psi := (\alpha, \theta^{(1)}, ..., \theta^{(n)} ). Note that θm|ψ\theta_m | \psi is a discrete random variable with at most NN outcomes, therefore its entropy has an upper bound of logN\log N.
+Therefore if MM grows to infinity maybe the OBE will learn ψ\psi from HTMH_M^T, e.g. logN≥H(θM+1|ψ)≈H(θM+1|HTM)\log N \geq \mathbb H(\theta_{M+1} | \psi) \approx \mathbb H(\theta_{M+1}|H_M^T) and this may result in a logaritmic upper bound for the estimation error of θM+1|HTM\theta_{M+1}|H_M^T. You wonder what the estimation error is? This will be formaly definded in the next Paragraph. On top of that the previous claim will be formally evaluated in the next paragraph.
 
 
 You might remember that earlier in this chapter I said that the authors assumed, that all training data has been generated by a transformer. And now I suddently presented a sparse mixture of transformers instead of a transformer. This is because in the conclusion the authors said, that they hope, how further mathematical analysis will be able to describe how a transformer can implement a sparce mixtrue of transformers. In Section "Can a transformer implement a sparse mixture of transformers?" (TODO add link finish proof), we show that a transformer can not approximate a sparse mixture of transformers. (But espilon appoximate if d grows to infinity?) 
@@ -159,30 +159,30 @@ So actually they made this assumption, but this assumption might be made in the 
 
 ### Results without making assumptions about the bayesian prior 
 
-In this paragraph we outline the results {{< cite "jeon2024information" >}} drew from this models of data generation, by analyzing the optimal bayesian estimator $\hat P$ for the probability distribution of $X^{(m)}_{t+1}$ given $H_t^{(m)}$.  
+In this paragraph we outline the results {{< cite "jeon2024information" >}} drew from this models of data generation, by analyzing the optimal bayesian estimator ˆP\hat P for the probability distribution of X(m)t+1X^{(m)}_{t+1} given H(m)tH_t^{(m)}.  
 
-The optimal bayesian estimator is  defined to be  the estimator for the probability $P$ that minimizes this loss function:
+The optimal bayesian estimator is  defined to be  the estimator for the probability PP that minimizes this loss function:
 
 $\mathbb L_{M,T}(P) = \frac{1}{TM} \sum_{m=1}^{M} \sum_{t=0}^{T-1} \mathbb E[ - \ln P(H_t^{(m)})(X_{t+1}^{(m)})]$
 
-A little remark on the expression $P(H_t^{(m)})(X_{t+1}^{(m)})$: $P$ is a function that takes in an event like $H_t^{(m)}$, and returns a function, namely an estmated distribution for $X_{t+1}^{(m)}$. Therefore there are two braket pairs after $P$ in the above equation. 
+A little remark on the expression $P(H_t^{(m)})(X_{t+1}^{(m)}):: Pisafunctionthattakesinaneventlike is a function that takes in an event like H_t^{(m)},andreturnsafunction,namelyanestmateddistributionfor, and returns a function, namely an estmated distribution for X_{t+1}^{(m)}.Thereforetherearetwobraketpairsafter. Therefore there are two braket pairs after P$ in the above equation. 
 
-In {{< cite "jeon2024information" >}} it was shown, that $\hat P(H_t^{(m)}) = (x \to \mathbb P[X_{t+1}^{(m)} = x|H_t^{(m)}])$ (If $X$ is not discrete the left equation has to be expressed slightly differently). 
+In {{< cite "jeon2024information" >}} it was shown, that $\hat P(H_t^{(m)}) = (x \to \mathbb P[X_{t+1}^{(m)} = x|H_t^{(m)}])(If (If X$ is not discrete the left equation has to be expressed slightly differently). 
 
 Let's denote the loss of the minimal bayesian optimizer with $\mathbb L_{M,T} := \mathbb L_{M,T}(\hat P) = \frac{1}{TM} \sum_{m=1}^{M} \sum_{t=0}^{T-1} \mathbb E[ - \ln \mathbb P[X_{t+1}^{(m)}|H_t^{(m)}]]$.
 
-As autoregressive models such as transformers define a probability distribution one can not predict a sequence of tokens they generate with probability 1, even if one knows all of their parameters $\theta$ (Expect of course if they are deterministic autoregressive models).  This means that $\mathbb H(H_T^{(M)}|\theta)$, e.g. the hardness of predicting the sequence even if the autoregressive model is known, has a value above 0 and might grow to infinity with T or M. The Authors named this error "the irreducible error". As we are interessted in how hard it is to estimate not the series of tokens itself, but their distribution, the error $\mathcal L_{M,T} = \mathbb L_{M,T} - \dfrac{\mathbb H(H_T^{(M)}|\theta)}{MT}$ will be more insightfull in our exploration.
+As autoregressive models such as transformers define a probability distribution one can not predict a sequence of tokens they generate with probability 1, even if one knows all of their parameters θ\theta (Expect of course if they are deterministic autoregressive models).  This means that H(H(M)T|θ)\mathbb H(H_T^{(M)}|\theta), e.g. the hardness of predicting the sequence even if the autoregressive model is known, has a value above 0 and might grow to infinity with T or M. The Authors named this error "the irreducible error". As we are interessted in how hard it is to estimate not the series of tokens itself, but their distribution, the error LM,T=LM,T−H(H(M)T|θ)MT\mathcal L_{M,T} = \mathbb L_{M,T} - \dfrac{\mathbb H(H_T^{(M)}|\theta)}{MT} will be more insightfull in our exploration.
 They call this error "estimation error".
 
 
-In the rest of this section we will present derived expressions for $\mathcal L_{M,T}$, that provide insights in how easy or hard it is to estimate model parameters, if the data was generated as discussed. Then we derive from this result an expression of the in-context error $\mathbb L_\tau := \frac{1}{\tau} \sum_{t=0}^{\tau-1} \mathbb E \ln \mathbb P(X_{t+1}^{(M+1)}| H_t^{(M+1)})$, where $\tau$ is the length of the in-context document.
+In the rest of this section we will present derived expressions for LM,T\mathcal L_{M,T}, that provide insights in how easy or hard it is to estimate model parameters, if the data was generated as discussed. Then we derive from this result an expression of the in-context error Lτ:=1τ∑τ−1t=0ElnP(X(M+1)t+1|H(M+1)t)\mathbb L_\tau := \frac{1}{\tau} \sum_{t=0}^{\tau-1} \mathbb E \ln \mathbb P(X_{t+1}^{(M+1)}| H_t^{(M+1)}), where τ\tau is the length of the in-context document.
 
-Firstly we discuss two information theoretic results of $\mathcal L_{M,T}$. 
+Firstly we discuss two information theoretic results of LM,T\mathcal L_{M,T}. 
 
 ----
 #### Theorem Jeon.3.2 ({{< cite "jeon2024information" >}})
 
-$\mathcal L_{M,T} = \dfrac{\mathbb I(H_T^{(M)};\theta)}{MT}$
+LM,T=I(H(M)T;θ)MT\mathcal L_{M,T} = \dfrac{\mathbb I(H_T^{(M)};\theta)}{MT}
 
 
 (I adapted the original theorem very slightly as the apaption fits better into this post.)
@@ -190,7 +190,7 @@ $\mathcal L_{M,T} = \dfrac{\mathbb I(H_T^{(M)};\theta)}{MT}$
 ----
 #### Proof:
 
-We know $\mathbb H(X) = \mathbb H(X|Y) + \mathbb I(X;Y)$, therfore it suffices to show that $\mathbb L_{M,T} \cdot MT = \mathbb H(H_T^{(M)})$. This is true since:
+We know H(X)=H(X|Y)+I(X;Y)\mathbb H(X) = \mathbb H(X|Y) + \mathbb I(X;Y), therfore it suffices to show that LM,T⋅MT=H(H(M)T)\mathbb L_{M,T} \cdot MT = \mathbb H(H_T^{(M)}). This is true since:
 
 $\sum_{m=1}^{M} \sum_{t=0}^{T-1} \mathbb E[ - \ln \mathbb P[X_{t+1}^{(m)}|H_t^{(m)}]] = \mathbb E[-\ln \prod_{m=1}^{M} \prod_{t=0}^{T-1} \mathbb P[X_{t+1}^{(m)}|H_t^{(m)}]] \overset{a)}{=} \mathbb E[-\ln  \mathbb P[H_T^{(M)}]]= \mathbb H(H_T^{(M)})$
 
@@ -203,12 +203,12 @@ Disclaimer: This is my own version of the proof, I dont guarantee correctness.
 
 ----
 
-As an intermediate result of the proof we obtained $\mathbb L_{M,T}  = \dfrac{\mathbb H(H_T^{(M)})}{MT}$. Thus we can see $\mathbb L_{M,T}$ as the average entropy per token.
+As an intermediate result of the proof we obtained LM,T=H(H(M)T)MT\mathbb L_{M,T}  = \dfrac{\mathbb H(H_T^{(M)})}{MT}. Thus we can see LM,T\mathbb L_{M,T} as the average entropy per token.
 
 
-This equation means roughly speaking, that the estimation error consits of these parts in $\theta$, that are conveyed to $H_T^{(M)}$. For example as we often model $\theta$ as a continous random variable and $H_T^{(M)}$ as a discrete random variable, $H_T^{(M)}$ can not contain all information in $\theta$. (<- be more clear)
+This equation means roughly speaking, that the estimation error consits of these parts in θ\theta, that are conveyed to H(M)TH_T^{(M)}. For example as we often model θ\theta as a continous random variable and H(M)TH_T^{(M)} as a discrete random variable, H(M)TH_T^{(M)} can not contain all information in θ\theta. (<- be more clear)
 
-As in previous section, we have worked out a way to separate $\theta = \theta_1, ...\theta_m$ into two independent random variables, namely $\theta|\psi$ and $\psi$, we continue by expressing $\mathcal L_{M,T}$ with these two random variables. 
+As in previous section, we have worked out a way to separate θ=θ1,...θm\theta = \theta_1, ...\theta_m into two independent random variables, namely θ|ψ\theta|\psi and ψ\psi, we continue by expressing LM,T\mathcal L_{M,T} with these two random variables. 
 
 
 ----
