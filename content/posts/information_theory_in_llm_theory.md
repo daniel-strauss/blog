@@ -2,16 +2,25 @@
 title: Some Information Theoretic Perspectives on LLM Theory
 bibFile: data/bibliography.json # path relative to project root
 ---
+Author: Daniel Strauß, Supervisor: Suvrit Sra
 
 ⚠️ 📥 😚 🛡 🚦 👹 🌿 *By reading this blogpost, you will find out, why this emoji sequence is here.*
 
 
 TODO rewrite thetas, random theta: big, constant theta small
 
+TODO: when you reference them say "they", when you reference you say "we"
+
+TODO correct all sentences with gramarly
+
 ## Introduction
 
 In this Blogpost you will first learn about information theory and we will look at one example application of information theory in llm theory. Then we will look at one paper in detail, that looked specifically at the phenomenon of in-context learning by making assumptions about the probability distribution of the training data.
-Then we will carefully examine the assumptions made in that paper. To do that well we will proof some of our own statements, to get more insight into the validity of these assumptions. Specifically we show a) that a transformer can not implement a sparse mixture of transformers and b) that any discrete autoregressive distribution, can be both modeled, such that the estimation error is zero and, such that the estimation error equals the entropy of the distribution.
+Then we will carefully examine the assumptions made in that paper. To do that well we will proof some of our own statements, based on the results of that paper. 
+
+- The authors pledged for further anaylisis on how a transformer can implement a sparce mixture of transformers.
+In this blogpost we proof, that a transformer can not implement a sparse mixture of transformers.
+- Furthermore we proof, that any discrete autoregressive distribution, can be both modeled, such that the estimation error is zero and, such that the estimation error equals the entropy of the distribution. We discuss this result and state our opinion  on how to use this result to better interpret the estimation error
 
 
 ### A Brief Introduction on Information Theory
@@ -69,9 +78,9 @@ Please note that on Wikipedia equivalent but different definitions of these term
 
 
 
-## Data Compression and LLMs
+### Data Compression and LLMs
 
-As one might be able deduct from the definition of entropy made in previous Section, there is a strong link between data compression and information theory. Entropy of an information source is the amount of bits its optimal lossless compression holds on average. Basically ever since humanity developed new lossles compression techniques to express the same data with less bits. To do that, modeling the probability space, that generates the data, well is helpfull. In several work neural networks as transformers or other architectures have been used to compress data and ahieved good performances. <!--- in the online (Bellard, 2021; Mao et al., 2022) and offline settings (Valmeekam et al., 2023).-->
+As one might be able deduct from the definition of entropy made in previous Section, there is a strong link between data compression and information theory. Entropy of an information source is the amount of bits its optimal lossless compression holds on average. Basically ever since humanity developed new lossles compression techniques to express the same data with less bits. To do that, modeling the probability space, that generates the data, well is helpfull. In several work neural networks as transformers or other architectures have been used to compress data and ahieved good performances. <!--- in the online (Bellard, 2021; Mao et al., 2022) and offline settings (Valmeekam et al., 2023).--> As data compresson and data generation usually both rely on having some kind of representation of the datas probability distribution data generators, seem to be well suited for data compression.
 
 
 Also in {{< cite "deletang2024language" >}} the performance of several LLMs as lossles data compressors has been evaluated. They did not only test the performance of LLMs on the compression of text data, but also on image and audio data. Interestingly the compresion rates of LLMs, such as of Llama 2 (7B) and of Chinchilla 70B, outperformed PNG on the compression on image data, and FLAC on the compression on audio data. 
@@ -148,7 +157,6 @@ You might remember that earlier in this chapter I said that the authors assumed,
 
 So actually they made this assumption, but this assumption might be made in the future once it has been prooven that a transformer can implement a sparce mixtre of transformers.
 
-(TODO proof that a sparse mixture of transformers with fiven transformers has an infinite horizon)
 
 ## Results for in-context learning
 
@@ -180,7 +188,7 @@ Firstly we discuss two information theoretic results of $\mathcal L_{M,T}$.
 $\mathcal L_{M,T} = \dfrac{\mathbb I(H_T^{(M)};\theta)}{MT}$
 
 
-(I adapted the original theorem slightly as the apaption fits better into this explanation.)
+(I adapted the original theorem very slightly as the apaption fits better into this post.)
 
 ----
 #### Proof:
@@ -235,7 +243,7 @@ As $ (D_1, \theta_1),..., (D_M, \theta_m) | \psi$ are identically distributed, f
 
 
 
-(<- proof not peer reviewed)
+
 QED  
 
 
@@ -293,7 +301,7 @@ $$\mathcal L_T \leq \dfrac{pL\ln(136 \text e K^2) + p \ln(\frac{2KT^2}{L})}{T}$$
 
 
 
-For the case in which there are $M$ training documents and there is a sparse mixture of trasformers $\theta^{(1)}, ..., \theta^{(n)}$ another result for the upper bound of the estimation error $\mathcal L_{M,T} = \dfrac{\mathcal I(H_{M,T};\psi)}{MT} + \dfrac{\mathcal I(D_m;\theta_m|\psi)}{M}$.
+For the case in which there are $M$ training documents and there is a sparse mixture of trasformers $\theta^{(1)}, ..., \theta^{(n)}$ another result for the upper bound of the estimation error $\mathbb L_{M,T} = \dfrac{\mathcal I(H_{M,T};\psi)}{MT} + \dfrac{\mathbb I(D_m;\theta_m|\psi)}{T}$.
 
 
 #### Theorem Jeon.4.5 ({{< cite "jeon2024information" >}})
@@ -310,15 +318,32 @@ $\mathcal L_T \leq
 ---------
 
 
-(TODO talk about rate distortion error bounds?)
+As said in {{< cite "jeon2024information" >}} the first two terms relate to learning $\psi$, e.g. to $\dfrac{\mathbb I(H_{M,T};\psi)}{MT}$.
+The third part relates to learning, which transformer of the mixture was generating the document, e.g. $\dfrac{\mathbb I(D_m;\theta_m|\psi)}{T}$. As we can see the first two parts converge to zero with a large number of training documents $M$. The upper bount is indebendent of $N$ due to the ditrichilet assumption; As $N$ grows, the ditrichilet parameter $R/N$ becomes smaler and the mixture more sparse. Regarding the third part, I think it might be not too difficult to find a lower upper bound. As $\theta_m|\psi \sim \alpha$, calculating the average entropy of $\theta_m|\psi$ as an upper bound for the in-context error might be not to impossible and due to the sparcity I am sure that it will be lower than $\ln N$.
+
+
+
+What do these results tell us about in-context learning? The in-context error $\mathbb L_\tau$ is defined to be the error of the optimal bayesian estimator of predicting the in-context Document $D_{M+1}$ after having observed all other documents, where $\tau<K$ is the lenght of the in-context document.
+
+$\mathbb L_\tau := \frac{1}{\tau} = \sum_{t=0}^{\tau-1} \mathbb \mathbb E[- log P[X^{(M+1)}_{t+1}| D_t^{M+1} ]$
+
+Then we denote the irreducible error as $\mathcal L_\tau := \mathbb L_\tau - \dfrac{\mathbb H[D_{M+1}|\theta^{(M+1)}]}{\tau}$.
+
+----
+#### Theorem Jeon.4.7
+
+$\mathcal L_\tau \leq \dfrac{\mathbb I[H_{M,T};\psi}{M\tau} + \dfrac{\mathbb I(D_{M+1}; \theta_{M+1}|\tau)}{\tau}$.
+
+----
+
+From Theorem Jeon.4.5 we know that the first term will converge to zero with large amount of training data $M$ for the saprce mixtrue of transformers assumption.
+For this assumption the right-hand term will be upper bounded by $\log(N)/\tau$, as only the model from the sparce mixtrue has to be distinguished. If $\log(N)/\tau$ is a low number of nats, then the sparse mixture assumption can explain, how in-context learning works well. In the next chapter we will discuss these assumptions. 
 
 
 ## Discusion of their Assumptions {#discussion-assumptions}
 
 ### Can we assume the existance of a transformer, generating all training documents
 
-- transformers can imitate every upper bounded finite horizon am model
-- but they cant imitate infinite horizon documents
 
 ----
 
@@ -362,50 +387,101 @@ Two makrov-chains $M_1 = (P_1,V)$ and $M_2 = (P_2,V)$ are called **deterministic
 
 ----
 
+In lemma A we show, that in order to express the probability space of a non-deterministic mixture of two makrov chains, one needs an unbounded knotext length. This means there can not be a finite knotext length model that implements the probability space a non deterministic mixture of two markov chains. 
+
 #### Lemma A: 
-Let $M_1 = (P_1,V)$ and $M_2 = (P_2,V)$ be not dd but irreducible and finite makrov chains, $P_1 \neq P_2$ and $\theta \in (0,1)$. Let $x_0,X_1,X_2...$ be a random sequence in $V$, where $x_0$ is constant and the distribution of $x_0, X_1, ... $ follows with probability $\theta$, $M_1$ and with probability $1-\theta$, $M_2$. Then there is $t*$ such that for infinite $t>t*$ the finite horizon $d$ optimal bayesian estimator $\mathbb P(X_{t+1}|X_{t-d+1}, X_{t-d+2} ..., X_t)$ does not equal the unbounded optimal bayesian estimator $ \mathbb P(X_{t+1}|X_1, ..., X_t) $.
+Let $m_1 = (P_1,V)$ and $m_2 = (P_2,V)$ be not dd but irreducible and finite makrov chains, $P_1 \neq P_2$ and $p_1 \in (0,1)$. 
+The random markov chain $M$ is with probability $p_1$, $m_1$ and with probability $1-p_1$, $m_2$. 
+Let $x_0,X_1,X_2...$ be a random sequence in $V$, where $x_0 \in V$ is constant and the distribution of $x_0, X_1, ... $ is described by $M$. 
 
-(TODO maybe you can replace irreduciblt with something weaker)
-TODO make this : we assume M_theta = M_1 more formal somehow, TODO define more clearley what doe not equal 
+Then for any context length $K \in \mathbb N$:
+
+$ \lim_{T \to \infty} \mathbb P[\exists_{t<T}.\left(\mathbb P[X_{t+1}|H_{t-K:t}] \neq \mathbb P[X_{t+1}|H_t] \right)] = 1 $, 
+
+where $H_{a:b} = X_a, X_{a+1}, ..., X_b$.
+
+
 #### Proof: 
-We cdenote the random markov cahin, that is $M_1$ with probability $\theta$ and otherwise $M_2$, with $M_\theta$. We first show two statemetns:
-- a) Probability of $M_\theta = M_1$ grows with t to one given sequenze H_t and if $M_1 = M_\theta$
-- b) Probability of $M_\theta = M_1$ less than one, given t is less than one.
 
-- a) $\lim_{t \to \infty} \mathbb P[M_\theta = M_1 | H_t] = 1$, if we assume $M_\theta = M_1$
-- b)  For all $t \in \mathbb N$ it holds: $\mathbb P[M_\theta = M_1 | H_t] < 1$, if we assume $M_\theta = M_1$
+We first simplify the term $\mathbb P[X_{t+1}|H_{a:t}]$ using the markov assumption:
 
+$\mathbb P[X_{t+1}|H_{a:t}] = \mathbb P[M=m_1|H_{a:t}] \mathbb P[X_{t+1}|X_t, m_1] + \mathbb P[M=m_2|H_{a:t}] \mathbb P[X_{t+1}|X_t, m_2]$
 
+To increase readiblity we denote: $p_{1|H_a} := \mathbb P[M=m_1|H_{a:t}]$ and arrive at:
 
-##### Proof of a)  
+$\mathbb P[X_{t+1}|H_{a:t}] = p_{1|H_a} P_1(X_t, X_{t+1}) + (1-p_{1|H_a}) P_2(X_t, X_{t+1})$
 
 
-Since $P_1 \neq P_2$ there must be $(x,y)\in V^2$, such that $P_1((x,y)) \neq P_2((x,y))$. Let $T_i$ denote the random variable that $M_\theta$ visits $x$ for the $i$'th time. As $M_1$ and $M_2$ are irreducible and finite for $i \in \mathbb N$, $T_i$ is finite with probability 1. (TODO proof, argument?) Note that $X_{T_i}(\omega) = x$. For convenience we denote $p_1 := P_1(x,y)$ and $p_2 := P_2(x,y)$.
+Know we can simplify this expression:
 
-Notice that the sequence $X_{T_1 +1}, X_{T_2 +1}, ... | M_\theta$ is iid. To make our life even more easier we define the binomial variable $Y_i = \bold 1[X_{T_i + 1} = y]$. Now $Y_1, Y_2... $ is an infinite sequence of coinflips, that land with probability $\theta$ with probability $p_1$ on heads and with probability $1-\theta$ with probability $p_2$ on heads.
+$ \lim_{T \to \infty} \mathbb P[\exists_{t<T}.\left(\mathbb P[X_{t+1}|H_{t-K:t}] \neq \mathbb P[X_{t+1}|H_t] \right)] = 1 $ 
 
-Let $A_t = \bold 1 [|\dfrac{S_y}{t} - p_1| < |\dfrac{S_y}{t} - p_2|] $
+$\iff  \lim_{T \to \infty} \mathbb P[\exists_{t<T}. (p_{1|H_{(t-K)}} P_1(X_t, X_{t+1}) + (1-p_{1|H_{(t-K)}}) P_2(X_t, X_{t+1}) \neq $
+
+$p_{1|H_{0}} P_1(X_t, X_{t+1}) + (1-p_{1|H_{0}}) P_2(X_t, X_{t+1}))  ]=1$ 
 
 
-$A_t \to_{a.s.} 1$ iif $M_1 = M_\theta$ (todo show)
 
-proof of a) finished
+$\iff  \lim_{T \to \infty} \mathbb P[\exists_{t<T}. (p_{1|H_{(t-K)}} (P_1(X_t, X_{t+1})  - P_2(X_t, X_{t+1})) \neq $
 
-##### Proof of b)
+$p_{1|H_{0}} (P_1(X_t, X_{t+1}) - P_2(X_t, X_{t+1})))  ]=1$ 
+
+
+
+$\overset{a)}{\impliedby}  \lim_{T \to \infty} \mathbb P[\exists_{t<T}.\forall_{t*>t}. (p_{1|H_{(t*-K:t*)}}  \neq p_{1|H_{0:t*}} )  ] = 1$ 
+
+Implication a)  followed from the fact that with probbility 1 there are infinetly many $t$, such that $P_1(X_t, X_{t+1}) \neq P_2(X_t, X_{t+1})$. This is true since $m_1$ and $m_2$ are ireducible.
+
+
+In order to show the sufficient statement $\lim_{T \to \infty} \mathbb P[\exists_{t<T}.\forall_{t*>t}. (p_{1|H_{(t*-K:t*)}}  \neq p_{1|H_{0:t*}} )  ] = 1$, we will show two things:
+
+- A) $\lim_{t \to \infty} p_{1|H_{0:t}} (= \lim_{t \to \infty} \mathbb P(m_1 | H_t)) \in \{0,1\}$
+- B) For every word $h_K \in V^K$ that can appear in the markov process, e.g. $\exists_t .\mathbb P(H_{t-K:t} = h_K) > 0$ and for every $t$: $p_{1|h_K} := \mathbb P(m_1 | h_k) \in (0,1) $
+
+As there are only finitely many possibilites for $h_k$, from B) follows, that there mus exist $\epsilon > 0$, such that $p_{1|h_K} \in [0+\epsilon, 1-\epsilon]$. From this fact and A) we can conclude the suffitient statement on the righthandside of a).
+
+
+
+
+##### Proof of A)  
+
+
+Since $P_1 \neq P_2$ there must be $x,y\in V$, such that $P_1(x,y) \neq P_2(x,y)$. Let $T_i$ denote the random variable for the i'th time in which $M$ visits x. As $m_1$ and $m_2$ are irreducible and finite for $i \in \mathbb N$, $T_i$ is finite with probability 1. Note that $\mathbb P[X_{T_i} = x] = 1$. For convenience we denote $p^{(1)} := P_1(x,y)$ and $p^{(2)} := P_2(x,y)$.
+
+Notice that the sequence $X_{T_1 +1}, X_{T_2 +1}, ... | M$ is iid. To make our life easier we define the binomial variable $Y_i = \bold 1[X_{T_i + 1} = y]$. Now $Y_1, Y_2... $ is an infinite sequence of coinflips, that land with probability $p_1$ with probability $p^{(1)}$ on heads and with probability $1-p_1$ with probability $p^{(2)}$ on heads.
+
+Let wlog $p_1 > p_2$. Let $g = (p_1 +p_2)/2$.
+
+$\lim_{t\to\infty}\mathbb P[M = m_1|H_t] \in \{0,1\}$
+
+$\impliedby \lim_{n\to\infty}\mathbb P[M = m_1|\frac{\sum^n Y_i}{n} > g] \in \{0,1\}$
+
+
+$\impliedby \lim_{n\to\infty}\mathbb P[\frac{\sum^n Y_i}{n} > g|M = m_1] \dfrac{p_1}{\mathbb P[\frac{\sum^n Y_i}{n} > g]} \in \{0,1\}$
+
+
+$\impliedby \lim_{n\to\infty} 1 \dfrac{p_1}{ p_1 } \in \{0,1\}$
+
+proof of A) finished
+
+##### Proof of B)
 
 Broof by induction:
-Assume $M_1 = M_\theta$, assume for $t \in \mathbb N$ it holds: $\mathbb P[M_\theta = M_1 | H_t] = p_t < 1$.
 
-Then $\mathbb P[M_\theta = M_1 | H_t, X_{t+1}] = \dfrac{\mathbb P[M_\theta = M_1|H_t]}{\mathbb P[ X_{t+1}| H_t]}\mathbb P[X_{t+1} | M_\theta = M_1,H_t] $
+Induction base: Let $t_0 \in \mathbb N$:
+As $m_1$ and $m_2$ are not dd $\mathbb P[m_1 = M | ()] \in (0,1)$
 
-$= \dfrac{p_t P_1(X_t, X_{t+1})}{p_tP_1(X_t, X_{t+1}) + (1-p_t)P_2(X_t, X_{t+1})} <1$
+Induction step: Assume for $0<k< K$, that $\mathbb P[m_1 = M | H_{t_0:t_0+k}] =: p_t \in (0,1)$. Let $t := t_0+k$.
+
+Then $\mathbb P[m = M_1 | H_{t_0:t}, X_{t+1}] = \mathbb P[X_{t+1} | M = m_1,H_{t_0:t}] \dfrac{\mathbb P[M = m_1|H_{t_0:t}]}{\mathbb P[ X_{t+1}| H_{t_0:t}]} $
+
+$= \dfrac{p_t P_1(X_t, X_{t+1})}{p_tP_1(X_t, X_{t+1}) + (1-p_t)P_2(X_t, X_{t+1})} \overset{a)}{\in} (0,1)$
 
 
-Proof of b) finished.
+Because $m_1$ and $m_2$ are not dd $P_1(X_t, X_{t+1}) \in (0,1]$ and $P_2(X_t, X_{t+1}) \in (0,1]$, hence a).
 
-(todo make limit more formal, make this whole block below more formal!!)
-As we know from a) $\lim_{t\to \infty} \mathbb P(X_{t+1}|H_t) = \lim_{t\to \infty} \mathbb P(X_{t+1}|H_t, M_\theta = M_1) = \lim_{t \to \infty} P(X_{t+1}|X_t, M_\theta = M_1) = P_1((X_{t+1},X_t))$. (<- be more formal)
-But we also know from b) (TODO deal with non existance of d in b))that there is $0<p_t < 1$, s.t. $\lim_{t \to \infty} \mathbb P(X_{t+1}|X_{t-d+1},...,X_t ) = \lim_{t \to \infty} p_t \cdot P_1(X_t, X_{t+1}) + (1-p_t) \cdot P_2(X_t, X_{t+1})$. And as defined in the lemma there is x,y such that $P_1(x,y) \neq P_2(x,y)$ 
+Proof of B) finished.
+
 
 QED
 
@@ -413,52 +489,46 @@ QED
 
 Lemma A means the resulting probability distribution of $x_0, X_1, ... $ made in this simple construction can not be expressed by any finite horizon AM model, such as a transformer
 
-----
-
-#### Hypothesis B: 
-when d grows to infinity posterior distribution can be epsilon approximated
-
-Proof: Left out
 
 ----
+#### Definition: 
+If an autoregressive model with kontext length $K$, $f:\Sigma^K \to \mathcal P_\Sigma $ has the property that $\forall_{h \in \Sigma^{[d]}, x \in \Sigma}f(h)(x)>0$, we call $f$ unrestricted.
 
-#### Corolary of lemma A: 
-An upper bounded context $d_1$ length Transformer $T$ can not express the probability distribution a non-deterministic mixture of two transformers $(R,J)$ (Romeo and Juliett).
+----
+
+#### Theorem A.2: 
+An upper bounded context $K_t$ length Transformer $T$ can not express the probability distribution a non-deterministic mixture of two unrestricted transformers $(R,J)$ (Romeo and Juliett) with the same token set $\Sigma$ with probability one.
 
 #### Proof: 
-We start by showing the possibility of a reduction: Any discrete autoregressive distribution over alphabet $\Sigma$ with horizon $d$, $f:\Sigma^{[d]} \to \mathcal P_{|\Sigma|}$ can be express by an equivalent Markov chain $M=(V_m,P_m)$, where $V_m = \Sigma^{[d]}$. With equivalent it is meant that the new random model, has the same irreducible error, and the same bayesian estimation error (todo be formal about what you mean with equivalent (equivalen with respekt to obe), explain meaning of f!)
-To achieve the epuivalent markov chain, we construct $P_m$ like this: given $w \in \Sigma^{[d]}$, $x \in \Sigma$ and $f(w)(x) = p$, $P_m((w, s_1(w) \circ x)) = p$. If a transition $(a,b) \in V_m$ has not defined in the previous sentence (e.g. $s_1(a) \neq p_1(b)$), then its porbability is zero $P_m((a,b)) = 0$.
+We start by showing the possibility of a reduction: Any discrete autoregressive distribution $f$ over alphabet $\Sigma$ with context length $K$, $f:\Sigma^{[K]} \to \mathcal P_{|\Sigma|}$, can be expressed by an finite Markov chain $m=(V_m,P_m)$, where $V_m = \Sigma^{[K]}$. We also show, if $f$ is unrestricted, then $f$ can be expressed by an irreducible makrov chain.
 
-(TODO: adapt to new version of lemma A, e.g. chains are not dd and irreducible)
-Therefore there exists an equivalent markov chain $M_R=(V,P_R)$  of $R$ and $M_J$ analogously of $J$. By lemma A the distribution of a non-deterministic mixture of $M_R$ and $M_J$ can not be approximated by a bounded optimal bayesian optimizer. But as the parameters of $T$ has context length $d$ it can only express distributions of auto regressive models with horizons of at most $d$. Thus $T$ can not implement the non-deterministic misxture of R and J.
+(TODO deal with this K+i shit, somehow allow different kontext lengths)
 
+We construct $P_m$ like this: given $h \in \Sigma^{[K+i]}$, $x \in \Sigma$ and $f(s_K(h))(x) = p$, $P_m((h, s_{K-1}(h) \circ x)) = p$. If a transition $(a,b) \in V_m$ has not defined in the previous sentence (e.g. $s_{K-1}(a) \neq p_{K-1}(b)$), then its porbability is zero $P_m((a,b)) = 0$. Know by construction the $f$ can be fully expressed by $m$:
+$f(h)(x) = P_m(h, s(h) \circ x)$. If $f$ is unrestricted it will generate any possible sequence of length $K$ with positive probability.
+Therefore $m$ is irreducible.
+
+Let $K$ be the maximum context lenght of R or J and let $m_R = (\Sigma^{[K]}, P_r)$ be the equivalent makrov chain of R and $m_J=(\Sigma^{[K]}, P_j)$ the equivalent makrov chain of $J$.
+
+
+Let $X_1,X_2...$ be expressed, by a non deterministic mixture of $R$ and $J$.
+Lets suppose $T$ could express the probability distribution of this sequence, e.g. $\forall_{t \in \mathbb N} T(H_t)(X_{t+1}) = \mathbb P(X_t|H_t)$. 
+a) Then for $t=K_t$, $T$ implements the function $T(H_K)(X_{K_t+1}) = \mathbb P(X_{K_t + 1}|H_K)$.  
+b) As $T$ has kontext length $K_t$ it must hold that $T(h)(x) = T(s_{K_t}(h))(x)$. 
+From a) and b) follows, that for all $t$, we have $T(H_t)(X_{t+1}) = T(s_K(H_t))(X_{t+1}) = \mathbb P[X_{t+1}| H_{t-K:t}]$.
+
+From lemma A we shall conclude: $ \lim_{T' \to \infty} \mathbb P[\exists_{t<T'}.\left(T(H_t)(X_{t+1}) \neq \mathbb P[X_{t+1}|H_t] \right)] = 1 $
 
 QED 
 
 ----
-
-#### Corolary of corolary of lemma A: 
-An upper bounded context $d_1$ length Transformer $T$ can not express the probability distribution a non-deterministic mixture of n transformers $\{J_1,...,J_n\}$ for any n>2.
-
-#### Proof (TODO)
-
-Assume ad absurdum: asumme n>0 exists, st a mixture of n fhAms can be implemented by an fhAM.
-TODO finish proof
-  - reduction of determening of fhAM_a, fhAM_b to determening n fhAMs.
-  - generate n-2 random fhAMs (fhAM_2, ..., fhAM_n), and generate sequence of tokens with p=0.5 by (fhAM_a, fhAM_b) and with 0.5 percent by (fhAM_2, ..., fhAM_n) 
-  - this would mean after d tokens obe must know whether it is fhAM_a and fhAM_b or not
-  - given that obe knows 
-
- (TODO in definition of non deterministic mixture) (Romeo and Juliett).
-
-QED
-
-----
+Note that Theorem A.2 doesn't hold, if we have a series of transformers with context window growing to infinity. 
 
 #### Comments: 
-We assumed in corolarry of Lemma A that R,J take every next token with positive probability. This assumption was necessary for the corrolary to be true in general. Imagine R would give for a word $w$ to be followed by a letter $x$ the probability zero and T not. Then the optimal estimator would disguise T as soon as x would follow after w. Does that mean it stays plausible that for a non deterministic mixture of tansfoermes, that are limited to only taking one of the k most likely letters as the next one,  to be implemented as one transformer. I believe only yes, if all parameters of R and J are perfektly well known. As soon there is some ambiguity in there parameters, suddenlty we can not be exactly sure wich one is among the top k next tokens and suddently again all tokens could appear with positve probability. But thats only a believe and I do not provide any qualitative argument on that.
+We assumed in Theorem A.2 that R,J are unrestricted, e.g. that they take every next token with positive probability. This assumption was necessary for the Theorem to be true to be true in general. Imagine R would give for a word $w$ to be followed by a letter $x$ the probability zero and T not. Then the optimal estimator would disguise T as soon as x would follow after w. Does that mean it stays plausible that for a non deterministic mixture of transfoermes, that are limited to only taking one of the k most likely letters as the next one,  to be implemented as one transformer. I believe only yes, if all parameters of R and J are perfektly well known. As soon as there is some ambiguity in these parameters, suddenlty we can not be exactly sure wich one is among the top k next tokens and suddently again all tokens could appear with positve probability. But thats only a believe and I do not provide any qualitative argument on that.
 
-Also if we assume that 
+
+Eventhough a sparce mixture of Transformers can not be implemented by a finite horizon Transformer, in my opinion this does not reduce the plausibility  of assuming that training data was generated by a sparce mixture of transformers as was done in {{< cite "jeon2024information" >}}. I think this as in my opinion the finite horizon can not capture all details of the text document distribution, as we saw in (todo ref). But it could also be a simplification that doesnt hurt in some scenarios, as is ignoring relativity, when designing an elevator. 
 
 
 ### Does independence suffice for an upper bound of estimation error?
@@ -468,7 +538,7 @@ Lets suppose there was a transformer, that could generate all training documents
 Now we want to find an upper bound of the estomation error of the obe, but we dont know the bayesian prior, we just
 -->
 
-Lets suppose our training ducuments had all an upper bound length T, such that there would be a transformer being able to express their distribution, as we assume that the class of transformers can imitate any finite horizon distribution. Lets also assume that for any of these distributions there is a transformer with upper and lower bounded parameters $[-a,a]$.
+Lets suppose our training ducuments had all an upper bound length $T$, such that there would be a transformer being able to express their distribution, as we assume that the class of transformers can imitate any finite horizon distribution. Lets also assume that for any of these distributions there is a transformer with upper and lower bounded parameters $[-a,a]$.
 
 Now here comes the question: can we use this insight to find an upper bound for any optimal bayesian estimator assitiated to any prior bayesian assumption?
 
@@ -476,34 +546,24 @@ As transformers can express any distribution within our frame and if we start to
 
 If we would find that upper bound, then we would have found an upper bound, which holds independent of the bayesian prior and we would never have to worry again if your assumptions are valid!!! So here is why it fails:
 
-
-As the parameter space is bounded $[-a,a]$, the highes entropy would be from $\theta \sim \text{unif}([-a,a])^n$ e.g. all thetas iid. Lets call this $\Theta$
-
-Intuitively if using $A_t(\Theta)$, should work to create the highest bayesian error, then for any $A_x(\Theta)$ this should work as well as there is nothing special with transfomers. $A_x$ could be like $A(\Theta)$ but first convert all thetas to gaussians. 
-
-
-Probabilitstik correct answer:
-since we have a finite horizon T and a finite alphabet $\Sigma$, we have a finitely large space of outcomes. Let $\mathbb X$ be such a random token.
-Thus the problem can be reduced to estimating a bernoulli dsitribution.
-(Is it estimating a berounlli distribution, or estimating a distribution of bernoulli distriution)
-
-The estimation error comes down to
-
-$\mathbb I[\mathbb X; \Theta]$ (upper bound log(d)T)
+Let $\mathcal P_{\Sigma}$ the set of all probability distributions over tokenset $\Sigma$.
+Let $\mathcal P_{T} = \\{ \Sigma^{[T-1]} \to P_\Sigma \\}$ the set of all autoregressive probability distributions with $T$ tokens. 
+An element in $\mathcal P_{T}$ can be seen to take in a sequnce of tokens and to return the probability distribution for the next token.
 
 
-argmax distribution of theta $\mathbb I[\mathbb X; \Theta] = \mathbb H[\mathbb X] - \mathbb H[\mathbb X | \Theta]$
 
-<!-- see the whole context space as one character -->
+We call $A: \mathbb R^n \to P_T$ an autoregressive model. If a model $A$ is surjective, we call $A$ a full autoregressive model, since it can parametrize all autoregressive distributions. For parameters $\theta$, we call $A(\theta)$ a parametrized model.
 
-Be aware that H(X) is not indepenent on the distribution of theta.
+Let $A_t$ represet the transformer architecture, such that $A_t(\theta)$ is a transformer parametrized with $\theta$. $A_t(\theta)(h)(x)$ is then the probability with which this parametrized transformer predicts $x$ after having observed the token sequence $h$. 
 
-explain why problem is ultra hard to solve, explain on easy example. 
+As the parameter space is bounded $[-a,a]$, the highest diferential entropy would come from the prior $\Theta \sim \text{unif}([-a,a])^n$ where all parameters are iid.
+
+Intuitively if using $A_t(\Theta)$, should work to create the highest bayesian error, then for any full model $A_x(\Theta)$ this should work as well as there is nothing special with transfomers, as Suvrit Sra put it. For example $A_x$ could be like $A_t(\Theta)$ but first convert $\Theta$ to a gaussian vector. 
+
+As we assumed $A_t$ to be full, the outcome with the highest bayesian error should actually be the entropy of the uniform independent sequence over $\Sigma$ of length $T$, which is $T \cdot \log(d)$, being a higher upper bound as in Theorem Jeon.3.5, which means that a randomly initialized transformer does create a uniform independent token sequence. 
 
 
-X itself is the hardest to estimate if it is uniform distributed. But if we know that X is uniform distributed, then estimation error is minimal. 
-if estimation error is bigger than zero, interesstingly X is not for sure uniform distrivuted (if we kew for sure X was uniform distributed then estimation error was zero, as we would then have no uncertainty about distribution)). Does this observation challenge the meaning of the estimation error? Maybe we should not go about maximizing the estiamtion error?
-
+Assuming the training data was generated by an full autoegressive model with random parameters, can be a good assumption to simplify further mathematical analysis and maybe it is not too off, in order to produce results with well meaning and close bounds. Sill choosing random transformers as full autoregressive model, may be a bit arbitrary and I think that further justification would be helpfull to add validity.  
 
 ### What is the meaning of the estimation error
 
@@ -551,7 +611,7 @@ If we model $H_T \sim A_f(\theta_0)$, then $\mathbb H(\theta_0) = 0$ and therefo
 QED
 
 ----
-I hope this made people, who say that in-context learning is not learning because parameters are not getting updated, think.
+I hope reading this  made people, who say that in-context learning is not learning because parameters are not getting updated, think.
 (TODO write this down in a good way.)
 In Lemma B.1 we found, that we can do such a shitty job when trying to  find a model to express a posterior dstribution, that by looking at the data and updating our model parameters accordingly we will never be able to describe the posterior distribution more precise with the updated parameters, the more tokens we observe, e.g. we will never have to update them. (Still the model would become better at predicting the distribution by observing it, but that information would not be stored in updated model parameters.)
 
@@ -610,7 +670,7 @@ Lemma B.1 and B.2 showed that for any random sequence, we find a way to express 
 
 ## Conclusion
 
-In this blog post we discussed the basics of information theory and presented an example application for data compression with LLMs. Then we discussed the work of Jeon et al 2024 (insert reference), which aimed at finding an explanation for in-context learning through assumptions on the data generating process. We then discussed the paper and challenged the idea of assuming the data-generation process was made by transformers. We also provided qualitative arguments on that the estimation error says more about a model of data generation, than it says about the distribution of data itself.  Therefore I think that further work has to be done in this analysis to gain insights that are more meaningfull. On the other hand using the information theoretic tool of the estimation error, for analysing neural architectures and scaling laws, as was done in (todo add references), seem promising to me. I didnt look at these papers at such detail to have an established opinion about it, but I will after my exams and update the blogpost accordingly.
+In this blog post we discussed the basics of information theory and presented an example application for data compression with LLMs. Then we discussed the work of {{< cite "jeon2024information" >}} , which aimed at finding an explanation for in-context learning through assumptions on the data generating process. We then discussed the paper and challenged the idea of assuming the data-generation process was made by transformers. We also provided qualitative arguments on that the estimation error says more about a model of data generation, than it says about the distribution of data itself.  Therefore I think that further work has to be done in this analysis to gain insights that are more meaningfull. On the other hand using the information theoretic tool of the estimation error, for analysing neural architectures and scaling laws, as was done in (todo add references), seem promising to me. I didnt look at these papers at such detail to have an established opinion about it, but I will after my exams and update the blogpost accordingly.
 
 # References
 {{< bibliography >}} 
