@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Daniels Blog</title>
-    <link>http://localhost:1313/</link>
+    <link>https://strammermax27.github.io/</link>
     <description>Recent content on Daniels Blog</description>
     <generator>Hugo -- 0.128.2</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://strammermax27.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Some Information Theoretic Perspectives on LLM Theory</title>
-      <link>http://localhost:1313/posts/information_theory_in_llm_theory/</link>
+      <link>https://strammermax27.github.io/posts/information_theory_in_llm_theory/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/information_theory_in_llm_theory/</guid>
+      <guid>https://strammermax27.github.io/posts/information_theory_in_llm_theory/</guid>
       <description>Author: Daniel Strauß, Supervisor: Suvrit Sra
 🍳 😯 🔲 📥 🚤 🌧 By reading this blogpost, you will find out why this emoji sequence is here.
 Introduction In this blog post, you will first learn about information theory, and we will look at one example of the application of information theory in LLM theory. Then, we will look at one paper in detail that specifically examines the phenomenon of in-context learning by making assumptions about the probability distribution of the training data.</description>
