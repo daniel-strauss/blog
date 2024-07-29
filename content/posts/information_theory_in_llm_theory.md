@@ -100,13 +100,14 @@ Here we also provide a brief example where we tried to teach the language model 
 ![targets](/figures/screenshot_control.png "b") 
 
 
-In this screenshot, you see the control prompt for Mistral 7B and its text completion. The fact, that the language model did not complete the text with such a neutral statement about war might stem from the way, in which that LLM was trained, such that balanced responses are more promoted as Suvrit Sra mentioned.
+In this screenshot, you see the control prompt for Mistral 7B and its text completion. The fact, that the language model did not complete the text with such a neutral statement about war might stem from the way, in which that LLM was trained, such that balanced responses are more promoted as Suvrit Sra mentioned. Website: textsynth.com
 
 ----
 
 ![targets](/figures/screenshot_test.png "a") 
 
-In this screenshot, you see how the in-context window was provided with information that should teach the LLM that war is good.
+In this screenshot, you see how the in-context window was provided with information that should teach the LLM that war is good. Website: textsynth.com
+
 
 ---
 
@@ -381,7 +382,7 @@ $A^i$ can be seen as the set of all words of length $i$ over alphabet/token set 
 #### Definition:
 Let $K \in \mathbb N$ and $\Sigma$ an alphabet.
  - $s_K: \Sigma^* \mapsto \Sigma^{[K]}$, is the suffix of length $K$ of a word. E.g. $s_2(\text{CAR}) = \text{AR}$
-  - $p_K: \Sigma^* \mapsto \Sigma^{[K]}$, is the prefix of length $K$ of a word. E.g. $s_2(\text{CAR}) = \text{CA}$
+  - $p_K: \Sigma^* \mapsto \Sigma^{[K]}$, is the prefix of length $K$ of a word. E.g. $p_2(\text{CAR}) = \text{CA}$
 
 ---
 
@@ -474,7 +475,7 @@ Proof by induction:
 Induction base: Let $t_0 \in \mathbb N$ the point in time of the first observation:
 As $H_{t_0:t_0-1}$ is the empty word, we know $\mathbb P[m_1 = M | H_{t_0:t_0-1}] =  \mathbb P[m_1 = M] = p_1 \in (0,1)$
 
-Induction step: Assume for $0\leqk< K$, that $\mathbb P[m_1 = M | H_{t_0:t_0+k}] =: p_t \in (0,1)$. Let $t := t_0+k$.
+Induction step: Assume for $0\leq k< K$, that $\mathbb P[m_1 = M | H_{t_0:t_0+k}] =: p_t \in (0,1)$. Let $t := t_0+k$.
 
 Then $\mathbb P[m = M_1 | H_{t_0:t}, X_{t+1}] = \mathbb P[X_{t+1} | M = m_1,H_{t_0:t}] \dfrac{\mathbb P[M = m_1|H_{t_0:t}]}{\mathbb P[ X_{t+1}| H_{t_0:t}]} $
 
