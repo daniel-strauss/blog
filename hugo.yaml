@@ -1,4 +1,4 @@
-baseURL: "https://strammermax27.github.io/"
+baseURL: "https://daniel-strauss.github.io/blog/"
 languageCode: "en-us"
 title: "Blog of Daniel Strauss"
 theme: [PaperMod,hugo-cite] 
