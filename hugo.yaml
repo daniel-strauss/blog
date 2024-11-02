@@ -1,6 +1,6 @@
 baseURL: "https://strammermax27.github.io/"
 languageCode: "en-us"
-title: "Daniels Blog"
+title: "Blog of Daniel Strauss"
 theme: [PaperMod,hugo-cite] 
 
 markup:
