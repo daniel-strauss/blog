@@ -9,7 +9,7 @@ Author: Daniel Strauß, Supervisor: Suvrit Sra
 🍳 😯 🔲 📥 🚤 🌧 *By reading this blogpost, you will find out why this emoji sequence is here.*
 
 
-Note: some proofs of this have been written down more cleanly in this [pdf-file](./data/rare/Formal_Writeup_Blogpost_of_what_is_the_meaning_of_the_estimation_error.pdf).
+Note: some proofs of this have been written down more cleanly in this [pdf-file](./static/Formal_Writeup_Blogpost_of_what_is_the_meaning_of_the_estimation_error.pdf).
 
 ## Introduction
 

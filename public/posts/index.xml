@@ -14,7 +14,7 @@
       <guid>https://daniel-strauss.github.io/blog/posts/information_theory_in_llm_theory/</guid>
       <description>&lt;p&gt;Author: Daniel Strauß, Supervisor: Suvrit Sra&lt;/p&gt;
 &lt;p&gt;🍳 😯 🔲 📥 🚤 🌧 &lt;em&gt;By reading this blogpost, you will find out why this emoji sequence is here.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;Note: some proofs of this have been written down more cleanly in this &lt;a href=&#34;./data/rare/Formal_Writeup_Blogpost_of_what_is_the_meaning_of_the_estimation_error.pdf&#34;&gt;pdf-file&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Note: some proofs of this have been written down more cleanly in this &lt;a href=&#34;./static/Formal_Writeup_Blogpost_of_what_is_the_meaning_of_the_estimation_error.pdf&#34;&gt;pdf-file&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 &lt;p&gt;In this blog post, you will first learn about information theory, and we will look at one example of the application of information theory in LLM theory. Then, we will look at one paper in detail that specifically examines the phenomenon of in-context learning by making assumptions about the probability distribution of the training data. Next, we will carefully examine the assumptions made in that paper. To do that well, we will prove some of our own statements based on the results of that paper.&lt;/p&gt;</description>
     </item>
