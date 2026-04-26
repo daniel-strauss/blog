@@ -1,6 +1,6 @@
-baseURL: "https://strammermax27.github.io/"
+baseURL: "https://daniel-strauss.github.io/blog/"
 languageCode: "en-us"
-title: "Daniels Blog"
+title: "Blog of Daniel Strauss"
 theme: [PaperMod,hugo-cite] 
 
 markup:
@@ -11,8 +11,8 @@ markup:
 
 params:
   homeInfoParams:
-    Title: Hi there wave
-    Content: Can be Info, links, about...
+    Title: Contents
+    Content: 
 
 
   math:

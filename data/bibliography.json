@@ -1,1 +1,199 @@
-{"blocks":[{"t":"Para","c":[{"t":"Cite","c":[[{"citationSuffix":[],"citationNoteNum":0,"citationMode":{"t":"AuthorInText"},"citationPrefix":[],"citationId":"article","citationHash":0}],[{"t":"Str","c":"@article"}]]},{"t":"Str","c":"{jeon2024information,"},{"t":"SoftBreak"},{"t":"Str","c":"title={An"},{"t":"Space"},{"t":"Str","c":"information-theoretic"},{"t":"Space"},{"t":"Str","c":"analysis"},{"t":"Space"},{"t":"Str","c":"of"},{"t":"Space"},{"t":"Str","c":"in-context"},{"t":"Space"},{"t":"Str","c":"learning},"},{"t":"SoftBreak"},{"t":"Str","c":"author={Jeon,"},{"t":"Space"},{"t":"Str","c":"Hong"},{"t":"Space"},{"t":"Str","c":"Jun"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Lee,"},{"t":"Space"},{"t":"Str","c":"Jason"},{"t":"Space"},{"t":"Str","c":"D"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Lei,"},{"t":"Space"},{"t":"Str","c":"Qi"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Van"},{"t":"Space"},{"t":"Str","c":"Roy,"},{"t":"Space"},{"t":"Str","c":"Benjamin},"},{"t":"SoftBreak"},{"t":"Str","c":"journal={arXiv"},{"t":"Space"},{"t":"Str","c":"preprint"},{"t":"Space"},{"t":"Str","c":"arXiv:2401.15530},"},{"t":"SoftBreak"},{"t":"Str","c":"year={2024}"},{"t":"SoftBreak"},{"t":"Str","c":"}"},{"t":"SoftBreak"},{"t":"Cite","c":[[{"citationSuffix":[],"citationNoteNum":0,"citationMode":{"t":"AuthorInText"},"citationPrefix":[],"citationId":"article","citationHash":0}],[{"t":"Str","c":"@article"}]]},{"t":"Str","c":"{jeon2024scaling,"},{"t":"SoftBreak"},{"t":"Str","c":"title={Information-Theoretic"},{"t":"Space"},{"t":"Str","c":"Foundations"},{"t":"Space"},{"t":"Str","c":"for"},{"t":"Space"},{"t":"Str","c":"Neural"},{"t":"Space"},{"t":"Str","c":"Scaling"},{"t":"Space"},{"t":"Str","c":"Laws},"},{"t":"SoftBreak"},{"t":"Str","c":"author={Jeon,"},{"t":"Space"},{"t":"Str","c":"Hong"},{"t":"Space"},{"t":"Str","c":"Jun"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Van"},{"t":"Space"},{"t":"Str","c":"Roy,"},{"t":"Space"},{"t":"Str","c":"Benjamin},"},{"t":"SoftBreak"},{"t":"Str","c":"journal={arXiv"},{"t":"Space"},{"t":"Str","c":"e-prints},"},{"t":"SoftBreak"},{"t":"Str","c":"pages={arXiv–2407},"},{"t":"SoftBreak"},{"t":"Str","c":"year={2024}"},{"t":"SoftBreak"},{"t":"Str","c":"}"}]},{"t":"Para","c":[{"t":"Cite","c":[[{"citationSuffix":[],"citationNoteNum":0,"citationMode":{"t":"AuthorInText"},"citationPrefix":[],"citationId":"article","citationHash":0}],[{"t":"Str","c":"@article"}]]},{"t":"Str","c":"{jeon2022information,"},{"t":"SoftBreak"},{"t":"Str","c":"title={An"},{"t":"Space"},{"t":"Str","c":"information-theoretic"},{"t":"Space"},{"t":"Str","c":"framework"},{"t":"Space"},{"t":"Str","c":"for"},{"t":"Space"},{"t":"Str","c":"supervised"},{"t":"Space"},{"t":"Str","c":"learning},"},{"t":"SoftBreak"},{"t":"Str","c":"author={Jeon,"},{"t":"Space"},{"t":"Str","c":"Hong"},{"t":"Space"},{"t":"Str","c":"Jun"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Zhu,"},{"t":"Space"},{"t":"Str","c":"Yifan"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Van"},{"t":"Space"},{"t":"Str","c":"Roy,"},{"t":"Space"},{"t":"Str","c":"Benjamin},"},{"t":"SoftBreak"},{"t":"Str","c":"journal={arXiv"},{"t":"Space"},{"t":"Str","c":"preprint"},{"t":"Space"},{"t":"Str","c":"arXiv:2203.00246},"},{"t":"SoftBreak"},{"t":"Str","c":"year={2022}"},{"t":"SoftBreak"},{"t":"Str","c":"}"}]},{"t":"Para","c":[{"t":"Cite","c":[[{"citationSuffix":[],"citationNoteNum":0,"citationMode":{"t":"AuthorInText"},"citationPrefix":[],"citationId":"inproceedings","citationHash":0}],[{"t":"Str","c":"@inproceedings"}]]},{"t":"Str","c":"{"},{"t":"SoftBreak"},{"t":"Str","c":"deletang2024language,"},{"t":"SoftBreak"},{"t":"Str","c":"title={Language"},{"t":"Space"},{"t":"Str","c":"Modeling"},{"t":"Space"},{"t":"Str","c":"Is"},{"t":"Space"},{"t":"Str","c":"Compression},"},{"t":"SoftBreak"},{"t":"Str","c":"author={Gregoire"},{"t":"Space"},{"t":"Str","c":"Deletang"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Anian"},{"t":"Space"},{"t":"Str","c":"Ruoss"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Paul-Ambroise"},{"t":"Space"},{"t":"Str","c":"Duquenne"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Elliot"},{"t":"Space"},{"t":"Str","c":"Catt"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Tim"},{"t":"Space"},{"t":"Str","c":"Genewein"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Christopher"},{"t":"Space"},{"t":"Str","c":"Mattern"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Jordi"},{"t":"Space"},{"t":"Str","c":"Grau-Moya"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Li"},{"t":"Space"},{"t":"Str","c":"Kevin"},{"t":"Space"},{"t":"Str","c":"Wenliang"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Matthew"},{"t":"Space"},{"t":"Str","c":"Aitchison"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Laurent"},{"t":"Space"},{"t":"Str","c":"Orseau"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Marcus"},{"t":"Space"},{"t":"Str","c":"Hutter"},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Joel"},{"t":"Space"},{"t":"Str","c":"Veness},"},{"t":"SoftBreak"},{"t":"Str","c":"booktitle={The"},{"t":"Space"},{"t":"Str","c":"Twelfth"},{"t":"Space"},{"t":"Str","c":"International"},{"t":"Space"},{"t":"Str","c":"Conference"},{"t":"Space"},{"t":"Str","c":"on"},{"t":"Space"},{"t":"Str","c":"Learning"},{"t":"Space"},{"t":"Str","c":"Representations},"},{"t":"SoftBreak"},{"t":"Str","c":"year={2024},"},{"t":"SoftBreak"},{"t":"Str","c":"url={https://openreview.net/forum?id=jznbgiynus}"},{"t":"SoftBreak"},{"t":"Str","c":"}"}]},{"t":"Para","c":[{"t":"Cite","c":[[{"citationSuffix":[],"citationNoteNum":0,"citationMode":{"t":"AuthorInText"},"citationPrefix":[],"citationId":"article","citationHash":0}],[{"t":"Str","c":"@article"}]]},{"t":"Str","c":"{latham2009,"},{"t":"SoftBreak"},{"t":"Str","c":"author"},{"t":"Space"},{"t":"Str","c":"="},{"t":"Space"},{"t":"Str","c":"{Latham,"},{"t":"Space"},{"t":"Str","c":"P."},{"t":"Space"},{"t":"Str","c":"E."},{"t":"Space"},{"t":"Str","c":"and"},{"t":"Space"},{"t":"Str","c":"Roudi,"},{"t":"Space"},{"t":"Str","c":"Y."},{"t":"Space"},{"t":"Str","c":"},"},{"t":"SoftBreak"},{"t":"Str","c":"title"},{"t":"Space"},{"t":"Str","c":"="},{"t":"Space"},{"t":"Str","c":"{{M}utual"},{"t":"Space"},{"t":"Str","c":"information},"},{"t":"SoftBreak"},{"t":"Str","c":"year"},{"t":"Space"},{"t":"Str","c":"="},{"t":"Space"},{"t":"Str","c":"{2009},"},{"t":"SoftBreak"},{"t":"Str","c":"journal"},{"t":"Space"},{"t":"Str","c":"="},{"t":"Space"},{"t":"Str","c":"{Scholarpedia},"},{"t":"SoftBreak"},{"t":"Str","c":"volume"},{"t":"Space"},{"t":"Str","c":"="},{"t":"Space"},{"t":"Str","c":"{4},"},{"t":"SoftBreak"},{"t":"Str","c":"number"},{"t":"Space"},{"t":"Str","c":"="},{"t":"Space"},{"t":"Str","c":"{1},"},{"t":"SoftBreak"},{"t":"Str","c":"pages"},{"t":"Space"},{"t":"Str","c":"="},{"t":"Space"},{"t":"Str","c":"{1658},"},{"t":"SoftBreak"},{"t":"Str","c":"doi"},{"t":"Space"},{"t":"Str","c":"="},{"t":"Space"},{"t":"Str","c":"{10.4249/scholarpedia.1658},"},{"t":"SoftBreak"},{"t":"Str","c":"note"},{"t":"Space"},{"t":"Str","c":"="},{"t":"Space"},{"t":"Str","c":"{revision"},{"t":"Space"},{"t":"Str","c":"#186917}"},{"t":"SoftBreak"},{"t":"Str","c":"}"}]},{"t":"Para","c":[{"t":"Cite","c":[[{"citationSuffix":[],"citationNoteNum":0,"citationMode":{"t":"AuthorInText"},"citationPrefix":[],"citationId":"article","citationHash":0}],[{"t":"Str","c":"@article"}]]},{"t":"Str","c":"{shannon1948mathematical,"},{"t":"SoftBreak"},{"t":"Str","c":"title={A"},{"t":"Space"},{"t":"Str","c":"mathematical"},{"t":"Space"},{"t":"Str","c":"theory"},{"t":"Space"},{"t":"Str","c":"of"},{"t":"Space"},{"t":"Str","c":"communication},"},{"t":"SoftBreak"},{"t":"Str","c":"author={Shannon,"},{"t":"Space"},{"t":"Str","c":"Claude"},{"t":"Space"},{"t":"Str","c":"Elwood},"},{"t":"SoftBreak"},{"t":"Str","c":"journal={The"},{"t":"Space"},{"t":"Str","c":"Bell"},{"t":"Space"},{"t":"Str","c":"system"},{"t":"Space"},{"t":"Str","c":"technical"},{"t":"Space"},{"t":"Str","c":"journal},"},{"t":"SoftBreak"},{"t":"Str","c":"volume={27},"},{"t":"SoftBreak"},{"t":"Str","c":"number={3},"},{"t":"SoftBreak"},{"t":"Str","c":"pages={379–423},"},{"t":"SoftBreak"},{"t":"Str","c":"year={1948},"},{"t":"SoftBreak"},{"t":"Str","c":"publisher={Nokia"},{"t":"Space"},{"t":"Str","c":"Bell"},{"t":"Space"},{"t":"Str","c":"Labs}"},{"t":"SoftBreak"},{"t":"Str","c":"}"}]}],"pandoc-api-version":[1,17,5,4],"meta":{"author":{"t":"MetaList","c":[{"t":"MetaInlines","c":[{"t":"Str","c":"pandoc"},{"t":"Space"},{"t":"Str","c":"bibliography.bib"},{"t":"Space"},{"t":"Str","c":"-t"},{"t":"Space"},{"t":"Str","c":"csljson"},{"t":"Space"},{"t":"Str","c":"-o"},{"t":"Space"},{"t":"Str","c":"bibliography.json"}]}]},"title":{"t":"MetaInlines","c":[{"t":"Str","c":"to"},{"t":"Space"},{"t":"Str","c":"convert"},{"t":"Space"},{"t":"Str","c":"to"},{"t":"Space"},{"t":"Str","c":"json"}]}}}
+[
+  {
+    "author": [
+      {
+        "family": "Jeon",
+        "given": "Hong Jun"
+      },
+      {
+        "family": "Lee",
+        "given": "Jason D"
+      },
+      {
+        "family": "Lei",
+        "given": "Qi"
+      },
+      {
+        "family": "Van Roy",
+        "given": "Benjamin"
+      }
+    ],
+    "container-title": "arXiv preprint arXiv:2401.15530",
+    "id": "jeon2024information",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "title": "An information-theoretic analysis of in-context learning",
+    "type": "article-journal"
+  },
+  {
+    "author": [
+      {
+        "family": "Jeon",
+        "given": "Hong Jun"
+      },
+      {
+        "family": "Van Roy",
+        "given": "Benjamin"
+      }
+    ],
+    "container-title": "arXiv e-prints",
+    "id": "jeon2024scale",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "page": "arXiv-2407",
+    "title": "Information-theoretic foundations for neural scaling laws",
+    "type": "article-journal"
+  },
+  {
+    "author": [
+      {
+        "family": "Jeon",
+        "given": "Hong Jun"
+      },
+      {
+        "family": "Zhu",
+        "given": "Yifan"
+      },
+      {
+        "family": "Van Roy",
+        "given": "Benjamin"
+      }
+    ],
+    "container-title": "arXiv preprint arXiv:2203.00246",
+    "id": "jeon2022information",
+    "issued": {
+      "date-parts": [
+        [
+          2022
+        ]
+      ]
+    },
+    "title": "An information-theoretic framework for supervised learning",
+    "type": "article-journal"
+  },
+  {
+    "URL": "https://openreview.net/forum?id=jznbgiynus",
+    "author": [
+      {
+        "family": "Deletang",
+        "given": "Gregoire"
+      },
+      {
+        "family": "Ruoss",
+        "given": "Anian"
+      },
+      {
+        "family": "Duquenne",
+        "given": "Paul-Ambroise"
+      },
+      {
+        "family": "Catt",
+        "given": "Elliot"
+      },
+      {
+        "family": "Genewein",
+        "given": "Tim"
+      },
+      {
+        "family": "Mattern",
+        "given": "Christopher"
+      },
+      {
+        "family": "Grau-Moya",
+        "given": "Jordi"
+      },
+      {
+        "family": "Wenliang",
+        "given": "Li Kevin"
+      },
+      {
+        "family": "Aitchison",
+        "given": "Matthew"
+      },
+      {
+        "family": "Orseau",
+        "given": "Laurent"
+      },
+      {
+        "family": "Hutter",
+        "given": "Marcus"
+      },
+      {
+        "family": "Veness",
+        "given": "Joel"
+      }
+    ],
+    "container-title": "The twelfth international conference on learning representations",
+    "id": "deletang2024language",
+    "issued": {
+      "date-parts": [
+        [
+          2024
+        ]
+      ]
+    },
+    "title": "Language modeling is compression",
+    "type": "paper-conference"
+  },
+  {
+    "DOI": "10.4249/scholarpedia.1658",
+    "author": [
+      {
+        "family": "Latham",
+        "given": "P. E."
+      },
+      {
+        "family": "Roudi",
+        "given": "Y."
+      }
+    ],
+    "container-title": "Scholarpedia",
+    "id": "latham2009",
+    "issue": "1",
+    "issued": {
+      "date-parts": [
+        [
+          2009
+        ]
+      ]
+    },
+    "note": "revision #186917",
+    "page": "1658",
+    "title": "Mutual information",
+    "type": "article-journal",
+    "volume": "4"
+  },
+  {
+    "author": [
+      {
+        "family": "Shannon",
+        "given": "Claude Elwood"
+      }
+    ],
+    "container-title": "The Bell system technical journal",
+    "id": "shannon1948mathematical",
+    "issue": "3",
+    "issued": {
+      "date-parts": [
+        [
+          1948
+        ]
+      ]
+    },
+    "page": "379-423",
+    "publisher": "Nokia Bell Labs",
+    "title": "A mathematical theory of communication",
+    "type": "article-journal",
+    "volume": "27"
+  }
+]
