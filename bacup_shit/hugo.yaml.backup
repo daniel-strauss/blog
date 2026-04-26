@@ -1,0 +1,43 @@
+baseURL: "https://daniel-strauss.github.io/blog/"
+languageCode: "en-us"
+title: "Blog of Daniel Strauss"
+theme: [PaperMod,hugo-cite] 
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+
+params:
+  homeInfoParams:
+    Title: Contents
+    Content: 
+
+
+  math:
+    use: true
+    config: |
+      MathJax.Hub.Config({
+        tex: {
+          packages: {'[+]': ['bbm']}
+        },
+        TeX: {
+          Macros: {
+            mathbbm: ["{\\mathbbm{#1}}",1]
+          }
+        }
+      });
+    version: "3.2"
+    url: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"
+
+Modify the header.html Partial:
+
+socialIcons: # optional
+  - name: "<platform>"
+    url: "<link>"
+  - name: "<platform 2>"
+    url: "<link2>"
+
+
+      
