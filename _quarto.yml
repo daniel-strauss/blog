@@ -1,0 +1,20 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - index.qmd
+    - posts/
+
+website:
+  title: "Blog of Daniel Strauss"
+  site-url: "https://daniel-strauss.github.io/blog/"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    html-math-method: mathjax
