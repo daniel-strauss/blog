@@ -9,7 +9,7 @@ bibliography: data/bibliography.json
 
 🍳 😯 🔲 📥 🚤 🌧 *By reading this blog post, you will find out why this emoji sequence is here.*
 
-Note: some proofs of this have been written down more cleanly in this [pdf-file](/data/Formal_Writeup_Blogpost_of_what_is_the_meaning_of_the_estimation_error.pdf).
+
 
 ## Introduction
 
@@ -17,6 +17,7 @@ In this blog post, you will first learn about information theory, and we will lo
 
 - The authors called for further analysis of how a transformer can implement a sparse mixture of transformers. In this blog post, we prove that a transformer cannot implement a sparse mixture of transformers.
 - Furthermore, we prove that any discrete autoregressive distribution can be modeled such that the estimation error is zero and that the estimation error equals the entropy of the distribution. We discuss this result and state our opinion on how to use this result to better interpret the estimation error.
+Note: this section has been written down more cleanly in this [pdf-file](/data/Formal_Writeup_Blogpost_of_what_is_the_meaning_of_the_estimation_error.pdf).
 
 ### A Brief Introduction to Information Theory
 
