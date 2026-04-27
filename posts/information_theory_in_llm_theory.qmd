@@ -7,7 +7,7 @@ bibliography: ../data/bibliography.json
 
 🍳 😯 🔲 📥 🚤 🌧 *By reading this blog post, you will find out why this emoji sequence is here.*
 
-Note: some proofs of this have been written down more cleanly in this [pdf-file](/blog/data/Formal_Writeup_Blogpost_of_what_is_the_meaning_of_the_estimation_error.pdf).
+Note: some proofs of this have been written down more cleanly in this [pdf-file](/data/Formal_Writeup_Blogpost_of_what_is_the_meaning_of_the_estimation_error.pdf).
 
 ## Introduction
 
