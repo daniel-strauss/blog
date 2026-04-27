@@ -1,6 +1,6 @@
 ---
 title: Some Information Theoretic Perspectives on LLM Theory
-author: "Daniel Strauß, Supervisor: Suvrit Sra"
+author: "Daniel Strauß, Seminar Supervisor: Suvrit Sra"
 ---
 
 ---
