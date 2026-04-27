@@ -4,6 +4,8 @@ project:
   render:
     - index.qmd
     - posts/
+  resources:
+    - data/Formal_Writeup_Blogpost_of_what_is_the_meaning_of_the_estimation_error.pdf
 
 website:
   title: "Blog of Daniel Strauss"
