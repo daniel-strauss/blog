@@ -22,7 +22,7 @@ In this blog post, you will first learn about information theory, and we will lo
 
  
 
-Imagine you lived $40\cdot n$ years in the future and that the population had doubled every $40$ years. For simplicity, assume that in the current present, just one person is alive. Consequently, $2^n$ people live at your point in the future. You live far in the future, and $n$ is very large: $n=2^{10^{15}}$. "Today" is your friend's birthday party, and you do not have a present.
+Imagine you lived $40\cdot n$ years in the future and that the population had doubled every $40$ years. For simplicity, assume that in the current present, just one person is alive. Consequently, $2^n$ people live at your point in the future. You live far in the future, and $n$ is very large: $n=10^{15}$. "Today" is your friend's birthday party, and you do not have a present.
 
 Therefore, you decide to hire last minute a mathgician for his party, as mathgicians are known to let parties go wild with their magic and math. 
 In order to hire the mathgician, you have to put in your friend one petabit ($=10^{15}$ bits) long address into the website of the mathgician-firm, such that he can find the location of the party. (The address is one petabit long as, in the future, every inhabitant will have his own address, and there will be $n$ people.) At the party, the mathgician shows up, and everyone has a good time. But then suddenly, you start to wonder:
