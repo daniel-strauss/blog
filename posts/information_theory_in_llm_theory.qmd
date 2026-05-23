@@ -366,7 +366,7 @@ Short Answer: No, because a mixture of transformers has often an infinite contex
 Consider a mixture with two transformers $A$ and $B$ picked with the same probability of $0.5$, that both implement an iid coinflip. 
 $A$ implements the coinflip with $p=0.4$ and $B$ implements it with $p=0.7$. 
 Assume we want to model this mixture with an autoregressive model with a finite horizon $m$.
-Consider we generated $m+1$ coin throws. Then the heads probability of the next throw is 
+Consider we generated $m+1$ coin throws. Then the heads probability of the next throw is also
 dependent on a throw that is m+1 steps in the past. Therefore our model can't generate that sequence. 
 
 
