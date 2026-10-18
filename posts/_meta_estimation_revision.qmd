@@ -2,6 +2,40 @@
 
 ### What is the meaning of the meta estimation error? {#what-is-the-meaning-of-the-meta-estimation-error .revision-section}
 
+Before choosing document parameters, we first ask which part of the error is fixed by the document distribution itself.
+
+#### Lemma B.1: the canonical de Finetti split
+
+Fix the law of an **infinite exchangeable sequence of complete documents** $D_1,D_2,\ldots$ on the finite space $\Sigma^T$. Let $Q$ be its random de Finetti directing distribution, so that
+
+$$
+D_1,D_2,\ldots\mid Q\overset{\mathrm{iid}}{\sim}Q,
+\qquad C_M=(D_1,\ldots,D_M).
+$$
+
+Then the split
+
+$$
+\frac{H(C_M)}{MT}
+=\underbrace{\frac{I(C_M;Q)}{MT}}_{\substack{\text{estimation of the}\\\text{shared document distribution}}}
++\underbrace{\frac{H(D_i\mid Q)}{T}}_{\substack{\text{document uncertainty}\\\text{remaining given }Q}}
+$$
+
+is determined by that document process. With the canonical choice $\theta_i=\psi=Q$, these are precisely **estimation error** and **irreducible error**, respectively.
+
+**Proof.** The entropy identity and conditional iid property give
+
+$$
+H(C_M)=I(C_M;Q)+H(C_M\mid Q)
+=I(C_M;Q)+M\mathbb E[h(Q)],
+$$
+
+where $h(Q)$ is the entropy of the document distribution. De Finetti's mixing law is unique, so the document process fixes $\mathbb E[h(Q)]$ and hence both terms. Any other shared variable $\psi$ making the infinite document sequence conditionally iid induces the same mixing law through $Q_\psi=P(D_i\in\cdot\mid\psi)$. Therefore $H(C_M\mid\psi)=M\mathbb E[h(Q)]$ and $I(C_M;\psi)=I(C_M;Q)$. $\square$
+
+The uniqueness requires the infinite exchangeable law, not a finite corpus alone; see [Theorem 1 of Barber, Candès, Ramdas, and Tibshirani](https://www.stat.berkeley.edu/~ryantibs/papers/defin.pdf). **One document is one sample**; nothing here assumes iid tokens inside a document.
+
+The shared-distribution estimation term is therefore fixed. The question is whether introducing document-specific parameters also gives a canonical split of the remaining document uncertainty.
+
 **There are not enough restrictions on $\theta_i$ to force a nonzero intra-document estimation error. We can always choose $\theta_i=\psi$.** At the other extreme, we can choose $\theta_i=D_i$. Both choices preserve the distribution of the documents, but give different meanings to the paper's error terms.
 
 #### The two choices: $\theta_i=\psi$ and $\theta_i=D_i$
@@ -75,30 +109,7 @@ This is the issue behind the question in my email: *is there a missing modeling 
 
 The same qualification matters for Theorem Jeon.4.7 and Remark Jeon.4.8, which interpret the in-context term as dominant when the meta term is small. With $\theta_i=\psi$, that in-context term is zero. This does not imply that context is useless: the oracle knowing $\psi$ can still exploit dependencies between tokens. It changes the baseline against which estimation error is measured. Further restrictions on $\theta_i$ are needed to give this term the intended meaning. The specialized transformer-mixture assumptions in Theorem Jeon.4.5 would require a separate check.
 
-#### Lemma B.1: the canonical de Finetti split
-
-Fix the law of an **infinite exchangeable sequence of complete documents** on the finite space $\Sigma^T$. Let $Q$ be its de Finetti directing distribution, so documents are iid conditional on $Q$. Then the split
-
-$$
-\frac{H(C_M)}{MT}
-=\underbrace{\frac{I(C_M;Q)}{MT}}_{\substack{\text{estimation of the}\\\text{shared document distribution}}}
-+\underbrace{\frac{H(D_i\mid Q)}{T}}_{\substack{\text{document uncertainty}\\\text{remaining given }Q}}
-$$
-
-is determined by that document process. With the canonical choice $\theta_i=\psi=Q$, these are precisely **estimation error** and **irreducible error**, respectively.
-
-**Proof.** The entropy identity and conditional iid property give
-
-$$
-H(C_M)=I(C_M;Q)+H(C_M\mid Q)
-=I(C_M;Q)+M\mathbb E[h(Q)],
-$$
-
-where $h(Q)$ is the entropy of the document distribution. De Finetti's mixing law is unique, so the document process fixes $\mathbb E[h(Q)]$ and hence both terms. Any other shared variable $\psi$ making the infinite document sequence conditionally iid induces the same mixing law through $Q_\psi=P(D_i\in\cdot\mid\psi)$. Therefore $H(C_M\mid\psi)=M\mathbb E[h(Q)]$ and $I(C_M;\psi)=I(C_M;Q)$. $\square$
-
-The uniqueness requires the infinite exchangeable law, not a finite corpus alone; see [Theorem 1 of Barber, Candès, Ramdas, and Tibshirani](https://www.stat.berkeley.edu/~ryantibs/papers/defin.pdf). **One document is one sample**; nothing here assumes iid tokens inside a document.
-
-Introducing extra document parameters $\theta_i$ splits the second term further:
+By Lemma B.1, introducing extra document parameters $\theta_i$ splits the canonical residual term further:
 
 $$
 \frac{H(D_i\mid Q)}{T}
