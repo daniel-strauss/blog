@@ -337,7 +337,7 @@
       <ellipse cx="390" cy="340" rx="450" ry="310" fill="url(#universe-glow)"/>
       ${Array.from({length: 75}, () => `<circle cx="${Math.random() * 1000}" cy="${Math.random() * 650}" r="${0.3 + Math.random() * 1.2}" fill="#d7dfeb" opacity="${0.1 + Math.random() * 0.4}"/>`).join('')}
       <g class="universe-bowl-assembly">
-      <text class="universe-scene-label" x="390" y="115" text-anchor="middle">A bowl of possible universes</text>
+      <text class="universe-scene-label" x="390" y="115" text-anchor="middle">A lower level universe generator</text>
       <path class="universe-bowl" d="M 55 175 L 80 525 Q 390 650 700 525 L 725 175 Z"/>
       <ellipse class="universe-rim" cx="390" cy="175" rx="335" ry="22"/>
       <g class="universe-cards"></g>
