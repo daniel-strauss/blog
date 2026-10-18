@@ -2,9 +2,7 @@
 
 ### What is the meaning of the meta estimation error? {#what-is-the-meaning-of-the-meta-estimation-error .revision-section}
 
-[REPLACED SECTION · 18 October 2026]{.revision-label}
-
-The concern I raised in my email to Sra is simple: **there are not enough restrictions on $\theta_i$ to force a nonzero intra-document estimation error. We can always choose $\theta_i=\psi$.** At the other extreme, we can choose $\theta_i=D_i$. Both choices preserve the distribution of the documents, but give different meanings to the paper's error terms.
+**There are not enough restrictions on $\theta_i$ to force a nonzero intra-document estimation error. We can always choose $\theta_i=\psi$.** At the other extreme, we can choose $\theta_i=D_i$. Both choices preserve the distribution of the documents, but give different meanings to the paper's error terms.
 
 #### The two choices: $\theta_i=\psi$ and $\theta_i=D_i$
 
