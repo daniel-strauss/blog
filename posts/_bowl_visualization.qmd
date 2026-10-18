@@ -1,0 +1,96 @@
+#### The same document distribution, different parameters {#bowls}
+
+Each circle is one possible **complete document**. Choose an inner bowl afresh for each document, then draw a circle from it. Initially, every construction produces A, B, and C with probability $1/3$ each. **Redraw Q** chooses a new example; every representation then induces that same new $Q$.
+
+The rectangle encloses the representation chips and the whole construction: **the diagram determines $Q$**, although different diagrams can determine the same $Q$. Inside the rectangle, the outer bowl describes $P(\theta_i\mid\psi)$ for a fixed shared $\psi$. Switching representations preserves $Q$; redrawing $Q$ selects a different example.
+
+```{=html}
+<figure class="bowl-demo" id="bowl-demo" aria-labelledby="bowl-q-title bowl-caption">
+  <div class="bowl-q-heading"><strong id="bowl-q-title">Q</strong></div>
+  <div class="bowl-controls" hidden>
+    <div class="bowl-modes" role="group" aria-label="Choose the document parameter">
+      <button type="button" data-bowl-mode="zero" aria-pressed="true"><strong>θᵢ = ψ</strong><span>Intra-document error: 0</span></button>
+      <button type="button" data-bowl-mode="full" aria-pressed="false"><strong>θᵢ = Dᵢ</strong><span>Intra-document error: maximum</span></button>
+      <button type="button" data-bowl-mode="between" aria-pressed="false"><strong>Choose α</strong><span>Intra-document error: α × maximum</span></button>
+    </div>
+    <div class="bowl-sliders" hidden>
+      <div class="bowl-fraction-value">Intra-document share <output id="bowl-alpha-value" for="bowl-numerator bowl-denominator">α = 1/2 · 50%</output></div>
+      <div class="bowl-slider">
+        <label for="bowl-numerator">Numerator <output id="bowl-numerator-value" for="bowl-numerator">1</output></label>
+        <input id="bowl-numerator" type="range" min="0" max="2" step="1" value="1">
+      </div>
+      <div class="bowl-slider">
+        <label for="bowl-denominator">Denominator <output id="bowl-denominator-value" for="bowl-denominator">2</output></label>
+        <input id="bowl-denominator" type="range" min="1" max="20" step="1" value="2">
+      </div>
+    </div>
+    <div class="bowl-draw-controls">
+      <button type="button" id="bowl-draw">Generate random sample <span aria-hidden="true">↗</span></button>
+      <button type="button" id="bowl-estimate">Estimate distribution · 10,000 draws</button>
+      <span id="bowl-draw-result" role="status" aria-live="polite">Pick a bowl, then a complete document.</span>
+    </div>
+  </div>
+  <div class="bowl-estimate-progress" hidden>
+    <label for="bowl-estimate-progress">Repeated sampling <span id="bowl-estimate-count">0 / 10,000</span></label>
+    <progress id="bowl-estimate-progress" max="10000" value="0"></progress>
+    <p id="bowl-estimate-note">Each experiment picks a fresh bowl and then a document. The first three and last three draws are shown individually, with a fast middle.</p>
+  </div>
+  <svg class="bowl-drawing" viewBox="0 0 960 490" role="img" aria-labelledby="bowl-svg-title bowl-svg-description">
+    <title id="bowl-svg-title">Every representation induces the same Q</title>
+    <desc id="bowl-svg-description">Choose an inner bowl uniformly, then a document from it. Every representation gives each of the three documents probability one third.</desc>
+    <text class="bowl-outer-label" x="480" y="120" text-anchor="middle">θ = ψ: one inner bowl containing documents A, B, C</text>
+  </svg>
+  <section class="bowl-confidence" hidden aria-label="Confidence intervals">
+    <div class="bowl-ci-values" aria-label="Confidence intervals for the current estimate"></div>
+    <p class="bowl-confidence-note">95% per-category, fixed-sample <a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm">Wilson intervals</a>.</p>
+  </section>
+  <dl class="bowl-legend">
+    <div><dt><span class="bowl-legend-dot">A</span> <span class="bowl-legend-dot bowl-legend-b">B</span> <span class="bowl-legend-dot bowl-legend-c">C</span></dt><dd>3 text documents <span class="bowl-legend-aside">(representative for all text documents that exist.)</span></dd></div>
+    <div><dt>Bowls · θ⁽¹⁾, θ⁽²⁾, …</dt><dd>Numbered bowl choices, including identical copies. For document i, θᵢ is the selected choice.</dd></div>
+    <div><dt>Outer bowl · ψ</dt><dd>The shared parameter specifies which inner bowls are available. Pick one afresh for each document.</dd></div>
+    <div><dt>Rectangle · Q</dt><dd>All the selectable representations induce this same document distribution.</dd></div>
+  </dl>
+  <div class="bowl-controls" hidden>
+    <p class="bowl-explanation" id="bowl-explanation"></p>
+    <div class="bowl-allocation" aria-label="Division of the remaining document uncertainty">
+      <div class="bowl-allocation-labels">
+        <span>Intra-document <strong id="bowl-intra-value">0%</strong></span>
+        <span>Irreducible <strong id="bowl-noise-value">100%</strong></span>
+      </div>
+      <div class="bowl-bar" role="img" aria-label="0 percent intra-document, 100 percent irreducible">
+        <span class="bowl-bar-intra"></span><span class="bowl-bar-noise"></span>
+      </div>
+    </div>
+  </div>
+  <figcaption id="bowl-caption">All inner-bowl copies are equally likely. The bar divides H(Dᵢ | ψ)/T; its maximum for this Q is <span id="bowl-entropy">ln(3)/T</span>. The meta term stays unchanged across representations of the same Q. The denominator ranges from 1 to 20; every bowl copy is shown. Histogram percentages are empirical frequencies, so they need not equal Q exactly. Each sample starts with the full collection again.</figcaption>
+  <div class="bowl-redraw-controls bowl-controls" hidden>
+    <button type="button" id="bowl-redraw-q">Redraw Q <span aria-hidden="true">↻</span></button>
+  </div>
+  <noscript><p>Enable JavaScript to switch constructions and move the sliders, estimate the distribution, and watch the sampling animation.</p></noscript>
+</figure>
+<dialog class="universe-dialog" id="universe-dialog" aria-labelledby="universe-heading">
+  <audio id="universe-soundtrack" src="audio/redraw-q.mp3" preload="auto" loop></audio>
+  <button type="button" class="universe-sound" aria-pressed="true">Sound on</button>
+  <button type="button" class="universe-effects" aria-pressed="true">Effects on</button>
+  <button type="button" class="universe-close" aria-label="Close universe sampler">×</button>
+  <form class="universe-name-form">
+    <p class="universe-eyebrow">REDRAW Q</p>
+    <h2 id="universe-heading">Enter your nickname.</h2>
+    <label class="visually-hidden" for="universe-nickname">Nickname</label>
+    <input id="universe-nickname" name="nickname" maxlength="40" autocomplete="off" placeholder="Your nickname" required>
+    <button type="submit">Redraw Q <span aria-hidden="true">↗</span></button>
+  </form>
+  <div class="universe-sequence" hidden>
+    <div class="universe-story" role="status" aria-live="polite">
+      <p class="universe-eyebrow">REDRAWING Q</p>
+      <h2>Generating universes from scratch</h2>
+      <p class="universe-occurrence"></p>
+    </div>
+    <svg class="universe-scene" viewBox="0 0 1000 650" role="img" aria-label="A bowl of miniature universes. A hand samples dark universes until it finds one where you use this online tool and redraw Q."></svg>
+    <p class="universe-status" role="status" aria-live="polite"></p>
+    <button type="button" class="universe-skip">Skip to a bright universe</button>
+  </div>
+</dialog>
+<script src="bowl-demo.js" defer></script>
+<script src="universe-demo.js" defer></script>
+```

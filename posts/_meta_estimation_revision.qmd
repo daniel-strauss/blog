@@ -1,0 +1,133 @@
+<span id="what-is-the-meaning-of-the-estimation-error"></span>
+
+### What is the meaning of the meta estimation error? {#what-is-the-meaning-of-the-meta-estimation-error .revision-section}
+
+[REPLACED SECTION · 18 October 2026]{.revision-label}
+
+The concern I raised in my email to Sra is simple: **there are not enough restrictions on $\theta_i$ to force a nonzero intra-document estimation error. We can always choose $\theta_i=\psi$.** At the other extreme, we can choose $\theta_i=D_i$. Both choices preserve the distribution of the documents, but give different meanings to the paper's error terms.
+
+#### The two choices: $\theta_i=\psi$ and $\theta_i=D_i$
+
+One sample is **one complete document**, $D_i\in\Sigma^T$. Tokens within that document need not be independent. Keep the shared parameter $\psi$ and the joint law of the documents fixed, with $D_1,D_2,\ldots$ iid conditional on $\psi$. Write $C_M=(D_1,\ldots,D_M)$ and $Q=P(D_i\in\cdot\mid\psi)$.
+
+The paper's Theorem Jeon.4.2, together with its irreducible baseline, gives
+
+$$
+\underbrace{\frac{H(C_M)}{MT}}_{\substack{\text{optimal}\\\text{log-loss}}}
+=\underbrace{
+\underbrace{\frac{I(C_M;\psi)}{MT}}_{\substack{\text{meta}\\\text{estimation error}}}
++\underbrace{\frac{I(D_i;\theta_i\mid\psi)}{T}}_{\substack{\text{intra-document}\\\text{estimation error}}}
+}_{\text{estimation error}}
++\underbrace{\frac{H(D_i\mid\theta_i)}{T}}_{\substack{\text{irreducible}\\\text{error}}}.
+$$
+
+**Choice 1: $\theta_i=\psi$.** Give every document parameter exactly the shared information. Given $\psi$, choose the sole available parameter $\theta_i=\psi$, then generate the complete document from $Q$. This is precisely the original conditional document distribution, with any former document-specific latent variable integrated out. Now
+
+$$
+\underbrace{I(D_i;\theta_i\mid\psi)}_{\text{intra-document information}}
+=I(D_i;\psi\mid\psi)=0,
+\qquad H(D_i\mid\theta_i)=H(D_i\mid\psi).
+$$
+
+**Choice 2: $\theta_i=D_i$.** Given $\psi$, draw a document-valued parameter $\theta_i\sim Q$, then output $D_i=\theta_i$. The document has exactly the same law as before, but knowing its parameter now determines it completely:
+
+$$
+\underbrace{I(D_i;\theta_i\mid\psi)}_{\text{intra-document information}}
+=I(D_i;D_i\mid\psi)=H(D_i\mid\psi),
+\qquad H(D_i\mid\theta_i)=0.
+$$
+
+These are alternative latent representations. An invertible reparameterization alone cannot change mutual information.
+
+#### Do the paper's assumptions allow this?
+
+Yes, under the general requirements of Section 4.1. Here is the check from my attachment, with its autoregressive step repaired:
+
+| Requirement | $\theta_i=\psi$ | $\theta_i=D_i$ |
+|:--|:--|:--|
+| Exchangeable documents, iid given $\psi$ | The joint law of $(\psi,D_1,D_2,\ldots)$ stays fixed. | The same conditional law $Q$ is sampled independently for each document. |
+| $\theta_1,\theta_2,\ldots\mid\psi$ iid | $\psi,\psi,\ldots\mid\psi$ are iid: a point mass is allowed. | The parameters are independent draws from $Q$. |
+| $D_i\perp\psi\mid\theta_i$ | $D_i\perp\psi\mid\psi$. | $D_i\perp\psi\mid D_i$. |
+| Autoregressive generation; discrete tokens and length $T$ | Generate from $Q$ using its token conditionals. | Emit the stored document token by token. |
+| Independence across documents given $\psi$ | Use independent document draws. | Use independent parameter draws. |
+
+<details class="assumption-check">
+<summary>Technical detail: autoregressive generation and the attachment's gap</summary>
+
+For finite $\Sigma$, every document law $r$ on $\Sigma^T$ has an autoregressive generator. If $r[h]$ denotes the probability of prefix $h$, use
+
+$$
+A_r(h)(x)=\begin{cases}
+r[hx]/r[h],&r[h]>0,\\
+1/|\Sigma|,&r[h]=0.
+\end{cases}
+$$
+
+This reproduces $r$; zero-probability prefixes are never reached. Apply it to $r=Q$ in the first choice and $r=\delta_{\theta_i}$ in the second. On standard Borel parameter spaces these finite sums and piecewise ratios are measurable. No encoding of infinite sequences or differential entropy is needed.
+
+The attachment's item (ii) demanded strict dependence at every token position. De Finetti does not establish that: it concerns independence **across documents**, not dependence inside a document. The paper's Section 3 says the next token “may depend” on the parameter and history; its general framework states no strict information inequality excluding these endpoints. The check above uses conditional kernels instead of that extra premise. The description of parameters as document-specific would need an additional formal restriction to exclude $\theta_i=\psi$.
+
+</details>
+
+#### What follows for the interpretation?
+
+The two choices leave the meta term and optimal log-loss unchanged. They move the entire quantity $H(D_i\mid\psi)/T$ between intra-document estimation error and irreducible error. **If the irreducible error were held fixed as well, this move would be impossible.**
+
+This is the issue behind the question in my email: *is there a missing modeling assumption, or a limitation on the interpretability of the results?* Theorem Jeon.4.2 remains a valid identity. But its intra-document term alone cannot describe a property of the document distribution independently of how $\theta_i$ is chosen.
+
+The same qualification matters for Theorem Jeon.4.7 and Remark Jeon.4.8, which interpret the in-context term as dominant when the meta term is small. With $\theta_i=\psi$, that in-context term is zero. This does not imply that context is useless: the oracle knowing $\psi$ can still exploit dependencies between tokens. It changes the baseline against which estimation error is measured. Further restrictions on $\theta_i$ are needed to give this term the intended meaning. The specialized transformer-mixture assumptions in Theorem Jeon.4.5 would require a separate check.
+
+#### Lemma B.1: the canonical de Finetti split
+
+Fix the law of an **infinite exchangeable sequence of complete documents** on the finite space $\Sigma^T$. Let $Q$ be its de Finetti directing distribution, so documents are iid conditional on $Q$. Then the split
+
+$$
+\frac{H(C_M)}{MT}
+=\underbrace{\frac{I(C_M;Q)}{MT}}_{\substack{\text{estimation of the}\\\text{shared document distribution}}}
++\underbrace{\frac{H(D_i\mid Q)}{T}}_{\substack{\text{document uncertainty}\\\text{remaining given }Q}}
+$$
+
+is determined by that document process. With the canonical choice $\theta_i=\psi=Q$, these are precisely **estimation error** and **irreducible error**, respectively.
+
+**Proof.** The entropy identity and conditional iid property give
+
+$$
+H(C_M)=I(C_M;Q)+H(C_M\mid Q)
+=I(C_M;Q)+M\mathbb E[h(Q)],
+$$
+
+where $h(Q)$ is the entropy of the document distribution. De Finetti's mixing law is unique, so the document process fixes $\mathbb E[h(Q)]$ and hence both terms. Any other shared variable $\psi$ making the infinite document sequence conditionally iid induces the same mixing law through $Q_\psi=P(D_i\in\cdot\mid\psi)$. Therefore $H(C_M\mid\psi)=M\mathbb E[h(Q)]$ and $I(C_M;\psi)=I(C_M;Q)$. $\square$
+
+The uniqueness requires the infinite exchangeable law, not a finite corpus alone; see [Theorem 1 of Barber, Candès, Ramdas, and Tibshirani](https://www.stat.berkeley.edu/~ryantibs/papers/defin.pdf). **One document is one sample**; nothing here assumes iid tokens inside a document.
+
+Introducing extra document parameters $\theta_i$ splits the second term further:
+
+$$
+\frac{H(D_i\mid Q)}{T}
+=\underbrace{\frac{I(D_i;\theta_i\mid Q)}{T}}_{\text{intra-document estimation error}}
++\underbrace{\frac{H(D_i\mid\theta_i)}{T}}_{\text{irreducible error}},
+$$
+
+provided $D_i\perp Q\mid\theta_i$. The sum is canonical; this further split is not. This is exactly the freedom illustrated by $\theta_i=Q$ and $\theta_i=D_i$ above.
+
+{{< include _bowl_visualization.qmd >}}
+
+<details class="assumption-check">
+<summary>Optional extension: every intermediate allocation</summary>
+
+Independently for each document, choose the second construction with probability $\alpha$ and the first with probability $1-\alpha$. More explicitly, draw $B_i\sim\operatorname{Bernoulli}(\alpha)$ independently of $\psi$. If $B_i=0$, set $\theta_i=(0,\psi)$ and sample $D_i\sim Q$. If $B_i=1$, sample $Z_i\sim Q$, set $\theta_i=(1,Z_i)$, and output $D_i=Z_i$. The tags distinguish the two parameter spaces.
+
+Both branches produce law $Q$, and independent repetition preserves every corpus law, $P(C_M=(d_1,\ldots,d_M))=\mathbb E[\prod_i Q(d_i)]$. The parameters are iid conditional on $\psi$. The requirement $D_i\perp\psi\mid\theta_i$ holds because the first branch specifies $\psi$ and the second specifies $D_i$ itself. Consequently,
+
+$$
+\begin{aligned}
+\underbrace{\frac{H(D_i\mid\theta_i)}{T}}_{\text{irreducible error}}
+&=(1-\alpha)\frac{H(D_i\mid\psi)}{T},\\[1em]
+\underbrace{\frac{I(D_i;\theta_i\mid\psi)}{T}}_{\text{intra-document estimation error}}
+&=\alpha\frac{H(D_i\mid\psi)}{T}.
+\end{aligned}
+$$
+
+The first equality averages the conditional entropy of the two branches; the second follows from $I(D_i;\theta_i\mid\psi)=H(D_i\mid\psi)-H(D_i\mid\theta_i)$. This gives every allocation between the endpoints, without relying on the earlier formal proof sheet.
+
+</details>
