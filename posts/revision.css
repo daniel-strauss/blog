@@ -277,3 +277,8 @@ section.revision-section table {
 .universe-eye-rings { mix-blend-mode: screen; }
 
 .universe-dialog[open] { will-change: filter; }
+
+.bowl-fixed-quantities { padding: 0.7rem 0.9rem; margin-bottom: 0.8rem; border-left: 3px solid #267254; background: #f1f6f2; font-size: 0.82rem; }
+.bowl-fixed-quantities p { margin: 0.3rem 0; }
+
+.revision-amendment { background: #edf6ef; box-decoration-break: clone; -webkit-box-decoration-break: clone; }

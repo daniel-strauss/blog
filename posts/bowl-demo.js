@@ -130,14 +130,15 @@
     root.querySelector('#bowl-denominator-value').textContent = denominatorValue;
     numerator.setAttribute('aria-valuetext', `${numeratorValue} out of ${denominatorValue}`);
     root.querySelector('#bowl-intra-value').textContent = percent(alpha);
+    root.querySelector('#bowl-paper-total').textContent = `Paper’s estimation error = fixed meta term + ${percent(alpha)} of the canonical document uncertainty.`;
     root.querySelector('#bowl-noise-value').textContent = percent(1 - alpha);
     root.querySelector('.bowl-bar-intra').style.width = `${alpha * 100}%`;
     root.querySelector('.bowl-bar-noise').style.width = `${(1 - alpha) * 100}%`;
-    root.querySelector('.bowl-bar').setAttribute('aria-label', `${percent(alpha)} intra-document; ${percent(1 - alpha)} irreducible; meta term unchanged.`);
+    root.querySelector('.bowl-bar').setAttribute('aria-label', `Of document uncertainty: ${percent(alpha)} intra-document contribution; ${percent(1 - alpha)} paper oracle baseline. Canonical estimation error and canonical irreducible error unchanged.`);
     root.querySelector('#bowl-explanation').textContent = mode === 'zero'
       ? 'θᵢ = ψ: one possible bowl, three document types. Repeated circles encode Q. Choosing the bowl adds no information.'
       : mode === 'full'
-        ? 'θᵢ = Dᵢ: choosing a bowl already determines the document. The final draw adds no uncertainty.'
+        ? 'θᵢ = Dᵢ: the parameter reveals the whole document, so the paper’s oracle baseline is zero. Uncertainty given Q is unchanged.'
         : `α = ${p}/${q}: ${bowls.length} equally likely bowls, every copy shown. Select one, then draw a circle uniformly from it.`;
     estimate = null;
     progressPanel.hidden = true;
