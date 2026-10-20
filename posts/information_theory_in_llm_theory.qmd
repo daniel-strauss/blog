@@ -2,6 +2,11 @@
 title: "Some Information Theoretic Perspectives on LLM Theory"
 author: "Daniel Strauß, Seminar Supervisor: Suvrit Sra"
 date: 2024-07-29
+date-modified: 2026-10-20
+description: "An information-theoretic perspective on in-context learning, estimation error, and language models."
+css: revision.css
+resources:
+  - audio/redraw-q.mp3
 bibliography: ../data/bibliography.json
 ---
 
@@ -13,8 +18,8 @@ bibliography: ../data/bibliography.json
 
 In this blog post, you will first learn about information theory, and we will look at one example of the application of information theory in LLM theory. Then, we will look at one paper in detail that specifically examines the phenomenon of in-context learning by making assumptions about the probability distribution of the training data. Next, we will carefully examine the assumptions made in that paper. To do that well, we will prove some of our own statements based on the results of that paper.
 
-- The authors called for further analysis of how a transformer can implement a sparse mixture of transformers. In this blog post, we show that a transformer cannot implement a sparse mixture of transformers.
-- Furthermore, we show that any discrete autoregressive distribution can be modeled such that the estimation error equals any desired fraction of the sequence entropy — in particular zero or the full entropy. We use this to argue that the estimation error reflects properties of the chosen parameterization more than intrinsic learning difficulty. The according results have been written more cleanly in this [pdf-file](/data/Formal_Writeup_Blogpost_of_what_is_the_meaning_of_the_estimation_error.pdf).
+- The authors called for further analysis of how a transformer can implement a sparse mixture of transformers. In this blog post, we show the simple case, that a finite horizon transformer cannot implement a sparse mixture of finite horizon transformers.
+- The intra-document term is not fixed by the document distribution. Instead, it measures the oracle advantage that remains after the shared document distribution is learned.
 
 ### A Brief Introduction to Information Theory
 
@@ -172,7 +177,7 @@ In [@jeon2024information] it was shown, that $\hat P(H_t^{(m)}) = (x \to \mathbb
 
 Let's denote the loss of the optimal Bayesian optimizer with $\mathbb L_{M,T} := \mathbb L_{M,T}(\hat P) = \frac{1}{TM} \sum_{m=1}^{M} \sum_{t=0}^{T-1} \mathbb E[ - \ln \mathbb P[X_{t+1}^{(m)}|H_t^{(m)}]]$.
 
-As autoregressive models such as transformers define a probability distribution, one cannot predict a sequence of tokens they generate with probability 1, even if one knows all of their parameters $\theta$ (except, of course, if they are deterministic autoregressive models).  This means that $\mathbb H(H_T^{(M)}|\theta)$, e.g. the hardness of predicting the sequence even if the autoregressive model is known, has a value above 0 and might grow to infinity with $T$ or $M$. The authors named this error "the irreducible error". As we are interested in how hard it is to estimate not the series of tokens itself, but their distribution, the error $\mathcal L_{M,T} = \mathbb L_{M,T} - \dfrac{\mathbb H(H_T^{(M)}|\theta)}{MT}$ will be more insightful in our exploration. They call this error "estimation error". In Section [What is the meaning of the estimation error?](#what-is-the-meaning-of-the-estimation-error), we will discuss our opinion on how to interpret the meaning of the "estimation error" and the "irreducible error".
+As autoregressive models such as transformers define a probability distribution, one cannot predict a sequence of tokens they generate with probability 1, even if one knows all of their parameters $\theta$ (except, of course, if they are deterministic autoregressive models).  This means that $\mathbb H(H_T^{(M)}|\theta)$, e.g. the hardness of predicting the sequence even if the autoregressive model is known, has a value above 0 and might grow to infinity with $T$ or $M$. The authors named this error "the irreducible error". As we are interested in how hard it is to estimate not the series of tokens itself, but their distribution, the error $\mathcal L_{M,T} = \mathbb L_{M,T} - \dfrac{\mathbb H(H_T^{(M)}|\theta)}{MT}$ will be more insightful in our exploration. They call this error "estimation error". In Section [What is the meaning of the intra-document estimation error?](#what-is-the-meaning-of-the-meta-estimation-error), we discuss how to interpret the "estimation error" and the "irreducible error".
 
 
 In the rest of this section, we will present derived expressions for $\mathcal L_{M,T}$ that provide insights into how easy or hard it is to estimate model parameters if the data was generated as discussed. Then we derive from this result an expression of the in-context error $\mathbb L_\tau := \frac{1}{\tau} \sum_{t=0}^{\tau-1} \mathbb E \ln \mathbb P(X_{t+1}^{(M+1)}| H_t^{(M+1)})$, where $\tau$ is the length of the in-context document.
@@ -570,112 +575,13 @@ As we assumed $A_t$ to be full, the outcome with the highest Bayesian error shou
 
 Assuming the training data was generated by a full autoregressive model with random parameters can be a good assumption to simplify further mathematical analysis, and maybe it is not too far off, in order to produce results with well-meaning and close bounds. Still, choosing random transformers as a full autoregressive model may be a bit arbitrary, and I think that further justification would be helpful to add validity.
 
-### What is the meaning of the estimation error?
-
-
-In Section [Results without making assumptions about the Bayesian prior](#results-without-making-assumptions-about-the-bayesian-prior), we cited this result for the error of the OBE:
-
-$\mathbb L_{M,T} MT= \mathbb H[H_M^{(T)}] = \mathbb I(H_M^{(T)};\theta) + \mathbb H(H_M^{(T)}|\theta)$
-
-And then the estimation error $\mathbb I(H_M^{(T)};\theta)$ got extra care in the further analysis, as it conveys how hard it is to guess model parameters.
-
-
-As we will argue in this Section, the estimation error is fully dependent on the Bayesian prior model and independent of the resulting distribution. 
-E.g., a sequence generated by a random transformer can also be generated with the same distribution by a high amount of other random or nonrandom models.
-
----
-
-#### Lemma B.1
-
-Every autoregressive distribution $X_1, ..., X_T$ over the finite alphabet $\Sigma$ can be represented by a parametrized model with an estimation error of 0.
-
-
-
-#### Proof
-Let $\mathcal P_{\Sigma}$ be the set of all probability distributions over $\Sigma$.
-Let $\mathcal P_{T} = \lbrace  \Sigma^{[T-1]} \to P_\Sigma \rbrace$ the set of all autoregressive probability distributions with $T$ tokens. 
-An element in $\mathcal P_{T}$ can be seen to take in a sequence of tokens and to return the probability distribution for the next token.
-
-We call $A: \mathbb R^n \to P_T$ an autoregressive model. If a model $A$ is surjective, we call $A$ a full autoregressive model, since it can parametrize all autoregressive distributions. 
-
-At least one full model exists since $\mathbb R^n$ and $\mathcal P_T$ have the same cardinality.
-
-A transformer is, for example, an autoregressive model. I don't know whether transformers with context length T can $\ epsilon$ approximate a full autoregressive model.
-
-
-
-Let $H_T$ be any random sequence and represented by an autoregressive model $A$, such that its estimation error is bigger than zero. This means there $\mathcal Y \in \mathcal P_{\mathbb R^n}$ and $\theta \sim \mathcal Y$ ($\theta$ be a random vector of some distribution), such that $H_T \sim A(\theta)$ and $\mathbb I(H_T;\theta)>0$.
-
-Notice that $A(\theta) \in \mathcal P_T$. Let $A_f$
-be a full autoregressive model. As $A_f$ is surjective, there is a constant $\theta_0 \in \mathbb R^n$ such that $A_f(\theta_0) = A(\theta)$ and thus $H_T \sim A_f(\theta_0)$.
-
-If we model $H_T \sim A_f(\theta_0)$, then $\mathbb H(\theta_0) = 0$ and therefore we obtain an estimation error of $0$: $\mathbb I(H_T;\theta_0) = 0$.
-
-QED
-
----
-
-I hope reading this made people who say that in-context learning is not learning because parameters are not getting updated think.
-
-In Lemma B.1 we found, that we can do such a shitty job when trying to  find a model to express a posterior distribution, that by looking at the data and updating our model parameters accordingly we will never be able to describe the posterior distribution more precise with the updated parameters, the more tokens we observe, e.g. we will never have to update them. (Still the model would become better at predicting the distribution by observing it, but that information would not be stored in updated model parameters.)
-
-
-Can we also do the opposite? Imagine for a given random sequence $H_T$ we can find a parametrization $A, \mathcal Y$, s.t. the estimation error is maximal. Since this parametrization would maximize the estimation error, it would minimize $H(H_T|\Theta)$.
-Would we thereby find a model such that its parameters can describe the sequence the best? Would we then find the "perfect" model for this sequence? 
-Lemma B.2 shows that for every random sequence, there exists a parametrization, such that $H(H_T|\Theta) = 0$, but when you read the proof, you will be disappointed.
-
-
-
-#### Lemma B.2
-
-Every autoregressive distribution $H_T=X_1, ..., X_T$ can be represented by a model with an estimation error of $\mathbb H(H_T)/T$.
-
-
-#### Proof
-
-
-
-Let $\Sigma$ be the alphabet of $H_T$. Let $f: \Sigma^\infty \to \mathbb R^n$ be a bijection.
-
-
-We define $A(\theta) := h \to (x \to \mathbb P[f^{-1}$ $(\theta)\_{|h|+1} = x| f^{-1}(\theta)\_{1:|h|} = h]) $
-
-<!---
-We define ![Equation](https://latex.codecogs.com/png.latex?A(\theta)%20:=%20h%20\mapsto%20(x%20\mapsto%20\mathbb{P}[f^{-1}(\theta)_{|h|%2B1}%20=%20x%20\mid%20f^{-1}(\theta)_{1:|h|}%20=%20h]))
---->
-
-where $f^{-1}(\theta)_{i:j}$ defines the word that goes from the $i$'th character of the word $f^{-1}(\theta)$ until the $j$'th character.
-I am sorry that this expression looks confusing, but I will try to explain: $f^{-1}(\theta)$ is just an infinitely long word. $A(\theta)(h)(x)$ returns 1 iff the word $h \circ x$ is a prefix of $f^{-1}(\theta)$. If $h$ is a prefix of $f(\theta)$ but $h \circ x$ is not, then $A(\theta)(h)(x) = 0$, and otherwise $A(\theta)$ is undefined. $A$ will start to make more sense once $\theta$ is a random variable.
-
-Note that $A$ is a (not well-defined) autoregressive model, but not a full autoregressive model.
-
-Now for a given autoregressive sequence $H_T$, we define the random vector $\theta = f(H_T \circ 0^\infty)$.
-
-Then $A(\theta)(h_t)(x) \overset{a)}{=} \mathbb P(f^{-1} (\theta)_{t+1} = x | f^{-1}(\theta)_{1:t} = h_t)$
-
-$= \mathbb P[X_{t+1}  = x| H_t = h_t]$, e.g. b) $H_T \sim A(\theta)$.
-
-
-Since $f^{-1}$ is deterministic, $\theta$ contains all information of $H_T$ and we can conclude from a) and b): $\mathbb H(H_T) = \mathbb I(H_T;\theta)$
-
-
-QED
-
----
-
-
-So why are we disappointed after reading the proof of Lemma B.2.? Because even though by maximizing $\mathbb I(H_T;\theta)$ we found a model that contains all output randomness in its parameters, this model is still shit, as it doesn't permit a way to make more certain probabilistic statements about $\theta$ when observing more elements of the sequence $X_1, ..., X_T$.
-
-
-So, what does the content of this section have to do with its title?
-Lemma B.1 and B.2 showed that for any random sequence, we find a way to express this sequence with a model, such that a) no sequence information is contained in the model and b) all sequence information is contained in the model. Therefore, in my opinion, the estimation error tells us something about the model; one has chosen to describe a distribution, but less about the distribution itself. I think that from the estimation error, we can learn about how much information a given neural architecture can hold in its parameters. At the same time, I think that the estimation error tells us less about how well it is possible to learn something from a given distribution as was done in [Jeon and Van Roy, 2024](#ref-jeon2024scale) and possibly in [@jeon2022information] (Disclaimer: I didn't look at these papers at such detail to have an established opinion about it, but I will after my exams and update the blog post accordingly ). I think this as the estimation error can be zero for any distribution and the entire distribution entropy, solely depending on how the distribution is modeled. 
+{{< include _meta_estimation_revision.qmd >}}
 
 
 
 ## Conclusion
 
-In this blog post, we discussed the basics of information theory and presented an example application for data compression with LLMs. Then we discussed the work of [@jeon2024information], which aimed at finding an explanation for in-context learning through assumptions on the data-generating process. We then discussed the paper and challenged the idea of assuming the data-generation process was made by transformers. We also provided qualitative arguments on that the estimation error says more about a model of data generation than it says about the distribution of data itself.  Therefore, I think that further work has to be done in this analysis to gain more meaningful insights. On the other hand, using the information-theoretic tool of the estimation error for analyzing neural architectures and scaling laws, as was done in [Jeon and Van Roy, 2024](#ref-jeon2024scale), seems promising to me. I didn't look at these papers in such detail to have an established opinion about it, but I will, after my exams, update the blog post accordingly.
-
+In this blog post, we discussed the basics of information theory and presented an example application for data compression with LLMs. Then we discussed the work of [@jeon2024information], which aimed at finding an explanation for in-context learning through assumptions on the data-generating process. We then discussed the paper and challenged the idea of assuming the data-generation process was made by transformers. For a fixed infinite exchangeable document law, the meta-estimation term is fixed. The intra-document term can vary even when the document distribution is unchanged, and measures the oracle advantage remaining after the shared distribution is learned. Therefore, we argue that the intra-document term alone cannot characterize the intrinsic difficulty of in-context learning. On the other hand, using the information-theoretic tool of the estimation error for analyzing neural architectures and scaling laws, as was done in [Jeon and Van Roy, 2024](#ref-jeon2024scale), seems promising to me. 
 # References
 
 ::: {#refs}
@@ -684,3 +590,5 @@ In this blog post, we discussed the basics of information theory and presented a
 ---
 
 The emoji-character sequence from the beginning of the blog post was generated randomly (see: https://perchance.org/emoji) after the text of this Blog Post has been written, it is: 🍳 😯 🔲 📥 🚤 🌧
+
+Earlier version: [Read the original 2024 version](../old_versions/information_theory_in_llm_theory_original.html).

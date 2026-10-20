@@ -1,107 +1,142 @@
 <span id="what-is-the-meaning-of-the-estimation-error"></span>
 
-### What is the meaning of the meta estimation error? {#what-is-the-meaning-of-the-meta-estimation-error .revision-section}
+### What is the meaning of the intra-document estimation error? {#what-is-the-meaning-of-the-meta-estimation-error .revision-section}
 
-Before choosing document parameters, we first fix the full law of the infinite document sequence. This fixes the law of its random directing distribution $Q$, not merely the marginal law of one document. We must distinguish estimation relative to $Q$ from estimation relative to an additional document parameter.
+We start with an infinite exchangeable sequence of documents and hold its full joint law fixed while considering different choices of document parameters. Following Jeon et al., $D_m$ denotes document $m$, $\theta_m$ its document parameter, and $H_{M,T}=(D_1,\ldots,D_M)$ the complete corpus of $M$ documents of length $T$.
+
+By de Finetti's theorem, there is a shared random variable $\rho$ that makes the documents conditionally iid, i.e. $D_1,D_2, \dots | \rho \text{i.i.d.}$. We write $f_\rho(d):=P(D_1=d\mid\rho)$ for the document distribution it determines. We can view $\rho$ as the Bayesian prior over a complete document. Consequently, a whole dataset would be one partially observed sample of the Bayesian prior.   
+
+The following lemma shows that the resulting decomposition into estimation error and irreducible error depends only on the full joint law of the infinite document sequence, not on the choice of latent variable making the documents conditionally iid. 
 
 #### Lemma B.1: the canonical de Finetti split
 
-Fix the law of an **infinite exchangeable sequence of complete documents** $D_1,D_2,\ldots$ on the finite space $\Sigma^T$. Let $Q$ be its random de Finetti directing distribution, so that
+Fix the law of an infinite exchangeable sequence of complete documents $D_1,D_2,\ldots$ on the finite space $\Sigma^T$. Let $\rho$ be any random variable such that
 
 $$
-D_1,D_2,\ldots\mid Q\overset{\mathrm{iid}}{\sim}Q,
-\qquad C_M=(D_1,\ldots,D_M).
+D_1,D_2,\ldots\mid\rho\quad\text{iid}.
 $$
 
 Then the split
 
 $$
-\underbrace{\frac{H(C_M)}{MT}}_{L_{\mathrm{opt}}}
-=\underbrace{\frac{I(C_M;Q)}{MT}}_{\substack{E_{\mathrm{can}}\\\text{canonical estimation error}}}
-+\underbrace{\frac{H(D_i\mid Q)}{T}}_{\substack{R_{\mathrm{can}}\\\text{canonical irreducible error}}}
+\underbrace{\frac{H(H_{M,T})}{MT}}_{L_{\mathrm{opt}}}
+=\underbrace{\frac{I(H_{M,T};\rho)}{MT}}_{\substack{E_{\mathrm{can}}\\\text{canonical estimation error}}}
++\underbrace{\frac{H(D_m\mid\rho)}{T}}_{\substack{R_{\mathrm{can}}\\\text{canonical irreducible error}}}
 $$
 
-is determined by that document process. **Both $E_{\mathrm{can}}$ and $R_{\mathrm{can}}$ stay fixed when we change its latent representation.** Here “canonical” names the baseline that knows the shared document distribution $Q$.
+is determined by that document process. Both $E_{\mathrm{can}}$ and $R_{\mathrm{can}}$ stay fixed when we change its latent representation. 
 
-**Proof.** The entropy identity and conditional iid property give
-
-$$
-H(C_M)=I(C_M;Q)+H(C_M\mid Q)
-=I(C_M;Q)+M\mathbb E[h(Q)],
-$$
-
-where $h(Q)$ is the entropy of the document distribution. De Finetti's mixing law is unique, so the document process fixes $\mathbb E[h(Q)]$ and hence both terms. Any other shared variable $\psi$ making the infinite document sequence conditionally iid induces the same mixing law through $Q_\psi=P(D_i\in\cdot\mid\psi)$. Therefore $H(C_M\mid\psi)=M\mathbb E[h(Q)]$ and $I(C_M;\psi)=I(C_M;Q)$. $\square$
-
-The uniqueness requires the infinite exchangeable law, not a finite corpus alone; see [Theorem 1 of Barber, Candès, Ramdas, and Tibshirani](https://www.stat.berkeley.edu/~ryantibs/papers/defin.pdf). **One document is one sample**; nothing here assumes iid tokens inside a document.
-
-#### The paper uses a different oracle baseline
-
-Keep the joint law of $\psi$ and the documents fixed, with the documents iid given $\psi$ and $Q=P(D_i\in\cdot\mid\psi)$. The paper additionally introduces document parameters $\theta_i$ satisfying $D_i\perp\psi\mid\theta_i$.
-
-In Section 4.2, its estimation error is the prediction loss **minus the baseline of an oracle knowing the document parameters**. Write that baseline as $R_\theta=H(D_i\mid\theta_i)/T$. It can change with $\theta_i$, even though the document process and $R_{\mathrm{can}}$ stay fixed.
-
-Theorem Jeon.4.2 therefore gives two different groupings of the same optimal log-loss:
+**Proof.** Let $\tau$ be another random variable such that $D_1,D_2,\ldots\mid\tau$ are iid, and define
 
 $$
-\underbrace{\frac{H(C_M)}{MT}}_{\substack{\text{optimal}\\\text{log-loss}}}
-=\underbrace{
-\underbrace{\frac{I(C_M;\psi)}{MT}}_{\substack{\text{meta estimation error}\\=E_{\mathrm{can}}}}
-+\underbrace{\frac{I(D_i;\theta_i\mid\psi)}{T}}_{\substack{\text{intra-document}\\\text{estimation error}}}
-}_{E_{\mathrm{paper}}:\ \text{estimation error in the paper}}
-+\underbrace{\frac{H(D_i\mid\theta_i)}{T}}_{\substack{R_\theta\\\text{oracle baseline in the paper}}}.
-$$
-
-Consequently,
-
-$$
-\boxed{E_{\mathrm{paper}}=E_{\mathrm{can}}+rac{I(D_i;\theta_i\mid\psi)}{T}},
+f_\rho(d):=P(D_1=d\mid\rho),
 \qquad
-R_{\mathrm{can}}=\frac{I(D_i;\theta_i\mid\psi)}{T}+R_\theta.
+f_\tau(d):=P(D_1=d\mid\tau).
 $$
 
-**The canonical estimation error equals the meta term. The paper's estimation error equals meta plus intra-document error.** These coincide when the intra-document term is zero; they must not be identified in general.
-
-#### The two choices: $\theta_i=\psi$ and $\theta_i=D_i$
-
-There are not enough restrictions on $\theta_i$ in the general framework to force a nonzero intra-document estimation error. We can choose $\theta_i=\psi$, or at the other extreme $\theta_i=D_i$.
-
-**Choice 1: $\theta_i=\psi$.** Give every document parameter exactly the shared information. Given $\psi$, choose the sole available parameter $\theta_i=\psi$, then generate the complete document from $Q$. This is precisely the original conditional document distribution, with any former document-specific latent variable integrated out. Now
+By uniqueness in [Theorem 1 of Barber, Candès, Ramdas, and Tibshirani](https://www.stat.berkeley.edu/~ryantibs/papers/defin.pdf#page=5), $f_\rho$ and $f_\tau$ have the same law. Thus, writing $h(f)$ for the entropy of a document distribution $f$,
 
 $$
-\underbrace{I(D_i;\theta_i\mid\psi)}_{\text{intra-document information}}
-=I(D_i;\psi\mid\psi)=0,
-\qquad H(D_i\mid\theta_i)=H(D_i\mid\psi).
+H(H_{M,T}\mid\rho)
+=M\mathbb E[h(f_\rho)]
+=M\mathbb E[h(f_\tau)]
+=H(H_{M,T}\mid\tau).
 $$
 
-**Choice 2: $\theta_i=D_i$.** Given $\psi$, draw a document-valued parameter $\theta_i\sim Q$, then output $D_i=\theta_i$. The document has exactly the same law as before, but knowing its parameter now determines it completely:
+The corpus law is fixed, so $H(H_{M,T})$ is unchanged. Subtracting the equal conditional entropies gives
 
 $$
-\underbrace{I(D_i;\theta_i\mid\psi)}_{\text{intra-document information}}
-=I(D_i;D_i\mid\psi)=H(D_i\mid\psi),
-\qquad H(D_i\mid\theta_i)=0.
+\begin{aligned}
+I(H_{M,T};\rho)
+&=H(H_{M,T})-H(H_{M,T}\mid\rho)\\
+&=H(H_{M,T})-H(H_{M,T}\mid\tau)\\
+&=I(H_{M,T};\tau).
+\end{aligned}
+$$
+
+These equalities fix both terms of the split. $\square$
+
+#### How does Jeon et al.'s estimation-error decomposition relate to Lemma B.1? 
+
+
+Keep the joint law of $\psi$ and the documents fixed, with the documents iid given $\psi$, and write $f_\psi(d):=P(D_m=d\mid\psi)$. Applying Lemma B.1 with $\tau=\psi$ gives
+
+$$
+\frac{I(H_{M,T};\psi)}{MT}=E_{\mathrm{can}}.
+$$
+
+Thus, Jeon et al.'s meta estimation error is the canonical estimation error. They also assume that the document parameters $\theta_m$ are iid given $\psi$, and that $D_m\perp\psi\mid\theta_m$.
+
+Jeon et al. call the uncertainty that remains when $\psi$ and the document parameters are known the **irreducible error**. Its per-token value is
+
+$$
+\frac{H(H_{M,T}\mid\psi,\theta_1,\ldots,\theta_M)}{MT}
+=\frac{H(D_m\mid\theta_m)}{T}.
+$$
+
+Jeon et al. define their optimal estimation error $\mathcal L_{M,T}$ as the optimal prediction loss minus this irreducible error. Theorem Jeon.4.2 gives
+
+$$
+\underbrace{\frac{H(H_{M,T})}{MT}}_{\substack{\text{optimal}\\\text{prediction loss}}}
+=\underbrace{
+\underbrace{\frac{I(H_{M,T};\psi)}{MT}}_{\substack{\text{meta estimation error}\\=E_{\mathrm{can}}}}
++\underbrace{\frac{I(D_m;\theta_m\mid\psi)}{T}}_{\substack{\text{intra-document}\\\text{estimation error}}}
+}_{\mathcal L_{M,T}:\ \text{estimation error}}
++\underbrace{\frac{H(D_m\mid\theta_m)}{T}}_{\text{irreducible error}}.
+$$
+
+The document parameters split the canonical irreducible error as follows:
+
+$$
+R_{\mathrm{can}}=\frac{H(D_m\mid\psi)}{T}
+=\underbrace{\frac{I(D_m;\theta_m\mid\psi)}{T}}_{\text{intra-document estimation error}}
++\underbrace{\frac{H(D_m\mid\theta_m)}{T}}_{\text{irreducible error}}.
+$$
+
+So Jeon et al.'s estimation error is the meta estimation error plus the intra-document estimation error. The meta term stays fixed with the document process, while the split of $R_{\mathrm{can}}$ between intra-document estimation error and irreducible error can depend on the choice of $\theta_m$.
+
+#### Two extreme examples: $\theta_m=\psi$ and $\theta_m=D_m$
+
+There are not enough restrictions on $\theta_m$ in the general framework to obtain an intra-document estimation error that is determined by the distribution of the document sequence. E.g. we may choose $\theta_m=\psi$, or at the other extreme $\theta_m=D_m$.
+
+**Choice 1: $\theta_m=\psi$.** Give every document parameter exactly the shared information. Given $\psi$, choose the sole available parameter $\theta_m=\psi$, then generate the complete document from $f_\psi$. This is precisely the original conditional document distribution, with any former document-specific latent variable integrated out. Now
+
+$$
+\underbrace{I(D_m;\theta_m\mid\psi)}_{\text{intra-document information}}
+=I(D_m;\psi\mid\psi)=0,
+\qquad H(D_m\mid\theta_m)=H(D_m\mid\psi).
+$$
+
+**Choice 2: $\theta_m=D_m$.** Given $\psi$, draw a document-valued parameter $\theta_m\sim f_\psi$, then output $D_m=\theta_m$. The document has exactly the same law as before, but knowing its parameter now determines it completely:
+
+$$
+\underbrace{I(D_m;\theta_m\mid\psi)}_{\text{intra-document information}}
+=I(D_m;D_m\mid\psi)=H(D_m\mid\psi),
+\qquad H(D_m\mid\theta_m)=0.
 $$
 
 The resulting quantities are:
 
-| Document parameter | Meta $=E_{\mathrm{can}}$ | Intra-document | Paper's baseline $R_\theta$ | Paper's total $E_{\mathrm{paper}}$ |
+| Document parameter | Meta $=E_{\mathrm{can}}$ | Intra-document | Jeon et al.'s irreducible error | Jeon et al.'s total $\mathcal L_{M,T}$ |
 |:--|:--|:--|:--|:--|
-| $\theta_i=\psi$ | unchanged | $0$ | $R_{\mathrm{can}}$ | $E_{\mathrm{can}}$ |
-| $\theta_i=D_i$ | unchanged | $R_{\mathrm{can}}$ | $0$ | $E_{\mathrm{can}}+R_{\mathrm{can}}=L_{\mathrm{opt}}$ |
+| $\theta_m=\psi$ | unchanged | $0$ | $R_{\mathrm{can}}$ | $E_{\mathrm{can}}$ |
+| $\theta_m=D_m$ | unchanged | $R_{\mathrm{can}}$ | $0$ | $E_{\mathrm{can}}+R_{\mathrm{can}}=L_{\mathrm{opt}}$ |
 
-A zero $R_\theta$ means the oracle is given the whole document; **the canonical irreducible error $R_{\mathrm{can}}$ has not vanished**. These are alternative latent representations. An invertible reparameterization alone cannot change mutual information.
+A zero irreducible error in Jeon et al. means $\theta_m$ determines the whole document; the canonical irreducible error $R_{\mathrm{can}}$ has not vanished. These are alternative latent representations. An invertible reparameterization alone cannot change mutual information.
 
-#### Do the paper's assumptions allow this?
+#### Do Jeon et al.'s assumptions allow this? [@jeon2024information]
 
 Yes, under the general requirements of Section 4.1. Here is the check from my attachment, with its autoregressive step repaired:
 
-| Requirement | $\theta_i=\psi$ | $\theta_i=D_i$ |
+| Requirement | $\theta_m=\psi$ | $\theta_m=D_m$ |
 |:--|:--|:--|
-| Exchangeable documents, iid given $\psi$ | The joint law of $(\psi,D_1,D_2,\ldots)$ stays fixed. | The same conditional law $Q$ is sampled independently for each document. |
-| $\theta_1,\theta_2,\ldots\mid\psi$ iid | $\psi,\psi,\ldots\mid\psi$ are iid: a point mass is allowed. | The parameters are independent draws from $Q$. |
-| $D_i\perp\psi\mid\theta_i$ | $D_i\perp\psi\mid\psi$. | $D_i\perp\psi\mid D_i$. |
-| Autoregressive generation; discrete tokens and length $T$ | Generate from $Q$ using its token conditionals. | Emit the stored document token by token. |
+| Exchangeable documents, iid given $\psi$ | The joint law of $(\psi,D_1,D_2,\ldots)$ stays fixed. | The same conditional law $f_\psi$ is sampled independently for each document. |
+| $\theta_1,\theta_2,\ldots\mid\psi$ iid | $\psi,\psi,\ldots\mid\psi$ are iid: a point mass is allowed. | The parameters are independent draws from $f_\psi$. |
+| $D_m\perp\psi\mid\theta_m$ | $D_m\perp\psi\mid\psi$. | $D_m\perp\psi\mid D_m$. |
+| Autoregressive generation; discrete tokens and length $T$ | Generate from $f_\psi$ using its token conditionals. | Emit the stored document token by token. |
 | Independence across documents given $\psi$ | Use independent document draws. | Use independent parameter draws. |
 
+<!--
 <details class="assumption-check">
 <summary>Technical detail: autoregressive generation and the attachment's gap</summary>
 
@@ -114,50 +149,69 @@ r[hx]/r[h],&r[h]>0,\\
 \end{cases}
 $$
 
-This reproduces $r$; zero-probability prefixes are never reached. Apply it to $r=Q$ in the first choice and $r=\delta_{\theta_i}$ in the second. On standard Borel parameter spaces these finite sums and piecewise ratios are measurable. No encoding of infinite sequences or differential entropy is needed.
+This reproduces $r$; zero-probability prefixes are never reached. Apply it to $r=f_\psi$ in the first choice and $r=\delta_{\theta_m}$ in the second. On standard Borel parameter spaces these finite sums and piecewise ratios are measurable. No encoding of infinite sequences or differential entropy is needed.
 
-The attachment's item (ii) demanded strict dependence at every token position. De Finetti does not establish that: it concerns independence **across documents**, not dependence inside a document. The paper's Section 3 says the next token “may depend” on the parameter and history; its general framework states no strict information inequality excluding these endpoints. The check above uses conditional kernels instead of that extra premise. The description of parameters as document-specific would need an additional formal restriction to exclude $\theta_i=\psi$.
+The attachment's item (ii) demanded strict dependence at every token position. De Finetti does not establish that: it concerns independence **across documents**, not dependence inside a document. Jeon et al.'s Section 3 says the next token “may depend” on the parameter and history; its general framework states no strict information inequality excluding these endpoints. The check above uses conditional kernels instead of that extra premise. The description of parameters as document-specific would need an additional formal restriction to exclude $\theta_m=\psi$.
 
 </details>
+-->
 
 #### What follows for the interpretation?
 
-The two choices preserve $L_{\mathrm{opt}}$, $E_{\mathrm{can}}$, $R_{\mathrm{can}}$, and the meta term. They change $R_\theta$ and therefore the paper's total estimation error. **This is a change of oracle baseline, not a redistribution of a fixed estimation error between meta and intra.** If $R_\theta$ were also fixed, the intra-document term would be fixed as well.
+In Section 4.6, Jeon et al. [@jeon2024information] argue that the in-context estimation error can be small even for short contexts. Under their transformer-mixture model, the context only needs to distinguish which of the $N$ models generated the document, giving a bound of $\log(N)/\tau$.
 
-When $\theta_i=\psi$, meta accounts for all of the remaining paper estimation error, but its absolute value has not increased. If both are zero, a percentage share is undefined.
+The meta-estimation term is canonical, as established above. However, the intra-document term depends on the choice of $\theta_m$, not just on the document distribution. Its smallness therefore cannot, by itself, establish a statement about the document distribution alone: that in-context learning is intrinsically easy. Changing $\theta_m$ also changes the irreducible error against which performance is measured. 
 
-This is the issue behind the question in my email: *is there a missing modeling assumption, or a limitation on the interpretability of the results?* Theorem Jeon.4.2 remains a valid identity. But its intra-document term alone cannot describe a property of the document distribution independently of how $\theta_i$ is chosen.
-
-The same qualification matters for Theorem Jeon.4.7 and Remark Jeon.4.8, which interpret the in-context term as dominant when the meta term is small. With $\theta_i=\psi$, that in-context term is zero. This does not imply that context is useless: the oracle knowing $\psi$ can still exploit dependencies between tokens. It changes the baseline against which estimation error is measured. Further restrictions on $\theta_i$ are needed to give this term the intended meaning. The specialized transformer-mixture assumptions in Theorem Jeon.4.5 would require a separate check.
-
-By Lemma B.1, introducing extra document parameters $\theta_i$ splits the canonical residual term further:
+One may fix the intra document estimation error, applying a possible restriction to $\theta_m$, by requiring it contain no oracle information. 
+To make this precise, consider predicting a new document $D_{M+1}$ after observing the training corpus $H_{M,T}$. Define the oracle advantage as the reduction in optimal expected log loss obtained by additionally revealing its parameter:
 
 $$
-\frac{H(D_i\mid Q)}{T}
-=\underbrace{\frac{I(D_i;\theta_i\mid Q)}{T}}_{\text{intra-document estimation error}}
-+\underbrace{\frac{H(D_i\mid\theta_i)}{T}}_{\text{oracle baseline in the paper}},
+O_M:=\frac1T\sum_{t=0}^{T-1}
+I\!\left(X_{t+1}^{(M+1)};\theta_{M+1}
+\mid H_{M,T},X_{1:t}^{(M+1)}\right)
+=\frac{I(D_{M+1};\theta_{M+1}\mid H_{M,T})}{T}.
 $$
 
-provided $D_i\perp Q\mid\theta_i$. The sum is $R_{\mathrm{can}}$ and stays fixed. The diagram illustrates this residual split; it does not divide $E_{\mathrm{can}}$ into meta and intra.
+This compares predictions based on the training corpus and observed context with predictions that also have privileged access to the document parameter. For a finite corpus, that access may also compensate for incomplete knowledge of the shared document distribution. To exclude only an advantage that persists after arbitrarily much training data, we impose $\lim_{M\to\infty}O_M=0$.
+
+$$
+O_M
+=\frac{I(D_{M+1};\psi\mid H_{M,T})}{T}
++\frac{I(D_{M+1};\theta_{M+1}\mid\psi)}{T}.
+$$
+
+For our finite document space, the first term tends to zero as the training corpus determines $f_\psi$. The second is the same for every document. Consequently,
+
+$$
+\lim_{M\to\infty}O_M
+=\underbrace{\frac{I(D_m;\theta_m\mid\psi)}{T}}_{\text{intra-document estimation error}}.
+$$
+
+Our no-oracle restriction therefore implies that the intra-document estimation error is zero. 
+This does not mean that context is useless. Knowing $f_\psi$ already determines how an observed prefix changes predictions for its continuation, including any inference about document-specific parameters from that prefix. 
+
+The [diagram](#bowls) illustrates how the choice of $\theta_m$ divides the fixed residual $R_{\mathrm{can}}$ into intra-document estimation error and irreducible error. Under the restriction above, the entire residual is irreducible error.
 
 {{< include _bowl_visualization.qmd >}}
 
+<!--
 <details class="assumption-check">
 <summary>Optional extension: every intermediate allocation</summary>
 
-Independently for each document, choose the second construction with probability $\alpha$ and the first with probability $1-\alpha$. More explicitly, draw $B_i\sim\operatorname{Bernoulli}(\alpha)$ independently of $\psi$. If $B_i=0$, set $\theta_i=(0,\psi)$ and sample $D_i\sim Q$. If $B_i=1$, sample $Z_i\sim Q$, set $\theta_i=(1,Z_i)$, and output $D_i=Z_i$. The tags distinguish the two parameter spaces.
+Independently for each document, choose the second construction with probability $\alpha$ and the first with probability $1-\alpha$. More explicitly, draw $B_m\sim\operatorname{Bernoulli}(\alpha)$ independently of $\psi$. If $B_m=0$, set $\theta_m=(0,\psi)$ and sample $D_m\sim f_\psi$. If $B_m=1$, sample $Z_m\sim f_\psi$, set $\theta_m=(1,Z_m)$, and output $D_m=Z_m$. The tags distinguish the two parameter spaces.
 
-Both branches produce law $Q$, and independent repetition preserves every corpus law, $P(C_M=(d_1,\ldots,d_M))=\mathbb E[\prod_i Q(d_i)]$. The parameters are iid conditional on $\psi$. The requirement $D_i\perp\psi\mid\theta_i$ holds because the first branch specifies $\psi$ and the second specifies $D_i$ itself. Consequently,
+Both branches produce law $f_\psi$, and independent repetition preserves every corpus law, $P(H_{M,T}=(d_1,\ldots,d_M))=\mathbb E[\prod_{m=1}^M f_\psi(d_m)]$. The parameters are iid conditional on $\psi$. The requirement $D_m\perp\psi\mid\theta_m$ holds because the first branch specifies $\psi$ and the second specifies $D_m$ itself. Consequently,
 
 $$
 \begin{aligned}
-\underbrace{\frac{H(D_i\mid\theta_i)}{T}}_{\text{oracle baseline in the paper}}
-&=(1-\alpha)\frac{H(D_i\mid\psi)}{T},\\[1em]
-\underbrace{\frac{I(D_i;\theta_i\mid\psi)}{T}}_{\text{intra-document estimation error}}
-&=\alpha\frac{H(D_i\mid\psi)}{T}.
+\underbrace{\frac{H(D_m\mid\theta_m)}{T}}_{\text{irreducible error defined by Jeon et al.}}
+&=(1-\alpha)\frac{H(D_m\mid\psi)}{T},\\[1em]
+\underbrace{\frac{I(D_m;\theta_m\mid\psi)}{T}}_{\text{intra-document estimation error}}
+&=\alpha\frac{H(D_m\mid\psi)}{T}.
 \end{aligned}
 $$
 
-The first equality averages the conditional entropy of the two branches; the second follows from $I(D_i;\theta_i\mid\psi)=H(D_i\mid\psi)-H(D_i\mid\theta_i)$. Thus $E_{\mathrm{paper}}=E_{\mathrm{can}}+\alpha R_{\mathrm{can}}$ and $R_\theta=(1-\alpha)R_{\mathrm{can}}$. This interpolates the paper's total estimation error between $E_{\mathrm{can}}$ and $L_{\mathrm{opt}}$ by changing its baseline; the meta term stays fixed. No earlier formal proof sheet is needed.
+The first equality averages the conditional entropy of the two branches; the second follows from $I(D_m;\theta_m\mid\psi)=H(D_m\mid\psi)-H(D_m\mid\theta_m)$. Thus $\mathcal L_{M,T}=E_{\mathrm{can}}+\alpha R_{\mathrm{can}}$ and Jeon et al.'s irreducible error is $(1-\alpha)R_{\mathrm{can}}$. This interpolates Jeon et al.'s total estimation error between $E_{\mathrm{can}}$ and $L_{\mathrm{opt}}$ as the irreducible error changes; the meta term stays fixed. No earlier formal proof sheet is needed.
 
 </details>
+-->

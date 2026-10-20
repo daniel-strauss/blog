@@ -57,7 +57,7 @@
   }
 
   function configurations(p, q) {
-    // Equal-probability copies preserve Q for every alpha = p/q:
+    // Equal-probability copies preserve fψ for every alpha = p/q:
     // W(q-p) mixed bowls and p*w_j singleton bowls for each document j.
     const weightSum = qWeights.reduce((a, b) => a + b, 0);
     const rawCounts = [weightSum * (q - p), ...qWeights.map(w => p * w)];
@@ -71,22 +71,23 @@
   }
 
   function render(pop = false) {
-    const columns = Math.min(bowls.length, bowls.length <= 6 ? 3 : bowls.length <= 15 ? 5 : 6);
+    const columns = Math.min(bowls.length, bowls.length <= 6 ? 3 : 4);
     const scale = Math.min(1.04, 510 / (columns * 172));
     const rows = Math.ceil(bowls.length / columns);
-    const pitch = 132 * scale;
-    const outerBottom = Math.max(290, 154 + (rows - 1) * pitch + 85 * scale);
+    const pitch = 160 * scale;
+    const firstRowY = 180;
+    const outerBottom = Math.max(310, firstRowY + (rows - 1) * pitch + 85 * scale);
     const height = Math.max(estimate ? 640 : 475, outerBottom + 86);
     bowls.forEach((bowl, index) => {
       const row = Math.floor(index / columns);
       const rowLength = Math.min(columns, bowls.length - row * columns);
       bowl.x = 325 + (index % columns - (rowLength - 1) / 2) * (520 / columns);
-      bowl.y = 154 + row * pitch;
+      bowl.y = firstRowY + row * pitch;
       bowl.scale = scale;
     });
     svg.setAttribute('viewBox', `0 0 960 ${height}`);
     svg.innerHTML = `<title id="bowl-svg-title">Choose a numbered bowl, then draw one complete document</title>
-      <desc id="bowl-svg-description">All ${bowls.length} bowl copies are shown and equally likely. A hand moves the selected bowl to the right, then draws one of its document circles uniformly. ${qDescription()}. Every representation induces this same Q.</desc>
+      <desc id="bowl-svg-description">All ${bowls.length} bowl copies are shown and equally likely. A hand moves the selected bowl to the right, then draws one of its document circles uniformly. ${qDescription()}. Every representation induces this same fψ.</desc>
       <rect class="bowl-stage-background" x="680" y="82" width="255" height="${height - 145}" rx="24"/>
       <text class="bowl-outer-label" x="325" y="54" text-anchor="middle">ψ · choose a fresh bowl for each document</text>
       <path class="bowl-outer" d="M 30 97 L 50 ${outerBottom - 20} Q 325 ${outerBottom + 45} 600 ${outerBottom - 20} L 620 97 Z"/>
@@ -97,7 +98,7 @@
       ${estimate ? histogramMarkup() : `<text class="bowl-stage-label" x="805" y="306" text-anchor="middle">2. Draw a document</text>
       <circle class="bowl-document-target" cx="805" cy="360" r="28"/>
       <text class="bowl-stage-hint" x="805" y="414" text-anchor="middle">Your sample lands here</text>`}
-      <text class="bowl-output-label" x="480" y="${height - 18}" text-anchor="middle">Same Q: ${qDescription()}</text>
+      <text class="bowl-output-label" x="480" y="${height - 18}" text-anchor="middle">Same fψ: ${qDescription()}</text>
       <g class="bowl-animation-layer"></g>`;
     if (pop && !reducedMotion.matches) {
       popAnimations = [...svg.querySelectorAll('.bowl-inner')].map((node, index) => node.animate([
@@ -136,9 +137,9 @@
     root.querySelector('.bowl-bar-noise').style.width = `${(1 - alpha) * 100}%`;
     root.querySelector('.bowl-bar').setAttribute('aria-label', `Of document uncertainty: ${percent(alpha)} intra-document contribution; ${percent(1 - alpha)} paper oracle baseline. Canonical estimation error and canonical irreducible error unchanged.`);
     root.querySelector('#bowl-explanation').textContent = mode === 'zero'
-      ? 'θᵢ = ψ: one possible bowl, three document types. Repeated circles encode Q. Choosing the bowl adds no information.'
+      ? 'θₘ = ψ: one possible bowl, three document types. Repeated circles encode fψ. Choosing the bowl adds no information.'
       : mode === 'full'
-        ? 'θᵢ = Dᵢ: the parameter reveals the whole document, so the paper’s oracle baseline is zero. Uncertainty given Q is unchanged.'
+        ? 'θₘ = Dₘ: the parameter reveals the whole document, so the paper’s oracle baseline is zero. Uncertainty given fψ is unchanged.'
         : `α = ${p}/${q}: ${bowls.length} equally likely bowls, every copy shown. Select one, then draw a circle uniformly from it.`;
     estimate = null;
     progressPanel.hidden = true;
@@ -162,7 +163,7 @@
   function histogramMarkup() {
     return `<g class="bowl-histogram">
       <text class="bowl-stage-label" x="805" y="310" text-anchor="middle">Observed distribution</text>
-      <text class="bowl-stage-hint" x="805" y="335" text-anchor="middle">Dashed marks: true Q</text>
+      <text class="bowl-stage-hint" x="805" y="335" text-anchor="middle">Dashed marks: true fψ</text>
       <line class="bowl-histogram-axis" x1="700" x2="910" y1="520" y2="520"/>
       ${['A', 'B', 'C'].map((document, i) => `<g data-histogram-document="${document}">
         <rect class="bowl-histogram-bar bowl-circle-${document.toLowerCase()}" x="${chart.xs[i] - 22}" y="520" width="44" height="0" rx="4"/>
@@ -216,7 +217,7 @@
     const summary = ['A', 'B', 'C'].map((document, i) => `${document}: ${estimate.counts[i]} (${estimate.total ? percent(estimate.counts[i] / estimate.total) : '—'})`).join(' · ');
     result.textContent = `${stopped ? 'Stopped' : 'Finished'} at ${estimate.total.toLocaleString()} draws. ${summary}`;
     result.removeAttribute('data-document');
-    root.querySelector('#bowl-estimate-note').textContent = `${stopped ? 'Partial estimate' : '10,000 fresh bowl-and-document draws complete'}. Percentages use the completed draws; random fluctuations around Q are expected.`;
+    root.querySelector('#bowl-estimate-note').textContent = `${stopped ? 'Partial estimate' : '10,000 fresh bowl-and-document draws complete'}. Percentages use the completed draws; random fluctuations around fψ are expected.`;
     svg.querySelector('.bowl-hand')?.setAttribute('visibility', 'hidden');
   }
 
@@ -370,7 +371,7 @@
     updateConfidence();
     updateHistogram();
     result.removeAttribute('data-document');
-    result.textContent = 'Estimating Q with 10,000 independent bowl-and-document draws…';
+    result.textContent = 'Estimating fψ with 10,000 independent bowl-and-document draws…';
     root.querySelector('#bowl-estimate-note').textContent = 'Watch the first three and last three picks. Smooth acceleration and braking over five seconds; all 10,000 draws count.';
     const layer = svg.querySelector('.bowl-animation-layer');
     layer.innerHTML = `<g class="bowl-carried bowl-selected"></g><g class="bowl-picked-document"></g>${handMarkup}`;
@@ -477,7 +478,7 @@
   root.addEventListener('bowl-redraw-q', event => {
     if (!validWeights(event.detail?.weights)) return;
     qWeights = [...event.detail.weights];
-    try { localStorage.setItem('icl-bowls-document-law-v1', JSON.stringify(qWeights)); } catch { /* The selected Q still works for this session. */ }
+    try { localStorage.setItem('icl-bowls-document-law-v1', JSON.stringify(qWeights)); } catch { /* The selected fψ still works for this session. */ }
     update();
   });
   root.addEventListener('bowl-pause-for-universe', () => {

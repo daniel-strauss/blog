@@ -8,7 +8,6 @@
   const sequence = dialog.querySelector('.universe-sequence');
   const scene = dialog.querySelector('.universe-scene');
   const status = dialog.querySelector('.universe-status');
-  const skipButton = dialog.querySelector('.universe-skip');
   const sound = dialog.querySelector('#universe-soundtrack');
   const soundButton = dialog.querySelector('.universe-sound');
   let soundEnabled = true;
@@ -25,7 +24,6 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const SVG = 'http://www.w3.org/2000/svg';
   let generation = 0;
-  let skip = false;
   let portal = null;
   let bodyOverflow = '';
   let gazeState = null;
@@ -33,12 +31,12 @@
   const lerp = (a, b, t) => a + (b - a) * t;
   const pose = (node, x, y, scale = 1, angle = 0) => node.setAttribute('transform', `translate(${x} ${y}) rotate(${angle}) scale(${scale})`);
 
-  function motion(run, duration, paint, skipAllowed = true, animated = true) {
+  function motion(run, duration, paint, animated = true) {
     return new Promise(resolve => {
       const start = performance.now();
       function frame(now) {
         if (run !== generation || !dialog.open) { resolve(false); return; }
-        const t = (animated && reducedMotion.matches) || (skip && skipAllowed) ? 1 : Math.min(1, (now - start) / duration);
+        const t = animated && reducedMotion.matches ? 1 : Math.min(1, (now - start) / duration);
         paint(t);
         if (t < 1) requestAnimationFrame(frame);
         else resolve(true);
@@ -282,7 +280,7 @@
       function frame(now) {
         if (run !== generation || !dialog.open || !layer.isConnected) { if (!settled) resolve(false); return; }
         const elapsed = (now - started) / 1000;
-        const t = skip || reducedMotion.matches || !effectsEnabled ? 1 : Math.min(1, elapsed / 6.5);
+        const t = reducedMotion.matches || !effectsEnabled ? 1 : Math.min(1, elapsed / 6.5);
         const width = dialog.clientWidth;
         const height = dialog.clientHeight;
         if (width !== previousWidth || height !== previousHeight) {
@@ -387,7 +385,7 @@
 
   async function zoomInto(run, selected) {
     root.dispatchEvent(new CustomEvent('bowl-redraw-q', {detail: {weights: newWeights()}}));
-    // Align the live Q view under the portal before the final camera move.
+    // Align the live fψ view under the portal before the final camera move.
     window.scrollTo({top: window.scrollY + root.getBoundingClientRect().top - 85, behavior: 'instant'});
     const target = root.getBoundingClientRect();
     const origin = selected.getBoundingClientRect();
@@ -411,18 +409,17 @@
       const darkness = 1 - Math.max(0, (e - 0.65) / 0.35);
       dialog.style.backgroundColor = `rgba(2, 4, 8, ${darkness})`;
       dialog.style.setProperty('--universe-backdrop-alpha', darkness);
-    }, false)) return;
-    if (!await motion(run, 220, t => { portal.style.opacity = String(1 - t); }, false)) return;
+    })) return;
+    if (!await motion(run, 220, t => { portal.style.opacity = String(1 - t); })) return;
     close(true);
   }
 
   async function generate(nickname) {
     gazeState = null;
-    const occurrence = `${nickname} uses this online tool and redraws Q`;
+    const occurrence = `${nickname} uses this online tool and redraws ψ`;
     const run = ++generation;
     const story = dialog.querySelector('.universe-story');
     story.style.transform = '';
-    skip = false;
     form.hidden = true;
     sequence.hidden = false;
     sequence.style.opacity = '1';
@@ -430,9 +427,8 @@
     dialog.querySelector('.universe-occurrence').textContent = `until occurrence of “${occurrence}”.`;
     status.hidden = true;
     scene.hidden = true;
-    skipButton.hidden = false;
     // Let both equally sized lines stand alone before the bowl appears.
-    if (!await motion(run, 3500, () => {}, true, false)) return;
+    if (!await motion(run, 3500, () => {}, false)) return;
     const previousTop = story.getBoundingClientRect().top;
     const cards = buildScene();
     scene.hidden = false;
@@ -481,7 +477,7 @@
     while (run === generation) {
       // Stage three misses before the remaining random universe search.
       const candidates = attempts < 3 ? cards.filter(card => !card.bright)
-        : skip || reducedMotion.matches ? cards.filter(card => card.bright) : cards;
+        : reducedMotion.matches ? cards.filter(card => card.bright) : cards;
       const card = candidates[Math.floor(Math.random() * candidates.length)];
       attempts++;
       picked.replaceChildren(card.node.firstChild.cloneNode(true));
@@ -505,7 +501,6 @@
       if (card.bright) {
         status.textContent = `There you are. “${occurrence}”.`;
         scene.querySelector('.universe-observation').textContent = 'Occurrence found.';
-        skipButton.hidden = true;
         if (!await motion(run, 500, t => { hand.style.opacity = String(1 - t); })) return;
         if (!await eyeReady || run !== generation) return;
         await zoomInto(run, picked);
@@ -524,7 +519,6 @@
   trigger.addEventListener('click', () => {
     root.dispatchEvent(new CustomEvent('bowl-pause-for-universe'));
     generation++;
-    skip = false;
     form.hidden = false;
     sequence.hidden = true;
     dialog.style.backgroundColor = '';
@@ -561,7 +555,6 @@
     soundButton.setAttribute('aria-pressed', 'false');
   });
   input.addEventListener('input', () => input.setCustomValidity(''));
-  skipButton.addEventListener('click', () => { skip = true; });
   dialog.querySelector('.universe-close').addEventListener('click', () => close());
   dialog.addEventListener('cancel', event => { event.preventDefault(); close(); });
 })();
